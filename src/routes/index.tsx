@@ -1,9 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Box } from '../base/Box'
+import { Faq } from '../sections/Faq'
+import { Fit } from '../sections/Fit'
 import { Hero } from '../sections/Hero'
 import { HowItWorks } from '../sections/HowItWorks'
 import { Problem } from '../sections/Problem'
+import { Results } from '../sections/Results'
 import { Services } from '../sections/Services'
 import { SiteHeader } from '../sections/SiteHeader'
 import { Specialties } from '../sections/Specialties'
@@ -25,6 +28,9 @@ function Home() {
         <Specialties />
         <Systems />
         <WhyUs />
+        <Fit />
+        <Results />
+        <Faq />
       </Box>
     </>
   )

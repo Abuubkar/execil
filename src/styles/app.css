@@ -99,3 +99,26 @@ body {
 html:has([popover]:popover-open) {
   overflow: hidden;
 }
+
+/* --- Disclosure reveal ---------------------------------------------------- */
+
+/* The FAQ accordion's open animation. StyleX cannot target ::details-content,
+   and the property that must transition is content-visibility (which the UA
+   sets on the slot), not display.
+
+   Firefox has no discrete content-visibility transition, so it opens instantly.
+   That degradation is accepted (issue #10) — the content is never hidden, it
+   simply appears without the fade. */
+details::details-content {
+  opacity: 0;
+  translate: 0 -4px;
+  transition:
+    opacity 250ms ease,
+    translate 250ms ease,
+    content-visibility 250ms allow-discrete;
+}
+
+details[open]::details-content {
+  opacity: 1;
+  translate: 0 0;
+}

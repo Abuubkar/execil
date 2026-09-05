@@ -231,5 +231,64 @@
         }
       ]
     }
+  },
+  "fit": {
+    "title": "Who we're built for",
+    "goodTitle": "A strong fit if",
+    "badTitle": "Less of a fit if",
+    "good": [
+      "You're an independent practice with 1–20 providers",
+      "Denials are rising or AR is aging",
+      "You want real visibility into collections",
+      "You're adding providers who need credentialing"
+    ],
+    "bad": [
+      "You need hospital or facility (UB-04) billing",
+      "Your practice is mostly cash-pay",
+      "You want to keep a full in-house billing team"
+    ]
+  },
+  "results": {
+    "eyebrow": "Results",
+    "title": "What changes when the cycle is worked.",
+    "comingSoon": "We publish client outcomes only once they're measured and approved for sharing.",
+    "placeholderNotice": "[PLACEHOLDER — replace with real client results]",
+    "items": []
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Common questions",
+    "items": [
+      {
+        "id": "existing-ehr",
+        "q": "Do you work inside our existing EHR?",
+        "a": "Yes. We work inside your existing EHR/PM — no software switch and no re-training."
+      },
+      {
+        "id": "onboarding-time",
+        "q": "How long does onboarding take?",
+        "a": "Fourteen days from a signed BAA to steady-state claim submission, in most cases."
+      },
+      {
+        "id": "contract",
+        "q": "Is there a long-term contract?",
+        "a": "No. No setup fees and no long-term contract — the engagement is month-to-month."
+      },
+      {
+        "id": "pricing",
+        "q": "How is pricing structured?",
+        "a": "A percentage of collections, quoted upfront before any work begins."
+      },
+      {
+        "id": "hipaa",
+        "q": "How is patient data protected?",
+        "a": "A BAA is signed before any data moves, and every workflow is HIPAA-compliant."
+      },
+      {
+        "id": "ar-cleanup",
+        "q": "Can you take on aged AR cleanup only?",
+        "a": "Yes. Credentialing and AR cleanup can be engaged separately from full billing."
+      }
+    ]
   }
 }
