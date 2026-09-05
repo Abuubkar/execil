@@ -63,12 +63,11 @@ export default defineConfig({
   ],
 
   // The design canvas is the source of truth for structure and must stay byte-
-  // identical. Research docs and prototypes are primary sources, not code.
+  // identical. Research docs are primary sources, not code.
   fmt: {
     ignorePatterns: [
       'Landing page ready for review/**',
       'docs/**',
-      'prototypes/**',
       'src/routeTree.gen.ts',
       'dist/**',
     ],
@@ -80,7 +79,6 @@ export default defineConfig({
     ignorePatterns: [
       'Landing page ready for review/**',
       'docs/**',
-      'prototypes/**',
       'src/routeTree.gen.ts',
       'dist/**',
     ],
