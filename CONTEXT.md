@@ -19,9 +19,12 @@ Vocabulary for the Execile landing-page effort. Glossary only; decisions live in
 - **Design canvas** — the Claude Design export in `Landing page ready for review/`. Source of truth for page structure and copy.
 - **Section** — one labelled block of the landing page: Hero, Problem, Services, How It Works, Specialties, Systems, Why Us, Fit, Results, FAQ, Assessment (CTA + form), Footer.
 - **Placeholder** — bracketed copy in the canvas awaiting real values from the client, e.g. `[X%]`, `[SPECIALTY 1]`, `[Street address]`.
-- **Results mode** — whether the Results section shows placeholder case studies or a "coming soon" notice.
+- **Results mode** — whether the Results section shows placeholder case studies or a "coming soon" notice. Launches in placeholder mode; the client swaps copy at the end.
 - **Assessment Form** — the form in the Assessment section. Collects contact and practice details only; must never collect PHI.
 - **Messages** — the single English-only `messages.json` that holds every user-facing string. No locale layer.
 - **Base component** — a reusable wrapper around a raw HTML element. Feature and page code composes base components and never uses raw elements.
 - **Design system** — the StyleX token set (colour, type, spacing, radius, shadow, motion) every component styles from. No arbitrary values.
-- **Legal pages** — HIPAA Notice, Privacy Policy, Terms of Service. Thin static routes linked from the footer.
+- **Legal links** — the footer's HIPAA Notice, Privacy Policy and Terms of Service links. Dead links for v1; their fate is decided at the end.
+- **Inbox** — the Google Workspace mailbox that receives every Assessment Form submission. Google Workspace is a destination, not a sending platform.
+- **Turnstile** — Cloudflare's bot check on the Assessment Form.
+- **Brand font** — Satoshi, from Fontshare. Replaces the earlier FT Kunst Grotesk decision.
