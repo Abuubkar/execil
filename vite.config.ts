@@ -62,26 +62,16 @@ export default defineConfig({
     viteReact(),
   ],
 
-  // The design canvas is the source of truth for structure and must stay byte-
-  // identical. Research docs are primary sources, not code.
+  // docs/ holds the design canvas and the research notes. Both are primary
+  // sources that must stay byte-identical, not code to be reformatted.
   fmt: {
-    ignorePatterns: [
-      'Landing page ready for review/**',
-      'docs/**',
-      'src/routeTree.gen.ts',
-      'dist/**',
-    ],
+    ignorePatterns: ['docs/**', 'src/routeTree.gen.ts', 'dist/**'],
     singleQuote: true,
     semi: false,
   },
 
   lint: {
-    ignorePatterns: [
-      'Landing page ready for review/**',
-      'docs/**',
-      'src/routeTree.gen.ts',
-      'dist/**',
-    ],
+    ignorePatterns: ['docs/**', 'src/routeTree.gen.ts', 'dist/**'],
     // Setting `plugins` REPLACES the default set, so the defaults are re-listed
     // alongside `react`, which is not on by default.
     plugins: ['eslint', 'typescript', 'unicorn', 'oxc', 'react'],

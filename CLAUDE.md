@@ -1,6 +1,6 @@
 # Execile
 
-Landing page for Execile, a medical billing / RCM service. Glossary in `CONTEXT.md`. Design source of truth: `Landing page ready for review/RCM Landing.dc.html`.
+Landing page for Execile, a medical billing / RCM service. Glossary in `CONTEXT.md`. Design source of truth: `docs/design/rcm-landing.dc.html`.
 
 ## Conventions (not lint-enforced — check in review)
 

@@ -16,7 +16,7 @@ Vocabulary for the Execile landing-page effort. Glossary only; decisions live in
 
 ## Landing-page terms
 
-- **Design canvas** — the Claude Design export in `Landing page ready for review/`. Source of truth for page structure and copy.
+- **Design canvas** — the Claude Design export in `docs/design/`. Source of truth for page structure and copy.
 - **Section** — one labelled block of the landing page: Hero, Problem, Services, How It Works, Specialties, Systems, Why Us, Fit, Results, FAQ, Assessment (CTA + form), Footer.
 - **Placeholder** — bracketed copy in the canvas awaiting real values from the client, e.g. `[X%]`, `[SPECIALTY 1]`, `[Street address]`.
 - **Results mode** — whether the Results section shows placeholder case studies or a "coming soon" notice. Launches in placeholder mode; the client swaps copy at the end.

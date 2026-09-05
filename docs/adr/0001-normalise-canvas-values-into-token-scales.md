@@ -1,6 +1,6 @@
 # Normalise the design canvas's raw values into token scales
 
-The design canvas (`Landing page ready for review/RCM Landing.dc.html`) is a generative export. It uses roughly 110 distinct raw style values, including artefacts that read as incidental rather than intended: font sizes of 13.5/14.5/16.5px, spacing at 5/11/15/22/26px, ten border radii, and eleven greys — several used exactly once.
+The design canvas (`docs/design/rcm-landing.dc.html`) is a generative export. It uses roughly 110 distinct raw style values, including artefacts that read as incidental rather than intended: font sizes of 13.5/14.5/16.5px, spacing at 5/11/15/22/26px, ten border radii, and eleven greys — several used exactly once.
 
 We normalise these onto scales rather than preserving them exactly. A value used four or more times earns its own step; a value used one to three times rounds to its nearest neighbour. Two carve-outs stop the rule destroying the design: a value providing the only contrast between two adjacent surfaces is kept regardless of frequency, and a value with no perceptually near neighbour is kept rather than rounded to something unrelated.
 
