@@ -6,6 +6,9 @@ import { HowItWorks } from '../sections/HowItWorks'
 import { Problem } from '../sections/Problem'
 import { Services } from '../sections/Services'
 import { SiteHeader } from '../sections/SiteHeader'
+import { Specialties } from '../sections/Specialties'
+import { Systems } from '../sections/Systems'
+import { WhyUs } from '../sections/WhyUs'
 
 export const Route = createFileRoute('/')({ component: Home })
 
@@ -19,6 +22,9 @@ function Home() {
         <Problem />
         <Services />
         <HowItWorks />
+        <Specialties />
+        <Systems />
+        <WhyUs />
       </Box>
     </>
   )

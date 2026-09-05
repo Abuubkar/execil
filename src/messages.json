@@ -165,5 +165,71 @@
         "blurb": "Daily claims work with a monthly performance review you can act on."
       }
     ]
+  },
+  "specialties": {
+    "eyebrow": "Specialties",
+    "title": "Coders assigned by specialty, not by queue.",
+    "label": "Specialties served",
+    "items": [
+      "[SPECIALTY 1]",
+      "[SPECIALTY 2]",
+      "[SPECIALTY 3]",
+      "Primary Care",
+      "Behavioral Health",
+      "Physical Therapy",
+      "Urgent Care",
+      "Internal Medicine",
+      "Pediatrics"
+    ],
+    "more": "+ more"
+  },
+  "systems": {
+    "title": "Works with your systems",
+    "label": "Supported practice management and EHR platforms",
+    "items": [
+      "eClinicalWorks",
+      "athenahealth",
+      "Kareo / Tebra",
+      "AdvancedMD",
+      "NextGen",
+      "Office Ally",
+      "DrChrono",
+      "Practice Fusion"
+    ],
+    "note": "No forced migration — we work inside the system you already use."
+  },
+  "why": {
+    "eyebrow": "Why us",
+    "title": "The terms most billing vendors won't put in writing.",
+    "table": {
+      "caption": "Execile compared with a typical billing vendor",
+      "columns": ["", "Typical billing vendor", "Execile"],
+      "rows": [
+        {
+          "label": "Setup fees",
+          "cells": ["Common", "None"]
+        },
+        {
+          "label": "Contract",
+          "cells": ["Multi-year", "Month-to-month"]
+        },
+        {
+          "label": "Pricing",
+          "cells": ["Opaque", "% of collections, quoted upfront"]
+        },
+        {
+          "label": "Reporting",
+          "cells": ["Monthly PDF", "Live / monthly KPI dashboard"]
+        },
+        {
+          "label": "Team",
+          "cells": ["Pooled generalists", "Specialty-assigned team"]
+        },
+        {
+          "label": "Account manager",
+          "cells": ["Ticket queue", "Named US-hours contact"]
+        }
+      ]
+    }
   }
 }
