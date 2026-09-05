@@ -369,5 +369,70 @@
       "copied": "Copied",
       "subject": "Billing assessment request"
     }
+  },
+  "footer": {
+    "tagline": "Specialty-driven medical billing and revenue cycle management for independent US practices.",
+    "servicesLabel": "Services",
+    "specialtiesLabel": "Specialties",
+    "contactLabel": "Contact",
+    "services": [
+      {
+        "href": "#services",
+        "text": "Front-end: eligibility & credentialing"
+      },
+      {
+        "href": "#services",
+        "text": "Mid-cycle: coding & claims"
+      },
+      {
+        "href": "#services",
+        "text": "Back-end: AR & denials"
+      },
+      {
+        "href": "#services",
+        "text": "Visibility: KPI reporting"
+      }
+    ],
+    "specialties": [
+      {
+        "href": "#specialties",
+        "text": "[SPECIALTY 1]"
+      },
+      {
+        "href": "#specialties",
+        "text": "[SPECIALTY 2]"
+      },
+      {
+        "href": "#specialties",
+        "text": "[SPECIALTY 3]"
+      },
+      {
+        "href": "#specialties",
+        "text": "Primary Care"
+      },
+      {
+        "href": "#specialties",
+        "text": "Behavioral Health"
+      }
+    ],
+    "email": "[hello@domain.com]",
+    "emailHref": "mailto:hello@example.com",
+    "addressLines": ["New York, NY", "United States"],
+    "legalLabel": "Legal",
+    "legalLinks": [
+      {
+        "href": "#",
+        "text": "HIPAA Notice"
+      },
+      {
+        "href": "#",
+        "text": "Privacy Policy"
+      },
+      {
+        "href": "#",
+        "text": "Terms of Service"
+      }
+    ],
+    "copyright": "© 2026 EXECIL PVT LTD. All rights reserved."
   }
 }

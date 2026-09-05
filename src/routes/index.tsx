@@ -9,6 +9,7 @@ import { HowItWorks } from '../sections/HowItWorks'
 import { Problem } from '../sections/Problem'
 import { Results } from '../sections/Results'
 import { Services } from '../sections/Services'
+import { SiteFooter } from '../sections/SiteFooter'
 import { SiteHeader } from '../sections/SiteHeader'
 import { Specialties } from '../sections/Specialties'
 import { Systems } from '../sections/Systems'
@@ -34,6 +35,7 @@ function Home() {
         <Faq />
         <Assessment />
       </Box>
+      <SiteFooter />
     </>
   )
 }
