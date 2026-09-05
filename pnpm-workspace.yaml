@@ -1,4 +1,6 @@
 allowBuilds:
+  # posthog-js dependency; its postinstall only prints a banner.
+  core-js: false
   esbuild: true
   lightningcss: true
   sharp: true

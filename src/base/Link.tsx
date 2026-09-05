@@ -69,6 +69,10 @@ type LinkProps = {
   children?: React.ReactNode
   style?: StyleProp
   'aria-label'?: string
+  /** Fired on activation. Exists so sections can report an event without
+   *  importing the analytics module — base/ must not depend on it, and
+   *  sections must not depend on analytics either (issue #31). */
+  onActivate?: () => void
 }
 
 export function Link({
@@ -78,11 +82,13 @@ export function Link({
   children,
   style,
   'aria-label': ariaLabel,
+  onActivate,
 }: LinkProps) {
   return (
     <a
       href={href}
       aria-label={ariaLabel}
+      onClick={onActivate}
       rel={external ? 'noopener noreferrer' : undefined}
       target={external ? '_blank' : undefined}
       {...stylex.props(base.link, variants[variant], style)}

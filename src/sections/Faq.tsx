@@ -5,6 +5,7 @@ import { Eyebrow } from '../base/Eyebrow'
 import { Heading } from '../base/Heading'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
+import { track } from '../analytics/posthog'
 import { m } from '../messages'
 import { layout } from '../styles/tokens.stylex'
 
@@ -29,7 +30,17 @@ export function Faq() {
 
         <Stack gap="s10">
           {m.faq.items.map((item) => (
-            <Disclosure key={item.id} name={FAQ_GROUP} summary={item.q}>
+            <Disclosure
+              key={item.id}
+              name={FAQ_GROUP}
+              summary={item.q}
+              // Stable slug, NEVER an index: copy edits reorder questions and
+              // an index-keyed event would silently re-point to a different
+              // question, corrupting history already collected (issue #13).
+              onOpen={() => {
+                track({ name: 'faq_opened', props: { question_id: item.id } })
+              }}
+            >
               {item.a}
             </Disclosure>
           ))}

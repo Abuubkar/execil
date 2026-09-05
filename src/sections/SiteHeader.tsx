@@ -8,6 +8,7 @@ import { MenuPanel } from '../base/MenuPanel'
 import { SkipLink } from '../base/SkipLink'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
+import { track } from '../analytics/posthog'
 import { m } from '../messages'
 import { color, layout, radius, screen, space, text } from '../styles/tokens.stylex'
 
@@ -86,17 +87,38 @@ export function SiteHeader() {
 
           <Stack direction="row" gap="s28" align="center" style={styles.desktopOnly}>
             {links.map((link) => (
-              <Link key={link.href} href={link.href} variant="nav">
+              <Link
+                key={link.href}
+                href={link.href}
+                variant="nav"
+                onActivate={() => {
+                  track({ name: 'nav_clicked', props: { target: link.href } })
+                }}
+              >
                 {link.text}
               </Link>
             ))}
           </Stack>
 
           <Stack direction="row" gap="s18" align="center" style={styles.desktopOnly}>
-            <Link href={m.site.phoneHref} variant="plain" style={styles.phone}>
+            <Link
+              href={m.site.phoneHref}
+              variant="plain"
+              style={styles.phone}
+              onActivate={() => {
+                track({ name: 'phone_clicked', props: { location: 'header' } })
+              }}
+            >
               {m.site.phone}
             </Link>
-            <Link href="#assessment" variant="button" style={styles.headerCta}>
+            <Link
+              href="#assessment"
+              variant="button"
+              style={styles.headerCta}
+              onActivate={() => {
+                track({ name: 'cta_clicked', props: { location: 'header', variant: 'primary' } })
+              }}
+            >
               {m.nav.cta}
             </Link>
           </Stack>
@@ -108,14 +130,36 @@ export function SiteHeader() {
 
         <MenuPanel id={MENU_ID} label={m.nav.menuLabel} style={styles.mobileOnly}>
           {links.map((link) => (
-            <Link key={link.href} href={link.href} variant="plain" style={styles.menuLink}>
+            <Link
+              key={link.href}
+              href={link.href}
+              variant="plain"
+              style={styles.menuLink}
+              onActivate={() => {
+                track({ name: 'nav_clicked', props: { target: link.href } })
+              }}
+            >
               {link.text}
             </Link>
           ))}
-          <Link href={m.site.phoneHref} variant="plain" style={styles.menuLink}>
+          <Link
+            href={m.site.phoneHref}
+            variant="plain"
+            style={styles.menuLink}
+            onActivate={() => {
+              track({ name: 'phone_clicked', props: { location: 'mobile_menu' } })
+            }}
+          >
             {m.site.phone}
           </Link>
-          <Link href="#assessment" variant="button" style={styles.menuCta}>
+          <Link
+            href="#assessment"
+            variant="button"
+            style={styles.menuCta}
+            onActivate={() => {
+              track({ name: 'cta_clicked', props: { location: 'mobile_menu', variant: 'primary' } })
+            }}
+          >
             {m.nav.cta}
           </Link>
         </MenuPanel>

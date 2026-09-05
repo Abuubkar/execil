@@ -86,14 +86,23 @@ export function Disclosure({
   summary,
   marker = '+',
   children,
+  onOpen,
 }: {
   name?: string
   summary: string
   marker?: string
   children?: React.ReactNode
+  /** Fired when this disclosure opens (not when it closes). */
+  onOpen?: () => void
 }) {
   return (
-    <details name={name} {...stylex.props(styles.details, stylex.defaultMarker())}>
+    <details
+      name={name}
+      onToggle={(event) => {
+        if ((event.currentTarget as HTMLDetailsElement).open) onOpen?.()
+      }}
+      {...stylex.props(styles.details, stylex.defaultMarker())}
+    >
       <summary {...stylex.props(styles.summary)}>
         <span>{summary}</span>
         <span aria-hidden="true" {...stylex.props(styles.marker)}>

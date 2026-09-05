@@ -1,6 +1,8 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { useEffect } from 'react'
 import * as stylex from '@stylexjs/stylex'
 
+import { initAnalytics } from '../analytics/posthog'
 import { OG_IMAGE, SITE_URL, organizationLd } from '../seo'
 import { color, text } from '../styles/tokens.stylex'
 
@@ -74,6 +76,12 @@ const styles = stylex.create({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  // Client-only, after hydration. Never runs during prerender, where there is
+  // no browser and no visitor.
+  useEffect(() => {
+    initAnalytics()
+  }, [])
+
   return (
     <html lang="en">
       <head>
