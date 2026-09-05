@@ -42,6 +42,7 @@ A build-ready spec plus implementation tickets for the Execile landing page: the
 ## Decisions so far
 
 <!-- one line per closed ticket: gist, then the link for detail -->
+- [What does Vite+ provide, and how does a TanStack Start project live inside it?](issues/01-vite-plus.md) — `vp` v0.3.0 beta bundles Vite 8, Oxlint, Oxfmt, tsgolint and pnpm; scaffold with `vp create @tanstack/start` then `vp migrate`; rules 7 and 8 map to `react/jsx-no-literals` and `react/forbid-elements`; Husky conflicts with Vite+'s hook dispatcher, decision parked in the scaffold ticket.
 - [How does a statically prerendered TanStack Start site deploy to Cloudflare with one server endpoint?](issues/03-cloudflare-ssg.md) — One Worker with Static Assets via `@cloudflare/vite-plugin`; prerendered pages served as assets, the form POST as a TanStack server route in the same app; `vite dev` and Turnstile dummy keys run everything before any account exists.
 
 ## Not yet specified
