@@ -140,7 +140,16 @@ export function SiteHeader() {
 
       <Box as="header" style={styles.header}>
         <Box as="nav" aria-label={m.nav.label} style={styles.nav}>
-          <Link href="#top" variant="plain" aria-label={m.nav.home} style={styles.brand}>
+          <Link
+            href="#top"
+            variant="plain"
+            aria-label={m.nav.home}
+            style={styles.brand}
+            onActivate={(event) => {
+              event.preventDefault()
+              globalThis.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+          >
             <BrandMark />
             <Text style={styles.wordmark}>{m.site.name}</Text>
           </Link>

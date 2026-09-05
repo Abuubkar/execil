@@ -89,7 +89,7 @@ type LinkProps = {
   /** Fired on activation. Exists so sections can report an event without
    *  importing the analytics module — base/ must not depend on it, and
    *  sections must not depend on analytics either (issue #31). */
-  onActivate?: () => void
+  onActivate?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   current?: boolean
 }
 
