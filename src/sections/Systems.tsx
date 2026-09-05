@@ -38,9 +38,6 @@ export function Systems() {
         <List direction="row" wrap gap="s10" label={m.systems.label}>
           {m.systems.items.map((item) => (
             <ListItem key={item.name}>
-              {/* Outbound to the vendor's own site so a visitor can check who
-                  each platform actually is. external adds target=_blank plus
-                  the rel pair, which also keeps them on this page. */}
               <Link href={item.href} variant="plain" external style={styles.pill}>
                 {item.name}
               </Link>

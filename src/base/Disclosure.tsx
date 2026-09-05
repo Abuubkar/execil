@@ -1,7 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
 
-// when.ancestor needs the ancestor to carry a marker; the default one is already
-// on <details> for the [open] rotation, so <summary> gets its own.
 import { summaryMarker } from '../styles/markers.stylex'
 import { color, motion, radius, space, text } from '../styles/tokens.stylex'
 
@@ -16,8 +14,6 @@ const styles = stylex.create({
   },
   summary: {
     alignItems: 'center',
-    // The whole row highlights, not just the text: the colour-only change was
-    // too dim to notice against the heading tone.
     backgroundColor: { default: 'transparent', ':hover': color.surfaceAccent },
     color: { default: color.textHeading, ':hover': color.textLink },
     cursor: 'pointer',
@@ -44,8 +40,6 @@ const styles = stylex.create({
   },
   marker: {
     alignItems: 'center',
-    // Inverts when the summary is hovered: brand surface with white glyph, so
-    // the pill reads as part of the same highlight as the text.
     backgroundColor: {
       default: color.surfaceAccent,
       [stylex.when.ancestor(':hover', summaryMarker)]: color.surfaceBrand,

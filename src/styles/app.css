@@ -127,11 +127,6 @@ details[open]::details-content {
   translate: 0 0;
 }
 
-/* Lets block-size animate to/from `auto`. Without it the panel height snaps,
-   and in an exclusive group the closing sibling and the opening one snap at
-   once -- the summary you clicked jumps under the cursor. Chrome-only today;
-   elsewhere it degrades to the instant open already accepted in issue #10.
-   Never load-bearing. */
 :root {
   interpolate-size: allow-keywords;
 }

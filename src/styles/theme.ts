@@ -15,12 +15,8 @@ export const darkSurface = stylex.createTheme(color, {
   textBody: palette.ink300,
   textProse: palette.ink300,
   textMuted: palette.ink400,
-  // Footer nav links use textSecondary; without this override they rendered
-  // ink700 on ink900 at 1.96:1 (validator-confirmed). ink300 is 9.27:1.
   textSecondary: palette.ink300,
   textLink: palette.green200,
-  // Hover step for links on dark. teal800 (the light value) would be invisible
-  // on ink900; white is 17.28:1 and clearly distinct from the green textLink.
   textLinkHover: palette.white,
 
   surfacePage: palette.ink900,

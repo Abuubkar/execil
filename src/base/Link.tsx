@@ -22,9 +22,6 @@ const variants = stylex.create({
     fontWeight: text.weightMedium,
     textDecoration: 'none',
   },
-  /** Header navigation. The plain `nav` colour shift (ink700 -> teal800) was
-   *  too subtle to register, so this one fills a pill. Padding is constant and
-   *  only the background changes, so hovering causes no layout shift. */
   navPill: {
     backgroundColor: { default: 'transparent', ':hover': color.surfaceAccent },
     borderRadius: radius.md,
@@ -75,7 +72,6 @@ const variants = stylex.create({
 
 const base = stylex.create({
   link: { display: 'inline-block' },
-  /** The section currently in view. Same treatment as hover, held. */
   current: {
     backgroundColor: color.surfaceAccent,
     color: color.textLink,
@@ -95,8 +91,6 @@ type LinkProps = {
    *  importing the analytics module — base/ must not depend on it, and
    *  sections must not depend on analytics either (issue #31). */
   onActivate?: () => void
-  /** Marks the link whose section is in view. Renders aria-current, which is
-   *  the semantic for "current item within a set" (nav scroll-spy). */
   current?: boolean
 }
 

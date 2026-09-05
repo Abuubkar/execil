@@ -80,17 +80,6 @@ const styles = stylex.create({
   menuCta: { marginBlockStart: space.s8, textAlign: 'center' },
 })
 
-/**
- * Scroll-spy via IntersectionObserver -- a Web API (rule 3), ~20 lines, and
- * progressive: with JavaScript off nothing is highlighted and the nav still
- * works. This is the one interaction added after issue #10 fixed "the form is
- * the only JavaScript"; it exists because there is no CSS-only way to style a
- * nav link from a section's scroll position that is not Chrome-only.
- *
- * The root margin narrows the viewport to a band across its upper-middle, so
- * the "current" section is the one under the reader's eye, not the one that
- * has merely scrolled past the top edge.
- */
 function useCurrentSection(hrefs: readonly string[]): string | null {
   const [current, setCurrent] = useState<string | null>(null)
 
