@@ -191,11 +191,24 @@ export const motion = stylex.defineConsts({
   ease: 'ease',
 })
 
+/**
+ * Breakpoints, as COMPLETE media query strings.
+ *
+ * StyleX 0.19 cannot interpolate a const into a media-query key — a template
+ * literal like `@media (min-width: ${screen.nav})` fails the build with
+ * "Invalid media query syntax". The whole query has to be the const, used
+ * directly as a computed key: `{ default: 'none', [screen.navUp]: 'flex' }`.
+ * The raw widths are exported too, for anything that needs the number.
+ */
 export const screen = stylex.defineConsts({
   /** Header only — desktop nav swaps to the hamburger. */
   nav: '940px',
+  navUp: '@media (min-width: 940px)',
+  navDown: '@media (max-width: 939.98px)',
   /** Comparison table only — stacks below this. Issue #17. */
   table: '600px',
+  tableUp: '@media (min-width: 600px)',
+  tableDown: '@media (max-width: 599.98px)',
 })
 
 export const layout = stylex.defineConsts({

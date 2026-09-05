@@ -6,16 +6,19 @@ import { color, motion, radius, shadow, space, text } from '../styles/tokens.sty
 /** A link that looks like a button is `variant="button"` — NOT `Button as="a"`.
  *  The canvas has 6 brand-background anchors against 2 real buttons, so this is
  *  the common case, and it keeps the semantics honest. */
-export type LinkVariant = 'inline' | 'nav' | 'button' | 'buttonSecondary'
+export type LinkVariant = 'plain' | 'inline' | 'nav' | 'button' | 'buttonSecondary'
 
 const variants = stylex.create({
+  /** No visual treatment — for links that wrap their own composed content,
+   *  such as the brand lockup. */
+  plain: { color: 'inherit', textDecoration: 'none' },
   inline: {
     color: { default: color.textLink, ':hover': color.textLinkHover },
     textDecoration: 'underline',
   },
   nav: {
     color: { default: color.textSecondary, ':hover': color.textLinkHover },
-    fontSize: text.base,
+    fontSize: text.md,
     fontWeight: text.weightMedium,
     textDecoration: 'none',
   },

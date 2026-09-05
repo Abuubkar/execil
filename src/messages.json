@@ -4,15 +4,52 @@
     "phone": "(555) 000-0000",
     "phoneHref": "tel:+15550000000"
   },
+  "nav": {
+    "label": "Main",
+    "home": "Execile home",
+    "skip": "Skip to content",
+    "menuLabel": "Menu",
+    "cta": "Get a Free Billing Assessment",
+    "links": [
+      {
+        "href": "#services",
+        "text": "Services"
+      },
+      {
+        "href": "#how",
+        "text": "How It Works"
+      },
+      {
+        "href": "#specialties",
+        "text": "Specialties"
+      },
+      {
+        "href": "#why",
+        "text": "Why Us"
+      },
+      {
+        "href": "#faq",
+        "text": "FAQ"
+      }
+    ]
+  },
   "hero": {
     "badge": "Medical billing & RCM for independent practices",
     "title": [
       "Collect Every Dollar You've ",
-      { "text": "Earned", "tone": "brand" },
+      {
+        "text": "Earned",
+        "tone": "brand"
+      },
       ".",
-      { "br": true },
+      {
+        "br": true
+      },
       "Cut Denials ",
-      { "text": "Before They Happen", "tone": "success" },
+      {
+        "text": "Before They Happen",
+        "tone": "success"
+      },
       "."
     ],
     "lead": "Specialty-assigned billing for independent practices with 1–20 providers. We work inside your existing EHR, report what we collect, and quote our price upfront.",

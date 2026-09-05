@@ -80,3 +80,22 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* --- Popover: the two rules StyleX cannot express ------------------------- */
+
+/* Entry animation. Without a @starting-style the element has no "before" state
+   to transition from, so it would appear instantly. StyleX has no syntax for
+   this at-rule, and it must target the element generically. */
+@starting-style {
+  [popover]:popover-open {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+}
+
+/* Scroll lock while the menu is open. :has() has no StyleX equivalent — there
+   are no ancestor-of-descendant selectors. Removing the scrollbar would itself
+   be a layout shift; scrollbar-gutter: stable above reserves the space. */
+html:has([popover]:popover-open) {
+  overflow: hidden;
+}
