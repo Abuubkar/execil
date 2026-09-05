@@ -23,16 +23,15 @@ const variants = stylex.create({
     textDecoration: 'none',
   },
   navHeader: {
-    borderBlockEndColor: { default: 'transparent', ':hover': color.textLink },
-    borderBlockEndStyle: 'solid',
-    borderBlockEndWidth: '2px',
     color: { default: color.textSecondary, ':hover': color.textLink },
     fontSize: text.md,
-    fontWeight: text.weightMedium,
-    paddingBlockEnd: space.s4,
-    textDecoration: 'none',
+    fontWeight: text.weightSemibold,
+    textDecorationColor: color.textLink,
+    textDecorationLine: { default: 'none', ':hover': 'underline' },
+    textDecorationThickness: '2px',
+    textUnderlineOffset: '6px',
     transitionDuration: motion.fast,
-    transitionProperty: 'color, border-color',
+    transitionProperty: 'color',
     transitionTimingFunction: motion.ease,
   },
   button: {
@@ -73,8 +72,9 @@ const variants = stylex.create({
 const base = stylex.create({
   link: { display: 'inline-block' },
   current: {
-    borderBlockEndColor: color.textLink,
     color: color.textLink,
+    textDecorationColor: color.textLink,
+    textDecorationLine: 'underline',
   },
 })
 
