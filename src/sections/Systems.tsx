@@ -1,19 +1,25 @@
 import * as stylex from '@stylexjs/stylex'
 
 import { Heading } from '../base/Heading'
+import { Link } from '../base/Link'
 import { List, ListItem } from '../base/List'
 import { Prose } from '../base/Prose'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
-import { Text } from '../base/Text'
 import { m } from '../messages'
-import { color, radius, space, text } from '../styles/tokens.stylex'
+import { color, motion, radius, space, text } from '../styles/tokens.stylex'
 
 const HEADING_ID = 'systems-h'
 
 const styles = stylex.create({
   pill: {
-    backgroundColor: color.surfaceAccent,
+    backgroundColor: { default: color.surfaceAccent, ':hover': color.borderAccent },
+    color: color.textLink,
+    display: 'inline-block',
+    textDecoration: 'none',
+    transitionDuration: motion.fast,
+    transitionProperty: 'background-color',
+    transitionTimingFunction: motion.ease,
     borderRadius: radius.lg,
     fontSize: text.md,
     fontWeight: text.weightMedium,
@@ -31,10 +37,13 @@ export function Systems() {
         </Heading>
         <List direction="row" wrap gap="s10" label={m.systems.label}>
           {m.systems.items.map((item) => (
-            <ListItem key={item} style={styles.pill}>
-              <Text size="md" tone="link">
-                {item}
-              </Text>
+            <ListItem key={item.name}>
+              {/* Outbound to the vendor's own site so a visitor can check who
+                  each platform actually is. external adds target=_blank plus
+                  the rel pair, which also keeps them on this page. */}
+              <Link href={item.href} variant="plain" external style={styles.pill}>
+                {item.name}
+              </Link>
             </ListItem>
           ))}
         </List>

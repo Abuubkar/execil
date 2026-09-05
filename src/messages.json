@@ -5,10 +5,10 @@
     "phoneHref": "tel:+15550000000"
   },
   "meta": {
-    "title": "Execile — Medical Billing & RCM for Independent Practices",
-    "description": "Specialty-assigned medical billing and revenue cycle management for independent practices with 1–20 providers. We work inside your existing EHR, report what we collect, and quote our price upfront.",
+    "title": "Execile | Medical Billing & RCM for Independent Practices",
+    "description": "Specialty-assigned medical billing and revenue cycle management for independent practices with 1-20 providers. We work inside the EHR you already use, you see what we collect, and you know the price before you sign.",
     "ogTitle": "Collect Every Dollar You've Earned",
-    "ogImageAlt": "Execile — medical billing and revenue cycle management for independent practices",
+    "ogImageAlt": "Execile: medical billing and revenue cycle management for independent practices",
     "legalName": "EXECIL PVT LTD",
     "addressRegion": "NY",
     "addressCountry": "US",
@@ -62,7 +62,7 @@
       },
       "."
     ],
-    "lead": "Specialty-assigned billing for independent practices with 1–20 providers. We work inside your existing EHR, report what we collect, and quote our price upfront.",
+    "lead": "Specialty-assigned billing for independent practices with 1-20 providers. We work inside the EHR you already use. You see what we collect, and you know the price before you sign anything.",
     "ctaPrimary": "Get a Free Billing Assessment",
     "ctaSecondary": "See Our Services",
     "trustPointsLabel": "Trust points",
@@ -87,7 +87,7 @@
       {
         "stat": "13.5%",
         "title": "Aged AR nobody works",
-        "blurb": "Claims sit past 120 days until they time out — and Medicare's first-level appeal window has already closed.",
+        "blurb": "Claims sit past 120 days until they time out. By then Medicare's first-level appeal window has closed too.",
         "source": "MGMA DataDive, 2021 · 42 CFR 405.942"
       },
       {
@@ -134,7 +134,7 @@
         "eyebrow": "Back-end",
         "icon": "trend",
         "title": "Collect every dollar owed",
-        "blurb": "Every payment posted, every denial worked, every balance followed up.",
+        "blurb": "Every payment posted and every denial worked, down to the last patient balance.",
         "items": [
           "Payment Posting (ERA / EOB)",
           "Accounts Receivable Follow-up (30/60/90-day protocol)",
@@ -149,7 +149,7 @@
         "blurb": "The numbers that matter, reported the same way every month.",
         "items": [
           "Monthly KPI Reporting: net collections, denial rate, days in AR, first-pass rate",
-          "[Dashboard access — confirm with client]"
+          "[Dashboard access: confirm with client]"
         ]
       }
     ]
@@ -168,7 +168,7 @@
       },
       {
         "title": "14-day onboarding",
-        "blurb": "Inside your existing EHR/PM — no software switch, no re-training."
+        "blurb": "You keep your existing EHR/PM. There is no software switch and nobody has to be retrained."
       },
       {
         "title": "Ongoing billing",
@@ -181,9 +181,9 @@
     "title": "Coders assigned by specialty, not by queue.",
     "label": "Specialties served",
     "items": [
-      "[SPECIALTY 1]",
-      "[SPECIALTY 2]",
-      "[SPECIALTY 3]",
+      "Orthopedics",
+      "OB/GYN",
+      "Dermatology",
       "Primary Care",
       "Behavioral Health",
       "Physical Therapy",
@@ -197,16 +197,40 @@
     "title": "Works with your systems",
     "label": "Supported practice management and EHR platforms",
     "items": [
-      "eClinicalWorks",
-      "athenahealth",
-      "Kareo / Tebra",
-      "AdvancedMD",
-      "NextGen",
-      "Office Ally",
-      "DrChrono",
-      "Practice Fusion"
+      {
+        "name": "eClinicalWorks",
+        "href": "https://www.eclinicalworks.com/"
+      },
+      {
+        "name": "athenahealth",
+        "href": "https://www.athenahealth.com/"
+      },
+      {
+        "name": "Tebra (formerly Kareo)",
+        "href": "https://www.tebra.com/"
+      },
+      {
+        "name": "AdvancedMD",
+        "href": "https://www.advancedmd.com/"
+      },
+      {
+        "name": "NextGen",
+        "href": "https://www.nextgen.com/"
+      },
+      {
+        "name": "Office Ally",
+        "href": "https://www.officeally.com/"
+      },
+      {
+        "name": "DrChrono",
+        "href": "https://www.drchrono.com/"
+      },
+      {
+        "name": "Practice Fusion",
+        "href": "https://www.practicefusion.com/"
+      }
     ],
-    "note": "No forced migration — we work inside the system you already use."
+    "note": "We work inside the system you already use, so nothing has to be migrated."
   },
   "why": {
     "eyebrow": "Why us",
@@ -247,13 +271,13 @@
     "goodTitle": "A strong fit if",
     "badTitle": "Less of a fit if",
     "good": [
-      "You're an independent practice with 1–20 providers",
+      "You're an independent practice with 1-20 providers",
       "Denials are rising or AR is aging",
       "You want real visibility into collections",
       "You're adding providers who need credentialing"
     ],
     "bad": [
-      "You need hospital or facility (UB-04) billing",
+      "You need the facility's own billing (UB-04) for a hospital or surgery center",
       "Your practice is mostly cash-pay",
       "You want to keep a full in-house billing team"
     ]
@@ -262,7 +286,7 @@
     "eyebrow": "Results",
     "title": "What changes when the cycle is worked.",
     "comingSoon": "We publish client outcomes only once they're measured and approved for sharing.",
-    "placeholderNotice": "[PLACEHOLDER — replace with real client results]",
+    "placeholderNotice": "[PLACEHOLDER: replace with real client results]",
     "items": []
   },
   "faq": {
@@ -272,7 +296,7 @@
       {
         "id": "existing-ehr",
         "q": "Do you work inside our existing EHR?",
-        "a": "Yes. We work inside your existing EHR/PM — no software switch and no re-training."
+        "a": "Yes. We work inside your existing EHR/PM, so there is no software switch and no retraining."
       },
       {
         "id": "onboarding-time",
@@ -282,7 +306,7 @@
       {
         "id": "contract",
         "q": "Is there a long-term contract?",
-        "a": "No. No setup fees and no long-term contract — the engagement is month-to-month."
+        "a": "No. The engagement is month-to-month, and there are no setup fees."
       },
       {
         "id": "pricing",
@@ -292,7 +316,7 @@
       {
         "id": "hipaa",
         "q": "How is patient data protected?",
-        "a": "A BAA is signed before any data moves, and every workflow is HIPAA-compliant."
+        "a": "A BAA is signed before any data moves, and every workflow is HIPAA compliant."
       },
       {
         "id": "ar-cleanup",
@@ -329,9 +353,9 @@
         "specialty": {
           "label": "Specialty",
           "options": [
-            "[SPECIALTY 1]",
-            "[SPECIALTY 2]",
-            "[SPECIALTY 3]",
+            "Orthopedics",
+            "OB/GYN",
+            "Dermatology",
             "Primary Care",
             "Behavioral Health",
             "Physical Therapy",
@@ -343,7 +367,7 @@
         },
         "providers": {
           "label": "Number of providers",
-          "options": ["1", "2–5", "6–10", "11–20", "20+"]
+          "options": ["1", "2-5", "6-10", "11-20", "20+"]
         },
         "concern": {
           "label": "Primary concern",
@@ -406,15 +430,15 @@
     "specialties": [
       {
         "href": "#specialties",
-        "text": "[SPECIALTY 1]"
+        "text": "Orthopedics"
       },
       {
         "href": "#specialties",
-        "text": "[SPECIALTY 2]"
+        "text": "OB/GYN"
       },
       {
         "href": "#specialties",
-        "text": "[SPECIALTY 3]"
+        "text": "Dermatology"
       },
       {
         "href": "#specialties",

@@ -84,7 +84,7 @@ for line in LINES:
     y += round(size * 1.18)
 
 d.text((PAD, 476), "Medical billing & RCM for independent practices", font=body, fill=INK_600)
-d.text((PAD, 518), "1–20 providers · Inside your existing EHR · Priced upfront", font=body, fill=INK_600)
+d.text((PAD, 518), "1-20 providers · Inside your existing EHR · Priced upfront", font=body, fill=INK_600)
 
 out = ROOT / "public" / "og.png"
 img.save(out, "PNG", optimize=True)
