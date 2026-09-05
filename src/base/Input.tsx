@@ -21,7 +21,7 @@ export const controlStyles = stylex.create({
     width: '100%',
     ':focus-visible': {
       outlineColor: color.focusRing,
-      outlineOffset: 0,
+      outlineOffset: '-1px',
       outlineStyle: 'solid',
       outlineWidth: '2px',
     },
