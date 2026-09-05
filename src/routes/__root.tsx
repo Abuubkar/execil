@@ -19,6 +19,15 @@ export const Route = createRootRoute({
       },
     ],
     links: [
+      // Preload the variable font: it is on the LCP path (the hero h1 is text,
+      // not an image). crossorigin is required even same-origin for fonts.
+      {
+        rel: 'preload',
+        href: '/fonts/Satoshi-Variable.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
+      },
       {
         rel: 'stylesheet',
         href: appCss,

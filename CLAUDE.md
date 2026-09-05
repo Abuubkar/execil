@@ -7,7 +7,7 @@ Landing page for Execile, a medical billing / RCM service. Glossary in `CONTEXT.
 `react/forbid-elements` and `react/jsx-no-literals` cover rules 8 and 7 in `src/sections/` and `src/routes/`. These four are structurally unenforceable and are checked in review:
 
 1. **Tokens, not values.** `stylex.create` takes token references only. A literal colour, size, radius or duration is a bug. See issue #8.
-2. **Roles, not ramps.** Components import role keys (`color.textBody`, `color.surfaceBrand`). Ramp keys (`color.ink800`, `color.teal600`) exist to derive roles inside `tokens.stylex.ts` and are used nowhere else.
+2. **Roles, not ramps.** Components import role keys from `color` (`color.textBody`, `color.surfaceBrand`). The `palette` export (`palette.ink800`, `palette.teal600`) exists to derive roles inside `tokens.stylex.ts` and to supply values to `theme.ts`. Feature code never imports `palette`.
 3. **`style` positions, never restyles.** A parent may pass `style` to place a child within its own layout (margin, grid placement, width). It must never set the child's interior: colour, font, padding, border. See issue #9.
 4. **User-facing attribute strings come from `messages.json`.** `aria-label`, `alt`, `title` and `placeholder` are invisible to `jsx-no-literals`. Prefer a component that requires the string as a prop. See issue #11.
 

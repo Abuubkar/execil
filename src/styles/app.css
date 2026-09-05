@@ -1,5 +1,43 @@
-/* Global CSS: everything StyleX cannot express.
-   Design tokens and @font-face arrive in issue #21. */
+/* Global CSS: everything StyleX cannot express — @font-face, the reset, and
+   the rules that must apply to every element regardless of component. */
+
+/* Satoshi, self-hosted. The ITF licence forbids subsetting and format
+   conversion, so the kit's variable WOFF2 ships exactly as supplied. Upright
+   only — italics are not used, and two static weights already cost more bytes
+   than the variable file. See issue #21. */
+@font-face {
+  font-family: 'Satoshi Variable';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2-variations');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metric-matched fallbacks, computed FROM THE FONT FILE by
+   scripts/font-metrics.mjs — no library publishes Satoshi's metrics. These
+   make the swap from fallback to Satoshi cause no reflow.
+   Caveat: Safari ships size-adjust but not the *-override properties, so
+   vertical matching does not apply there. If measured CLS is not 0 on Safari,
+   the documented fallback is font-display: optional. */
+@font-face {
+  font-family: 'Satoshi Variable Fallback: Arial';
+  src: local('Arial'), local('ArialMT');
+  font-display: swap;
+  ascent-override: 92.6458%;
+  descent-override: 22.0149%;
+  line-gap-override: 9.1729%;
+  size-adjust: 109.0173%;
+}
+
+@font-face {
+  font-family: 'Satoshi Variable Fallback: Roboto';
+  src: local('Roboto Regular'), local('Roboto-Regular');
+  font-display: swap;
+  ascent-override: 92.4429%;
+  descent-override: 21.9666%;
+  line-gap-override: 9.1528%;
+  size-adjust: 109.2566%;
+}
 
 *,
 *::before,

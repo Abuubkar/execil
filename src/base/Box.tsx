@@ -1,5 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
-import type { StyleXStyles } from '@stylexjs/stylex'
+import type { CompiledStyles, StyleXArray } from '@stylexjs/stylex'
+
+/** Mirrors what stylex.props() accepts, so a caller can pass a single style,
+ *  an array, or a theme. `Parameters<typeof stylex.props>[0]` does NOT work —
+ *  the declared `this` parameter makes it resolve to `undefined`. */
+export type StyleProp = StyleXArray<CompiledStyles | boolean | null | undefined>
 
 /** Closed union — never unrestricted. `as="marquee"` must not typecheck. */
 export type BoxElement =
@@ -18,7 +23,7 @@ type BoxProps = {
   children?: React.ReactNode
   /** Positions this element within a parent's layout. Never restyles its
    *  interior — see the conventions in CLAUDE.md. */
-  style?: StyleXStyles
+  style?: StyleProp
 }
 
 /** Deliberately shallow. Its job is to close the raw-tag hole with a
