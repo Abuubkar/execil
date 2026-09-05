@@ -87,6 +87,7 @@ export const color = stylex.defineVars({
   surfaceDanger: palette.red50,
   surfaceNotice: palette.amber300,
   surfaceInverse: palette.ink900,
+  surfaceMuted: palette.ink100,
 
   // --- Roles: border
   borderDefault: palette.ink100,

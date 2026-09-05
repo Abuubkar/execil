@@ -1,9 +1,12 @@
 import * as stylex from '@stylexjs/stylex'
 
+import { Icon } from './Icon'
+
 import { color, radius, space, text } from '../styles/tokens.stylex'
 
 export const controlStyles = stylex.create({
   control: {
+    appearance: 'none',
     backgroundColor: color.surfaceRaised,
     borderColor: { default: color.borderStrong, ':focus': color.focusRing },
     borderRadius: radius.lg,
@@ -69,6 +72,21 @@ export function Textarea({
   )
 }
 
+const selectStyles = stylex.create({
+  wrap: { display: 'block', position: 'relative' },
+  field: { paddingInlineEnd: space.s40 },
+  chevron: {
+    alignItems: 'center',
+    color: color.textMuted,
+    display: 'flex',
+    insetBlockEnd: 0,
+    insetBlockStart: 0,
+    insetInlineEnd: space.s14,
+    pointerEvents: 'none',
+    position: 'absolute',
+  },
+})
+
 export function Select({
   name,
   options,
@@ -81,18 +99,23 @@ export function Select({
   required?: boolean
 }) {
   return (
-    <select
-      name={name}
-      required={required}
-      defaultValue=""
-      {...stylex.props(controlStyles.control)}
-    >
-      <option value="">{placeholder}</option>
-      {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
+    <span {...stylex.props(selectStyles.wrap)}>
+      <select
+        name={name}
+        required={required}
+        defaultValue=""
+        {...stylex.props(controlStyles.control, selectStyles.field)}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+      <span {...stylex.props(selectStyles.chevron)}>
+        <Icon name="chevronDown" size="xs" />
+      </span>
+    </span>
   )
 }

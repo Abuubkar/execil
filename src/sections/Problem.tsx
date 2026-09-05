@@ -17,7 +17,7 @@ const styles = stylex.create({
   intro: { maxWidth: layout.containerText },
   stat: {
     alignSelf: 'flex-start',
-    backgroundColor: color.surfaceDanger,
+    backgroundColor: color.surfaceMuted,
     borderRadius: radius.md,
     fontSize: text['3xl'],
     fontWeight: text.weightBlack,
@@ -44,7 +44,7 @@ export function Problem() {
           {m.problem.cards.map((card) => (
             <Card key={card.title} interactive>
               <Stack gap="s12">
-                <Text tone="danger" style={styles.stat}>
+                <Text tone="heading" style={styles.stat}>
                   {card.stat}
                 </Text>
                 <Heading level={3} size="lg">
