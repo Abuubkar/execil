@@ -39,6 +39,7 @@ export const palette = stylex.defineVars({
   green200: '#9FD4A3',
   red600: '#C0392B',
   red50: '#FFF0F0',
+  clay600: '#B5533D',
   amber300: '#FFD166',
 })
 
@@ -76,6 +77,7 @@ export const color = stylex.defineVars({
    *  normal text. Issue #8 demoted teal600 to exactly this use: the hero
    *  headline emphasis at clamp(34px, 5.4vw, 64px). Never use it below 24px. */
   textAccentDisplay: palette.teal600,
+  textStat: palette.clay600,
 
   // --- Roles: surface
   surfacePage: palette.ink50,
@@ -87,7 +89,6 @@ export const color = stylex.defineVars({
   surfaceDanger: palette.red50,
   surfaceNotice: palette.amber300,
   surfaceInverse: palette.ink900,
-  surfaceMuted: palette.ink100,
 
   // --- Roles: border
   borderDefault: palette.ink100,

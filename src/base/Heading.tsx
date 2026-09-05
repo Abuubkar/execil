@@ -28,6 +28,7 @@ const tones = stylex.create({
   danger: { color: color.textDanger },
   success: { color: color.textSuccess },
   accentDisplay: { color: color.textAccentDisplay },
+  stat: { color: color.textStat },
 })
 
 const base = stylex.create({

@@ -9,20 +9,16 @@ import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
 import { m } from '../messages'
-import { color, layout, radius, space, text } from '../styles/tokens.stylex'
+import { layout, space, text } from '../styles/tokens.stylex'
 
 const HEADING_ID = 'problem-h'
 
 const styles = stylex.create({
   intro: { maxWidth: layout.containerText },
   stat: {
-    alignSelf: 'flex-start',
-    backgroundColor: color.surfaceMuted,
-    borderRadius: radius.md,
     fontSize: text['3xl'],
     fontWeight: text.weightBlack,
-    paddingBlock: space.s6,
-    paddingInline: space.s12,
+    letterSpacing: text.trackingTight,
   },
   /** Attribution. Every statistic here is an industry figure from a named
    *  third party — never a claim about Execile's own results (issue #19). */
@@ -44,7 +40,7 @@ export function Problem() {
           {m.problem.cards.map((card) => (
             <Card key={card.title} interactive>
               <Stack gap="s12">
-                <Text tone="heading" style={styles.stat}>
+                <Text tone="stat" style={styles.stat}>
                   {card.stat}
                 </Text>
                 <Heading level={3} size="lg">

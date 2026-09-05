@@ -18,6 +18,7 @@ export type Tone =
   | 'danger'
   | 'success'
   | 'accentDisplay'
+  | 'stat'
 
 export type Weight = 'regular' | 'medium' | 'semibold' | 'bold' | 'black'
 
@@ -43,6 +44,7 @@ const tones = stylex.create({
   danger: { color: color.textDanger },
   success: { color: color.textSuccess },
   accentDisplay: { color: color.textAccentDisplay },
+  stat: { color: color.textStat },
 })
 
 const weights = stylex.create({
