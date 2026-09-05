@@ -42,12 +42,13 @@ A build-ready spec plus implementation tickets for the Execile landing page: the
 ## Decisions so far
 
 <!-- one line per closed ticket: gist, then the link for detail -->
+- [How does a Cloudflare Worker deliver a form submission to a Google Workspace inbox?](issues/04-worker-to-workspace-email.md) — Cloudflare Email Service `send_email` binding to the Workspace mailbox as a verified destination (free on every plan), sending from an Email Routing subdomain so Google's apex MX stays; `wrangler dev` simulates the binding locally; Resend is the runner-up.
 - [What does Vite+ provide, and how does a TanStack Start project live inside it?](issues/01-vite-plus.md) — `vp` v0.3.0 beta bundles Vite 8, Oxlint, Oxfmt, tsgolint and pnpm; scaffold with `vp create @tanstack/start` then `vp migrate`; rules 7 and 8 map to `react/jsx-no-literals` and `react/forbid-elements`; Husky conflicts with Vite+'s hook dispatcher, decision parked in the scaffold ticket.
 - [How does a statically prerendered TanStack Start site deploy to Cloudflare with one server endpoint?](issues/03-cloudflare-ssg.md) — One Worker with Static Assets via `@cloudflare/vite-plugin`; prerendered pages served as assets, the form POST as a TanStack server route in the same app; `vite dev` and Turnstile dummy keys run everything before any account exists.
 
 ## Not yet specified
 
-- **Domain and email-domain setup.** DNS on Cloudflare, and SPF/DKIM/DMARC if the winning email path sends from the brand domain. Sharpens once the email research settles which path is used.
+- **Domain and email-domain setup.** DNS on Cloudflare; an Email Routing subdomain (e.g. `forms.<brand>`) for the form sender, with Cloudflare writing its MX/SPF/DKIM; the apex MX stays on Google. Whether the free send lane accepts a routing subdomain is unconfirmed until the account exists. Graduates into the deploy and provisioning ticket.
 - **Structured data.** schema.org markup for a medical billing business. In scope, deferred until the SEO decision lands.
 - **Accessibility beyond semantics.** Skip link, focus styles, colour contrast of the teal on white, table responsiveness on narrow screens. Likely graduates from the base-component and interaction tickets.
 - **Performance budget.** What the static page may weigh (font, PostHog snippet, Turnstile script) and whether anything loads lazily. Depends on font, analytics and form decisions.
