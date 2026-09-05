@@ -15,7 +15,7 @@ const styles = stylex.create({
   summary: {
     alignItems: 'center',
     backgroundColor: { default: 'transparent', ':hover': color.surfaceAccent },
-    color: { default: color.textHeading, ':hover': color.textLink },
+    color: { default: color.textHeading, ':hover': color.textLinkHover },
     cursor: 'pointer',
     display: 'flex',
     fontSize: text.lg,
@@ -40,14 +40,11 @@ const styles = stylex.create({
   },
   marker: {
     alignItems: 'center',
-    backgroundColor: {
-      default: color.surfaceAccent,
-      [stylex.when.ancestor(':hover', summaryMarker)]: color.surfaceBrand,
-    },
+    backgroundColor: color.surfaceAccent,
     borderRadius: radius.circle,
     color: {
       default: color.textLink,
-      [stylex.when.ancestor(':hover', summaryMarker)]: color.surfaceRaised,
+      [stylex.when.ancestor(':hover', summaryMarker)]: color.textLinkHover,
     },
     display: 'flex',
     flex: 'none',
@@ -57,7 +54,7 @@ const styles = stylex.create({
     justifyContent: 'center',
     lineHeight: '1',
     transitionDuration: motion.fast,
-    transitionProperty: 'rotate, background-color, color',
+    transitionProperty: 'rotate, color',
     transitionTimingFunction: motion.ease,
     width: '26px',
     // StyleX has no descendant combinators, so `details[open] .marker` cannot
