@@ -184,6 +184,7 @@
       "Orthopedics",
       "OB/GYN",
       "Dermatology",
+      "Podiatry",
       "Primary Care",
       "Behavioral Health",
       "Physical Therapy",
@@ -356,6 +357,7 @@
             "Orthopedics",
             "OB/GYN",
             "Dermatology",
+            "Podiatry",
             "Primary Care",
             "Behavioral Health",
             "Physical Therapy",
@@ -442,11 +444,11 @@
       },
       {
         "href": "#specialties",
-        "text": "Primary Care"
+        "text": "Podiatry"
       },
       {
         "href": "#specialties",
-        "text": "Behavioral Health"
+        "text": "Primary Care"
       }
     ],
     "email": "[hello@domain.com]",

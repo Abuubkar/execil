@@ -6,7 +6,7 @@ import { color, motion, radius, shadow, space, text } from '../styles/tokens.sty
 /** A link that looks like a button is `variant="button"` — NOT `Button as="a"`.
  *  The canvas has 6 brand-background anchors against 2 real buttons, so this is
  *  the common case, and it keeps the semantics honest. */
-export type LinkVariant = 'plain' | 'inline' | 'nav' | 'button' | 'buttonSecondary'
+export type LinkVariant = 'plain' | 'inline' | 'nav' | 'navPill' | 'button' | 'buttonSecondary'
 
 const variants = stylex.create({
   /** No visual treatment — for links that wrap their own composed content,
@@ -21,6 +21,22 @@ const variants = stylex.create({
     fontSize: text.md,
     fontWeight: text.weightMedium,
     textDecoration: 'none',
+  },
+  /** Header navigation. The plain `nav` colour shift (ink700 -> teal800) was
+   *  too subtle to register, so this one fills a pill. Padding is constant and
+   *  only the background changes, so hovering causes no layout shift. */
+  navPill: {
+    backgroundColor: { default: 'transparent', ':hover': color.surfaceAccent },
+    borderRadius: radius.md,
+    color: { default: color.textSecondary, ':hover': color.textLink },
+    fontSize: text.md,
+    fontWeight: text.weightMedium,
+    paddingBlock: space.s6,
+    paddingInline: space.s10,
+    textDecoration: 'none',
+    transitionDuration: motion.fast,
+    transitionProperty: 'background-color, color',
+    transitionTimingFunction: motion.ease,
   },
   button: {
     backgroundColor: {
@@ -59,6 +75,12 @@ const variants = stylex.create({
 
 const base = stylex.create({
   link: { display: 'inline-block' },
+  /** The section currently in view. Same treatment as hover, held. */
+  current: {
+    backgroundColor: color.surfaceAccent,
+    color: color.textLink,
+    fontWeight: text.weightSemibold,
+  },
 })
 
 type LinkProps = {
@@ -73,6 +95,9 @@ type LinkProps = {
    *  importing the analytics module — base/ must not depend on it, and
    *  sections must not depend on analytics either (issue #31). */
   onActivate?: () => void
+  /** Marks the link whose section is in view. Renders aria-current, which is
+   *  the semantic for "current item within a set" (nav scroll-spy). */
+  current?: boolean
 }
 
 export function Link({
@@ -83,15 +108,17 @@ export function Link({
   style,
   'aria-label': ariaLabel,
   onActivate,
+  current = false,
 }: LinkProps) {
   return (
     <a
       href={href}
       aria-label={ariaLabel}
       onClick={onActivate}
+      aria-current={current ? 'location' : undefined}
       rel={external ? 'noopener noreferrer' : undefined}
       target={external ? '_blank' : undefined}
-      {...stylex.props(base.link, variants[variant], style)}
+      {...stylex.props(base.link, variants[variant], current && base.current, style)}
     >
       {children}
     </a>

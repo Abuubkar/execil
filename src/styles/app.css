@@ -110,15 +110,28 @@ html:has([popover]:popover-open) {
    That degradation is accepted (issue #10) — the content is never hidden, it
    simply appears without the fade. */
 details::details-content {
+  block-size: 0;
   opacity: 0;
+  overflow: hidden;
   translate: 0 -4px;
   transition:
+    block-size 250ms ease,
     opacity 250ms ease,
     translate 250ms ease,
     content-visibility 250ms allow-discrete;
 }
 
 details[open]::details-content {
+  block-size: auto;
   opacity: 1;
   translate: 0 0;
+}
+
+/* Lets block-size animate to/from `auto`. Without it the panel height snaps,
+   and in an exclusive group the closing sibling and the opening one snap at
+   once -- the summary you clicked jumps under the cursor. Chrome-only today;
+   elsewhere it degrades to the instant open already accepted in issue #10.
+   Never load-bearing. */
+:root {
+  interpolate-size: allow-keywords;
 }

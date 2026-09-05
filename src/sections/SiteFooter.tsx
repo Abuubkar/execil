@@ -3,6 +3,7 @@ import * as stylex from '@stylexjs/stylex'
 import { Box } from '../base/Box'
 import { BrandMark } from '../base/BrandMark'
 import { Grid } from '../base/Grid'
+import { Icon } from '../base/Icon'
 import { Link } from '../base/Link'
 import { List, ListItem } from '../base/List'
 import { Prose } from '../base/Prose'
@@ -31,6 +32,7 @@ const styles = stylex.create({
     textTransform: 'uppercase',
   },
   link: { fontSize: text.md },
+  phone: { alignItems: 'center', display: 'inline-flex', gap: space.s6 },
   address: { fontStyle: 'normal' },
   bottom: {
     borderBlockStartColor: color.borderDefault,
@@ -104,7 +106,8 @@ export function SiteFooter() {
                 <Link href={m.footer.emailHref} variant="nav" style={styles.link}>
                   {m.footer.email}
                 </Link>
-                <Link href={m.site.phoneHref} variant="nav" style={styles.link}>
+                <Link href={m.site.phoneHref} variant="nav" style={[styles.link, styles.phone]}>
+                  <Icon name="phone" size="xs" />
                   {m.site.phone}
                 </Link>
                 {m.footer.addressLines.map((line) => (

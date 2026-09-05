@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react'
 import * as stylex from '@stylexjs/stylex'
 
 import { Box } from '../base/Box'
 import { BrandMark } from '../base/BrandMark'
+import { Icon } from '../base/Icon'
 import { IconButton } from '../base/IconButton'
 import { Link } from '../base/Link'
 import { MenuPanel } from '../base/MenuPanel'
@@ -13,6 +15,7 @@ import { m } from '../messages'
 import { color, layout, radius, screen, space, text } from '../styles/tokens.stylex'
 
 const MENU_ID = 'site-menu'
+const NAV_HREFS: readonly string[] = m.nav.links.map((link) => link.href)
 
 const styles = stylex.create({
   header: {
@@ -50,9 +53,12 @@ const styles = stylex.create({
   desktopOnly: { display: { default: 'none', [screen.navUp]: 'flex' } },
   mobileOnly: { display: { default: 'flex', [screen.navUp]: 'none' } },
   phone: {
+    alignItems: 'center',
     color: color.textHeading,
+    display: 'inline-flex',
     fontSize: text.md,
     fontWeight: text.weightSemibold,
+    gap: space.s6,
   },
   headerCta: {
     borderRadius: radius.lg,
@@ -62,7 +68,10 @@ const styles = stylex.create({
     paddingInline: space.s18,
   },
   menuLink: {
+    alignItems: 'center',
     color: color.textBody,
+    display: 'inline-flex',
+    gap: space.s8,
     fontSize: text.lg,
     fontWeight: text.weightMedium,
     paddingBlock: space.s12,
@@ -71,8 +80,46 @@ const styles = stylex.create({
   menuCta: { marginBlockStart: space.s8, textAlign: 'center' },
 })
 
+/**
+ * Scroll-spy via IntersectionObserver -- a Web API (rule 3), ~20 lines, and
+ * progressive: with JavaScript off nothing is highlighted and the nav still
+ * works. This is the one interaction added after issue #10 fixed "the form is
+ * the only JavaScript"; it exists because there is no CSS-only way to style a
+ * nav link from a section's scroll position that is not Chrome-only.
+ *
+ * The root margin narrows the viewport to a band across its upper-middle, so
+ * the "current" section is the one under the reader's eye, not the one that
+ * has merely scrolled past the top edge.
+ */
+function useCurrentSection(hrefs: readonly string[]): string | null {
+  const [current, setCurrent] = useState<string | null>(null)
+
+  useEffect(() => {
+    const targets = hrefs
+      .map((href) => document.getElementById(href.slice(1)))
+      .filter((el): el is HTMLElement => el !== null)
+    if (targets.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setCurrent(`#${entry.target.id}`)
+        }
+      },
+      { rootMargin: '-35% 0px -55% 0px' },
+    )
+    for (const target of targets) observer.observe(target)
+    return () => {
+      observer.disconnect()
+    }
+  }, [hrefs])
+
+  return current
+}
+
 export function SiteHeader() {
   const links = m.nav.links
+  const current = useCurrentSection(NAV_HREFS)
 
   return (
     <>
@@ -85,12 +132,13 @@ export function SiteHeader() {
             <Text style={styles.wordmark}>{m.site.name}</Text>
           </Link>
 
-          <Stack direction="row" gap="s28" align="center" style={styles.desktopOnly}>
+          <Stack direction="row" gap="s4" align="center" style={styles.desktopOnly}>
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                variant="nav"
+                variant="navPill"
+                current={current === link.href}
                 onActivate={() => {
                   track({ name: 'nav_clicked', props: { target: link.href } })
                 }}
@@ -109,6 +157,7 @@ export function SiteHeader() {
                 track({ name: 'phone_clicked', props: { location: 'header' } })
               }}
             >
+              <Icon name="phone" size="xs" />
               {m.site.phone}
             </Link>
             <Link
@@ -150,6 +199,7 @@ export function SiteHeader() {
               track({ name: 'phone_clicked', props: { location: 'mobile_menu' } })
             }}
           >
+            <Icon name="phone" size="xs" />
             {m.site.phone}
           </Link>
           <Link
