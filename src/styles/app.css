@@ -46,6 +46,9 @@
 }
 
 html {
+  /* Tell the UA this is a light page. Without it a browser in dark mode paints
+     its own dark canvas behind any element that has no background. */
+  color-scheme: light;
   scroll-behavior: smooth;
   /* Reserve the gutter so locking scroll (mobile menu, issue #23) removes the
      scrollbar without shifting layout. */

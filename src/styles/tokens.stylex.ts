@@ -72,6 +72,10 @@ export const color = stylex.defineVars({
   textDanger: palette.red600,
   /** 3.41:1 — large display text only. */
   textSuccess: palette.green600,
+  /** teal600, 4.18:1 on white. Passes AA for LARGE text (3:1) and fails for
+   *  normal text. Issue #8 demoted teal600 to exactly this use: the hero
+   *  headline emphasis at clamp(34px, 5.4vw, 64px). Never use it below 24px. */
+  textAccentDisplay: palette.teal600,
 
   // --- Roles: surface
   surfacePage: palette.ink50,

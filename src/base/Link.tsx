@@ -1,0 +1,90 @@
+import * as stylex from '@stylexjs/stylex'
+
+import type { StyleProp } from './Box'
+import { color, motion, radius, shadow, space, text } from '../styles/tokens.stylex'
+
+/** A link that looks like a button is `variant="button"` — NOT `Button as="a"`.
+ *  The canvas has 6 brand-background anchors against 2 real buttons, so this is
+ *  the common case, and it keeps the semantics honest. */
+export type LinkVariant = 'inline' | 'nav' | 'button' | 'buttonSecondary'
+
+const variants = stylex.create({
+  inline: {
+    color: { default: color.textLink, ':hover': color.textLinkHover },
+    textDecoration: 'underline',
+  },
+  nav: {
+    color: { default: color.textSecondary, ':hover': color.textLinkHover },
+    fontSize: text.base,
+    fontWeight: text.weightMedium,
+    textDecoration: 'none',
+  },
+  button: {
+    backgroundColor: {
+      default: color.surfaceBrand,
+      ':hover': color.surfaceBrandHover,
+    },
+    borderRadius: radius.xl,
+    boxShadow: shadow.brandSm,
+    color: color.surfaceRaised,
+    fontSize: text.md,
+    fontWeight: text.weightSemibold,
+    paddingBlock: space.s14,
+    paddingInline: space.s24,
+    textDecoration: 'none',
+    transitionDuration: motion.fast,
+    transitionProperty: 'background-color',
+    transitionTimingFunction: motion.ease,
+  },
+  buttonSecondary: {
+    backgroundColor: color.surfaceRaised,
+    borderColor: { default: color.borderStrong, ':hover': color.textLink },
+    borderRadius: radius.xl,
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    color: { default: color.textHeading, ':hover': color.textLinkHover },
+    fontSize: text.md,
+    fontWeight: text.weightSemibold,
+    paddingBlock: space.s14,
+    paddingInline: space.s24,
+    textDecoration: 'none',
+    transitionDuration: motion.fast,
+    transitionProperty: 'border-color, color',
+    transitionTimingFunction: motion.ease,
+  },
+})
+
+const base = stylex.create({
+  link: { display: 'inline-block' },
+})
+
+type LinkProps = {
+  href: string
+  variant?: LinkVariant
+  /** Adds target and the rel pair. */
+  external?: boolean
+  children?: React.ReactNode
+  style?: StyleProp
+  'aria-label'?: string
+}
+
+export function Link({
+  href,
+  variant = 'inline',
+  external = false,
+  children,
+  style,
+  'aria-label': ariaLabel,
+}: LinkProps) {
+  return (
+    <a
+      href={href}
+      aria-label={ariaLabel}
+      rel={external ? 'noopener noreferrer' : undefined}
+      target={external ? '_blank' : undefined}
+      {...stylex.props(base.link, variants[variant], style)}
+    >
+      {children}
+    </a>
+  )
+}

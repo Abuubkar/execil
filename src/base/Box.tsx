@@ -20,6 +20,10 @@ export type BoxElement =
 
 type BoxProps = {
   as?: BoxElement
+  id?: string
+  /** -1 makes an element programmatically focusable — needed on <main> so the
+   *  skip link actually moves focus, not just scroll position (issue #23). */
+  tabIndex?: number
   children?: React.ReactNode
   /** Positions this element within a parent's layout. Never restyles its
    *  interior — see the conventions in CLAUDE.md. */
@@ -29,8 +33,12 @@ type BoxProps = {
 /** Deliberately shallow. Its job is to close the raw-tag hole with a
  *  constrained set, not to hide complexity — the depth lives in tier 2.
  *  See issue #22. */
-export function Box({ as: Tag = 'div', children, style }: BoxProps) {
+export function Box({ as: Tag = 'div', id, tabIndex, children, style }: BoxProps) {
   // The sx prop only works on lowercase host elements, so every base component
   // spreads stylex.props() itself.
-  return <Tag {...stylex.props(style)}>{children}</Tag>
+  return (
+    <Tag id={id} tabIndex={tabIndex} {...stylex.props(style)}>
+      {children}
+    </Tag>
+  )
 }

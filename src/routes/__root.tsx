@@ -1,4 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import * as stylex from '@stylexjs/stylex'
+
+import { color, text } from '../styles/tokens.stylex'
 
 import { m } from '../messages'
 
@@ -37,13 +40,24 @@ export const Route = createRootRoute({
   shellComponent: RootDocument,
 })
 
+/** The page's base surface, text colour and font stack. These belong on <body>
+ *  rather than in a component: every element inherits them, and putting the
+ *  stack here means the token is the single source for it. */
+const styles = stylex.create({
+  body: {
+    backgroundColor: color.surfacePage,
+    color: color.textBody,
+    fontFamily: text.familySans,
+  },
+})
+
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body {...stylex.props(styles.body)}>
         {children}
 
         <Scripts />

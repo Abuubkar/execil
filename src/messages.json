@@ -1,10 +1,30 @@
 {
   "site": {
-    "name": "Execile"
+    "name": "Execile",
+    "phone": "(555) 000-0000",
+    "phoneHref": "tel:+15550000000"
   },
-  "scaffold": {
-    "heading": "Execile",
-    "body": "Scaffold is running. Sections arrive in later tickets.",
-    "inverse": "Inverse surface: the same Role tokens, themed for a dark subtree."
+  "hero": {
+    "badge": "Medical billing & RCM for independent practices",
+    "title": [
+      "Collect Every Dollar You've ",
+      { "text": "Earned", "tone": "brand" },
+      ".",
+      { "br": true },
+      "Cut Denials ",
+      { "text": "Before They Happen", "tone": "success" },
+      "."
+    ],
+    "lead": "Specialty-assigned billing for independent practices with 1–20 providers. We work inside your existing EHR, report what we collect, and quote our price upfront.",
+    "ctaPrimary": "Get a Free Billing Assessment",
+    "ctaSecondary": "See Our Services",
+    "trustPointsLabel": "Trust points",
+    "trustPoints": [
+      "HIPAA Compliant",
+      "BAA on Day One",
+      "No Setup Fees",
+      "No Long-Term Contract",
+      "US-facing team · 24-hour processing"
+    ]
   }
 }
