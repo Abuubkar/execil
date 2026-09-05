@@ -47,10 +47,12 @@ export const Route = createRootRoute({
         type: 'font/woff2',
         crossOrigin: 'anonymous',
       },
-      {
-        rel: 'stylesheet',
-        href: appCss,
-      },
+      ...(import.meta.env.DEV
+        ? [
+            { rel: 'stylesheet', href: '/virtual:stylex.css' },
+            { rel: 'stylesheet', href: `${appCss}?direct` },
+          ]
+        : [{ rel: 'stylesheet', href: appCss }]),
       { rel: 'canonical', href: SITE_URL },
       { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
     ],
