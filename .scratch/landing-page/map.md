@@ -42,6 +42,7 @@ A build-ready spec plus implementation tickets for the Execile landing page: the
 ## Decisions so far
 
 <!-- one line per closed ticket: gist, then the link for detail -->
+- [How does a statically prerendered TanStack Start site deploy to Cloudflare with one server endpoint?](issues/03-cloudflare-ssg.md) — One Worker with Static Assets via `@cloudflare/vite-plugin`; prerendered pages served as assets, the form POST as a TanStack server route in the same app; `vite dev` and Turnstile dummy keys run everything before any account exists.
 
 ## Not yet specified
 
