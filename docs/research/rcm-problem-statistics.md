@@ -23,7 +23,9 @@ Ticket: none — direct request. Researched 2026-09-05 against MGMA, HFMA, CAQH,
 | Rising denials (alternative) | **60%** — of medical group leaders reported denial rates rising year over year | MGMA Stat, 5 Mar 2024 | Strong — medical groups |
 | Aged AR nobody works | **13.54%** — median share of AR past **120 days** in multispecialty practices | MGMA DataDive Cost and Revenue, 2021 | Moderate — multispecialty groups, 2020 data |
 | No revenue visibility | **25 minutes** — provider time to check one claim's status by phone, the most time-consuming task in the revenue cycle | CAQH Index 2024 | Strong — provider sample weighted 49.7% to 1–4 physician practices |
-| Providers not enrolled | **8–13 wks** — before a new hire is billable with one commercial payer | Cigna and UnitedHealthcare published timelines; Arizona SB1291 | Strong — payer-side, and delegated credentialing is unavailable at this size |
+| Providers not enrolled | **13 wks** — before a new hire is billable with one commercial payer | BCBS of Texas; Ohio Rev. Code 3963.06; La. R.S. 22:1009 | Strong — payer-side, and delegated credentialing is unavailable at this size |
+
+> **Correction (state-statute verification pass).** An earlier draft of this card cited **California AB 1041**. Its 90-day duty is **not yet operative** — the chaptered text reads *"within one year of the operative date of this section"* and never fixes that date, which practically lands around January 2027. Replaced with **Ohio Rev. Code § 3963.06** (90 days, in force since 23 Sep 2008, carrying either $500/day payable to the provider or retroactive reimbursement from day 91 at the payer's election) and **La. R.S. 22:1009** (90 days, in force). Two related traps: **Texas has no statutory credentialing deadline at all** — Tex. Ins. Code ch. 1452 grants expedited *payment* for group-joiners instead, so "BCBS of Texas" is a payer's published ceiling, not state law; and **Colorado's deemed-participating provision is triggered by a missed 7-day receipt, not a missed 60-day decision**, which most vendor blogs state incorrectly.
 
 Two of the four cards need copy changes, not just numbers:
 
