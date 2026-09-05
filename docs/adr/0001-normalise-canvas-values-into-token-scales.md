@@ -6,6 +6,8 @@ We normalise these onto scales rather than preserving them exactly. A value used
 
 The trade-off: preserving every value exactly would keep perfect visual fidelity to the canvas, but it would make rule 10 ("use the design system instead of arbitrary styling values") unenforceable, because every arbitrary value would already be blessed as a token. A 62-token system that drifts sub-pixel from the export is worth more than a 110-value dump that cannot be reasoned about. `CLAUDE.md` names the canvas the design source of truth; this ADR narrows that to **structure and copy**, and makes the token set the source of truth for **values**.
 
+**Amended (issue #19):** copy has since moved out too. The Problem section's statistics were placeholders that had to be replaced with sourced industry figures, which changed the wording as well as the numbers. The canvas is therefore the source of truth for **structure only**; `messages.json` owns copy, and the token set owns values.
+
 ## Consequences
 
 - The built page will differ from the canvas by 1–2px in places. This is expected and is not a bug to be "fixed" by reintroducing the raw value.
