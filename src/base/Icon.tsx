@@ -2,7 +2,7 @@ import * as stylex from '@stylexjs/stylex'
 
 /** Closed union. Adding an icon means adding a case here, so feature code can
  *  never reference one that does not exist. */
-export type IconName = 'menu'
+export type IconName = 'menu' | 'target' | 'checkSquare' | 'trend' | 'bars'
 
 export type IconSize = 'sm' | 'md'
 
@@ -17,6 +17,31 @@ const PATHS: Record<IconName, React.ReactNode> = {
       <line x1="1" y1="4" x2="19" y2="4" />
       <line x1="1" y1="10" x2="19" y2="10" />
       <line x1="1" y1="16" x2="19" y2="16" />
+    </>
+  ),
+  target: (
+    <>
+      <circle cx="10" cy="10" r="7" />
+      <circle cx="10" cy="10" r="2.5" fill="currentColor" stroke="none" />
+    </>
+  ),
+  checkSquare: (
+    <>
+      <rect x="3" y="3" width="14" height="14" rx="2" />
+      <path d="M6.5 10.5l2.5 2.5 4.5-5" strokeLinejoin="round" />
+    </>
+  ),
+  trend: (
+    <>
+      <path d="M3 14l4-4 3 3 7-7" strokeLinejoin="round" />
+      <path d="M13 6h4v4" strokeLinejoin="round" />
+    </>
+  ),
+  bars: (
+    <>
+      <rect x="3" y="11" width="3" height="6" rx="1" fill="currentColor" stroke="none" />
+      <rect x="8.5" y="7" width="3" height="10" rx="1" fill="currentColor" stroke="none" />
+      <rect x="14" y="3" width="3" height="14" rx="1" fill="currentColor" stroke="none" />
     </>
   ),
 }

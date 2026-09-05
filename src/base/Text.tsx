@@ -65,6 +65,8 @@ type TextProps = {
   children?: React.ReactNode
   style?: StyleProp
   htmlFor?: string
+  /** For decorative text whose meaning is already carried by context. */
+  'aria-hidden'?: boolean
 }
 
 /** Tokens reach this component only as variant props — never raw values. */
@@ -76,10 +78,12 @@ export function Text({
   children,
   style,
   htmlFor,
+  'aria-hidden': ariaHidden,
 }: TextProps) {
   return (
     <Tag
       htmlFor={htmlFor}
+      aria-hidden={ariaHidden}
       {...stylex.props(
         base.reset,
         size && sizes[size],

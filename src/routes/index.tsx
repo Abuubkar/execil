@@ -2,6 +2,9 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Box } from '../base/Box'
 import { Hero } from '../sections/Hero'
+import { HowItWorks } from '../sections/HowItWorks'
+import { Problem } from '../sections/Problem'
+import { Services } from '../sections/Services'
 import { SiteHeader } from '../sections/SiteHeader'
 
 export const Route = createFileRoute('/')({ component: Home })
@@ -13,6 +16,9 @@ function Home() {
       <SiteHeader />
       <Box as="main" id="top" tabIndex={-1}>
         <Hero />
+        <Problem />
+        <Services />
+        <HowItWorks />
       </Box>
     </>
   )

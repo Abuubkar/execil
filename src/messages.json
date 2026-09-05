@@ -63,5 +63,107 @@
       "No Long-Term Contract",
       "US-facing team · 24-hour processing"
     ]
+  },
+  "problem": {
+    "eyebrow": "The problem",
+    "title": "Revenue leaks quietly, one claim at a time.",
+    "cards": [
+      {
+        "stat": "60%",
+        "title": "Rising denials",
+        "blurb": "Three in five medical groups report denial rates rising year over year.",
+        "source": "MGMA Stat, March 2024 (n=235)"
+      },
+      {
+        "stat": "13.5%",
+        "title": "Aged AR nobody works",
+        "blurb": "Claims sit past 120 days until they time out — and Medicare's first-level appeal window has already closed.",
+        "source": "MGMA DataDive, 2021 · 42 CFR 405.942"
+      },
+      {
+        "stat": "25 min",
+        "title": "No revenue visibility",
+        "blurb": "You learn about a collection problem weeks late, because checking where one claim stands is still the most time-consuming task in the revenue cycle.",
+        "source": "CAQH Index 2024"
+      },
+      {
+        "stat": "13 wks",
+        "title": "Providers not enrolled",
+        "blurb": "New hires see patients before payers will pay for them. Effective dates are not backdated.",
+        "source": "BCBS of Texas · Ohio Rev. Code 3963.06 · La. R.S. 22:1009"
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "The full revenue cycle, handled by people who know your specialty.",
+    "footnote": "Available as a full end-to-end package or à la carte (credentialing and AR cleanup can be engaged separately).",
+    "cards": [
+      {
+        "eyebrow": "Front-end",
+        "icon": "target",
+        "title": "Get paid-ready before the visit",
+        "blurb": "Confirm coverage and enrollment so clean claims start at the front desk.",
+        "items": [
+          "Insurance Eligibility & Benefits Verification",
+          "Provider Credentialing & Payer Enrollment (CAQH, PECOS, commercial payers)"
+        ]
+      },
+      {
+        "eyebrow": "Mid-cycle",
+        "icon": "checkSquare",
+        "title": "Code and submit it right the first time",
+        "blurb": "Certified coders and pre-submission scrubbing to protect first-pass rate.",
+        "items": [
+          "Medical Coding (ICD-10, CPT, HCPCS) by certified coders",
+          "Charge Entry & Claim Scrubbing",
+          "Electronic Claims Submission via clearinghouse"
+        ]
+      },
+      {
+        "eyebrow": "Back-end",
+        "icon": "trend",
+        "title": "Collect every dollar owed",
+        "blurb": "Every payment posted, every denial worked, every balance followed up.",
+        "items": [
+          "Payment Posting (ERA / EOB)",
+          "Accounts Receivable Follow-up (30/60/90-day protocol)",
+          "Denial Management & Appeals",
+          "Patient Statements & Balance Follow-up"
+        ]
+      },
+      {
+        "eyebrow": "Visibility",
+        "icon": "bars",
+        "title": "Know where your revenue stands",
+        "blurb": "The numbers that matter, reported the same way every month.",
+        "items": [
+          "Monthly KPI Reporting: net collections, denial rate, days in AR, first-pass rate",
+          "[Dashboard access — confirm with client]"
+        ]
+      }
+    ]
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "From first look to steady collections in four steps.",
+    "steps": [
+      {
+        "title": "Free billing assessment",
+        "blurb": "We review a sample of your claims and AR and show you what we find."
+      },
+      {
+        "title": "Custom plan and BAA",
+        "blurb": "A scoped plan, a quoted rate, and a signed BAA before any data moves."
+      },
+      {
+        "title": "14-day onboarding",
+        "blurb": "Inside your existing EHR/PM — no software switch, no re-training."
+      },
+      {
+        "title": "Ongoing billing",
+        "blurb": "Daily claims work with a monthly performance review you can act on."
+      }
+    ]
   }
 }
