@@ -5,7 +5,7 @@ import { color, motion, radius, space, text } from '../styles/tokens.stylex'
 
 const styles = stylex.create({
   details: {
-    backgroundColor: color.surfacePage,
+    backgroundColor: { default: color.surfacePage, '[open]': color.surfaceAccent },
     borderColor: color.borderDefault,
     borderRadius: radius.xl,
     borderStyle: 'solid',
