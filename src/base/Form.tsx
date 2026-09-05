@@ -20,12 +20,15 @@ const styles = stylex.create({
 export function Form({
   label,
   onSubmit,
+  onFocusCapture,
   children,
   style,
 }: {
   /** Names the form for assistive tech. */
   label: string
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
+  /** Used to lazy-load third-party form scripts on first interaction. */
+  onFocusCapture?: () => void
   children?: React.ReactNode
   style?: StyleProp
 }) {
@@ -33,6 +36,7 @@ export function Form({
     <form
       aria-label={label}
       onSubmit={onSubmit}
+      onFocusCapture={onFocusCapture}
       noValidate={false}
       {...stylex.props(styles.form, style)}
     >

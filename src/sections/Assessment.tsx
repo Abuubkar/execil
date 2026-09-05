@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as stylex from '@stylexjs/stylex'
 
 import { Badge } from '../base/Badge'
+import { Box } from '../base/Box'
 import { Button } from '../base/Button'
 import { Dot } from '../base/Dot'
 import { Field } from '../base/Field'
@@ -10,21 +11,30 @@ import { Grid } from '../base/Grid'
 import { Heading } from '../base/Heading'
 import { Input, Select, Textarea } from '../base/Input'
 import { List, ListItem } from '../base/List'
+import { Mount } from '../base/Mount'
 import { Prose } from '../base/Prose'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
 import { VisuallyHidden } from '../base/VisuallyHidden'
+import type { AssessmentResult } from '../routes/api/assessment'
 import { m } from '../messages'
 import { color, layout, radius, space, text } from '../styles/tokens.stylex'
 
 const HEADING_ID = 'cta-h'
 const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL ?? ''
+const TURNSTILE_SITEKEY = import.meta.env.VITE_TURNSTILE_SITEKEY ?? ''
+const TURNSTILE_SCRIPT = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
 
 /** Mirrors the endpoint's discriminated union (issue #12), so the UI maps each
  *  result straight onto a state. The endpoint arrives in #28; until then the
  *  submit handler is a stub that exercises every branch. */
 type FailureReason = 'validation' | 'challenge' | 'rate' | 'delivery'
+type TurnstileApi = {
+  render: (el: HTMLElement, options: { sitekey: string }) => string
+  reset: (id: string) => void
+}
+
 type FormState =
   | { status: 'idle' }
   | { status: 'submitting' }
@@ -39,6 +49,7 @@ const styles = stylex.create({
     gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
   },
   submit: { marginBlockStart: space.s6 },
+  turnstile: { display: 'contents' },
   disclaimer: { textAlign: 'center' },
   noscript: { display: 'block', marginBlockStart: space.s8 },
   panel: {
@@ -80,19 +91,68 @@ function formatSubmission(data: FormData): string {
 
 export function Assessment() {
   const [state, setState] = useState<FormState>({ status: 'idle' })
+  const turnstileLoaded = useRef(false)
+  const widgetRef = useRef<HTMLDivElement>(null)
+  const widgetId = useRef<string | null>(null)
   const [submission, setSubmission] = useState('')
   const [copied, setCopied] = useState(false)
 
+  /** Turnstile loads on FIRST INTERACTION, not on page load: ~90% of visitors
+   *  never touch the form, and they should not pay for a third-party script.
+   *  By the time a field is focused it has seconds before a submit is
+   *  possible, and the submit path awaits it rather than assuming it is
+   *  ready (issue #18). */
+  const loadTurnstile = () => {
+    if (turnstileLoaded.current || !TURNSTILE_SITEKEY) return
+    turnstileLoaded.current = true
+    const script = document.createElement('script')
+    script.src = TURNSTILE_SCRIPT
+    script.async = true
+    script.defer = true
+    document.head.append(script)
+  }
+
+  useEffect(() => {
+    // Render the widget once the script is ready and the container exists.
+    if (!TURNSTILE_SITEKEY || state.status !== 'idle') return
+    const id = globalThis.setInterval(() => {
+      const api = (globalThis as { turnstile?: TurnstileApi }).turnstile
+      const node = widgetRef.current
+      if (!api || !node || node.childElementCount > 0) return
+      widgetId.current = api.render(node, { sitekey: TURNSTILE_SITEKEY })
+      globalThis.clearInterval(id)
+    }, 150)
+    return () => {
+      globalThis.clearInterval(id)
+    }
+  }, [state.status])
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const data = new FormData(event.currentTarget)
+    const form = event.currentTarget
+    const data = new FormData(form)
     setSubmission(formatSubmission(data))
     setState({ status: 'submitting' })
-    // Stub until the endpoint lands in #28. Every branch is reachable by
-    // changing this one line, which is how all four states were verified.
-    globalThis.setTimeout(() => {
-      setState({ status: 'success' })
-    }, 600)
+
+    void fetch('/api/assessment', { method: 'POST', body: data })
+      .then(async (response) => {
+        const result = (await response.json()) as AssessmentResult
+        if (result.ok) {
+          setState({ status: 'success' })
+          return
+        }
+        setState({ status: 'failure', reason: result.error })
+      })
+      .catch(() => {
+        setState({ status: 'failure', reason: 'delivery' })
+      })
+      .finally(() => {
+        // Tokens are single-use with a 300s window, so a retry needs a FRESH
+        // one. Reusing the original fails as timeout-or-duplicate and looks
+        // like a different bug (issue #12).
+        const api = (globalThis as { turnstile?: TurnstileApi }).turnstile
+        if (api && widgetId.current) api.reset(widgetId.current)
+      })
   }
 
   /** The clipboard write can reject — insecure context, denied permission, or
@@ -161,7 +221,11 @@ export function Assessment() {
             </Stack>
           </Stack>
         ) : (
-          <Form label={m.assessment.form.label} onSubmit={handleSubmit}>
+          <Form
+            label={m.assessment.form.label}
+            onSubmit={handleSubmit}
+            onFocusCapture={loadTurnstile}
+          >
             <Grid floor="sm" gap="s14">
               <Field label={m.assessment.form.fields.name.label}>
                 <Input name="name" autoComplete="name" required />
@@ -213,6 +277,11 @@ export function Assessment() {
                 <Input name="company_website" autoComplete="off" />
               </Field>
             </VisuallyHidden>
+
+            {/* Invisible widget; injects the cf-turnstile-response input. */}
+            <Box style={styles.turnstile}>
+              <Mount ref={widgetRef} />
+            </Box>
 
             {/* Enabled from first paint — nothing gates it on a third-party
                 script (issue #12). */}
