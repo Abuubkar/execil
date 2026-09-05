@@ -1,7 +1,7 @@
 # 03 — How does a statically prerendered TanStack Start site deploy to Cloudflare with one server endpoint?
 
 Type: research
-Status: open
+Status: claimed
 
 ## Question
 

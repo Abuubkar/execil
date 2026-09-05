@@ -1,7 +1,7 @@
 # 01 — What does Vite+ provide, and how does a TanStack Start project live inside it?
 
 Type: research
-Status: open
+Status: claimed
 
 ## Question
 

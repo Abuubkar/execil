@@ -1,7 +1,7 @@
 # 02 — How does StyleX compile inside TanStack Start on Vite, and is LightningCSS worth adding?
 
 Type: research
-Status: open
+Status: claimed
 
 ## Question
 

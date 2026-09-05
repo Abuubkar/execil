@@ -1,7 +1,7 @@
 # 04 — How does a Cloudflare Worker deliver a form submission to a Google Workspace inbox?
 
 Type: research
-Status: open
+Status: claimed
 
 ## Question
 

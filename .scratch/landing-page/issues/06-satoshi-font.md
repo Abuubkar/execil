@@ -1,7 +1,7 @@
 # 06 — Can Satoshi be self-hosted, and how is it loaded without layout shift?
 
 Type: research
-Status: open
+Status: claimed
 
 ## Question
 

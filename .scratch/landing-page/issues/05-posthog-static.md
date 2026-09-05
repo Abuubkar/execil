@@ -1,7 +1,7 @@
 # 05 — How should PostHog run on a static marketing site without a consent banner?
 
 Type: research
-Status: open
+Status: claimed
 
 ## Question
 
