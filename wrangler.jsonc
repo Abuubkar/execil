@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "execile",
+  "compatibility_date": "2025-09-02",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+
+  // Plaintext config. Real values arrive at provisioning (issue #32).
+  "vars": {
+    "ASSESSMENT_TO": "placeholder@example.com",
+  },
+
+  // Declared at provisioning, not now — both need an account to exist:
+  //   "send_email": [{ "name": "EMAIL", "destination_address": "<verified mailbox>" }]
+  //   TURNSTILE_SECRET via `wrangler secret put` (locally: .dev.vars)
+}

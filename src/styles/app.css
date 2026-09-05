@@ -1,0 +1,41 @@
+/* Global CSS: everything StyleX cannot express.
+   Design tokens and @font-face arrive in issue #21. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Reserve the gutter so locking scroll (mobile menu, issue #23) removes the
+     scrollbar without shifting layout. */
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* MUST come after any rule that sets an explicit `display`, or [hidden] loses
+   to it and hidden elements render anyway. Found via prototype in issue #10. */
+[hidden] {
+  display: none !important;
+}
+
+/* Handled once, globally, so no component author can forget rule 4.
+   `*, *::before, *::after` does NOT cover ::details-content — the FAQ
+   accordion (issue #26) animates through that pseudo-element. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  *::details-content {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

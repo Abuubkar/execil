@@ -1,0 +1,5 @@
+# Worker secrets for local dev. Copy to .dev.vars.
+# This is Cloudflare's always-passes TEST secret. Others, for exercising failures:
+#   2x0000000000000000000000000000000AA  always fails
+#   3x0000000000000000000000000000000AA  "token already spent"
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA

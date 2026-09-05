@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: cp .env.example .env
+      - name: Format, lint and type-check
+        run: pnpm exec vp check
+      - name: Build
+        run: pnpm run build
+      # Report only. The copy ships with bracketed placeholders deliberately
+      # until launch, so a blocking gate here would leave CI red for the whole
+      # build phase. It gates the production deploy instead (issue #32).
+      - name: Placeholder report
+        run: pnpm run placeholders || true
