@@ -55,6 +55,8 @@ type StackProps = {
   align?: 'start' | 'center' | 'end'
   justify?: 'start' | 'center' | 'between'
   wrap?: boolean
+  /** Live-region role for panels that announce a result (status / alert). */
+  role?: 'status' | 'alert'
   children?: React.ReactNode
   style?: StyleProp
 }
@@ -67,11 +69,13 @@ export function Stack({
   align,
   justify,
   wrap = false,
+  role,
   children,
   style,
 }: StackProps) {
   return (
     <div
+      role={role}
       {...stylex.props(
         base.stack,
         direction === 'row' ? base.row : base.column,

@@ -290,5 +290,84 @@
         "a": "Yes. Credentialing and AR cleanup can be engaged separately from full billing."
       }
     ]
+  },
+  "assessment": {
+    "badge": "Free · No obligation",
+    "title": "Get a Free Billing Assessment",
+    "lead": "Send us a sample of recent claims and your AR aging. We'll show you where revenue is leaking and what it would take to fix it.",
+    "bullets": [
+      "Written findings within [X] business days",
+      "Reviewed by a coder in your specialty",
+      "BAA signed before any data is shared"
+    ],
+    "form": {
+      "label": "Billing assessment request",
+      "selectPlaceholder": "Select…",
+      "fields": {
+        "name": {
+          "label": "Full name"
+        },
+        "email": {
+          "label": "Work email"
+        },
+        "phone": {
+          "label": "Phone"
+        },
+        "practice": {
+          "label": "Practice name"
+        },
+        "specialty": {
+          "label": "Specialty",
+          "options": [
+            "[SPECIALTY 1]",
+            "[SPECIALTY 2]",
+            "[SPECIALTY 3]",
+            "Primary Care",
+            "Behavioral Health",
+            "Physical Therapy",
+            "Urgent Care",
+            "Internal Medicine",
+            "Pediatrics",
+            "Other"
+          ]
+        },
+        "providers": {
+          "label": "Number of providers",
+          "options": ["1", "2–5", "6–10", "11–20", "20+"]
+        },
+        "concern": {
+          "label": "Primary concern",
+          "options": [
+            "Denials",
+            "Aged AR",
+            "Credentialing",
+            "Eligibility / Prior auth",
+            "Full outsourcing",
+            "Not sure"
+          ]
+        },
+        "message": {
+          "label": "Message",
+          "hint": "(optional)"
+        }
+      },
+      "honeypotLabel": "Company website",
+      "submit": "Get a Free Billing Assessment",
+      "submitting": "Sending…",
+      "disclaimer": "HIPAA-compliant · BAA before any data moves · No obligation.",
+      "noscript": "JavaScript is required to send this form. Please call (555) 000-0000 instead."
+    },
+    "success": {
+      "title": "Request received",
+      "body": "We'll reach out within one business day to schedule your assessment and send the BAA."
+    },
+    "failure": {
+      "title": "We couldn't send your request.",
+      "body": "You can email us directly instead. We've copied your message so you can paste it into your email.",
+      "openEmail": "Open Email",
+      "copyMessage": "Copy Message",
+      "copied": "Copied",
+      "subject": "Billing assessment request"
+    }
   }
 }

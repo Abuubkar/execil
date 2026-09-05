@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Box } from '../base/Box'
+import { Assessment } from '../sections/Assessment'
 import { Faq } from '../sections/Faq'
 import { Fit } from '../sections/Fit'
 import { Hero } from '../sections/Hero'
@@ -31,6 +32,7 @@ function Home() {
         <Fit />
         <Results />
         <Faq />
+        <Assessment />
       </Box>
     </>
   )
