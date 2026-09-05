@@ -13,6 +13,10 @@ Landing page for Execile, a medical billing / RCM service. Glossary in `CONTEXT.
 
 Import direction is one-way: `routes/ → sections/ → base/ → styles/`. Sections compose base components and never each other.
 
+When a lint rule genuinely conflicts with a file's job, disable it for that file with a scoped
+`// oxlint-disable-next-line <rule>` (or a file-level disable) and a one-line reason. Prefer the
+narrowest scope that works. Do not silence a rule repo-wide to fix one file.
+
 ## Agent skills
 
 - **Issue tracker:** GitHub Issues on this repo. Conventions in `docs/agents/issue-tracker.md`.
