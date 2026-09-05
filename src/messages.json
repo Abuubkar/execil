@@ -4,6 +4,16 @@
     "phone": "(555) 000-0000",
     "phoneHref": "tel:+15550000000"
   },
+  "meta": {
+    "title": "Execile — Medical Billing & RCM for Independent Practices",
+    "description": "Specialty-assigned medical billing and revenue cycle management for independent practices with 1–20 providers. We work inside your existing EHR, report what we collect, and quote our price upfront.",
+    "ogTitle": "Collect Every Dollar You've Earned",
+    "ogImageAlt": "Execile — medical billing and revenue cycle management for independent practices",
+    "legalName": "EXECIL PVT LTD",
+    "addressRegion": "NY",
+    "addressCountry": "US",
+    "areaServed": "United States"
+  },
   "nav": {
     "label": "Main",
     "home": "Execile home",

@@ -15,3 +15,7 @@ dist-ssr/
 .dev.vars
 .dev.vars.*
 !.dev.vars.example
+
+# OG image render font — a TTF from the Satoshi kit, used only by
+# scripts/og-image.py because Pillow cannot read WOFF2. Not shipped.
+scripts/.og-font/
