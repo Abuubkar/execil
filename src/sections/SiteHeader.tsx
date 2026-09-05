@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import * as stylex from '@stylexjs/stylex'
 
 import { Box } from '../base/Box'
@@ -12,7 +12,7 @@ import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
 import { track } from '../analytics/posthog'
 import { m } from '../messages'
-import { color, layout, radius, screen, space, text } from '../styles/tokens.stylex'
+import { color, layout, motion, radius, screen, space, text } from '../styles/tokens.stylex'
 
 const MENU_ID = 'site-menu'
 const NAV_HREFS: readonly string[] = m.nav.links.map((link) => link.href)
@@ -54,11 +54,14 @@ const styles = stylex.create({
   mobileOnly: { display: { default: 'flex', [screen.navUp]: 'none' } },
   phone: {
     alignItems: 'center',
-    color: color.textHeading,
+    color: { default: color.textHeading, ':hover': color.textLink },
     display: 'inline-flex',
     fontSize: text.md,
     fontWeight: text.weightSemibold,
     gap: space.s6,
+    transitionDuration: motion.fast,
+    transitionProperty: 'color',
+    transitionTimingFunction: motion.ease,
   },
   headerCta: {
     borderRadius: radius.lg,
@@ -80,20 +83,27 @@ const styles = stylex.create({
   menuCta: { marginBlockStart: space.s8, textAlign: 'center' },
 })
 
-function useCurrentSection(hrefs: readonly string[]): string | null {
+function useCurrentSection(hrefs: readonly string[]): [string | null, (href: string) => void] {
   const [current, setCurrent] = useState<string | null>(null)
+  const pinned = useRef<string | null>(null)
 
   useEffect(() => {
-    const targets = hrefs
-      .map((href) => document.getElementById(href.slice(1)))
+    const ids = hrefs.map((href) => href.slice(1))
+    const targets = ids
+      .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
     if (targets.length === 0) return
 
+    const inBand = new Set<string>()
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setCurrent(`#${entry.target.id}`)
+          if (entry.isIntersecting) inBand.add(entry.target.id)
+          else inBand.delete(entry.target.id)
         }
+        if (pinned.current !== null) return
+        const topmost = ids.find((id) => inBand.has(id))
+        if (topmost) setCurrent(`#${topmost}`)
       },
       { rootMargin: '-35% 0px -55% 0px' },
     )
@@ -103,12 +113,26 @@ function useCurrentSection(hrefs: readonly string[]): string | null {
     }
   }, [hrefs])
 
-  return current
+  const pin = useCallback((href: string) => {
+    pinned.current = href
+    setCurrent(href)
+
+    let timer: ReturnType<typeof globalThis.setTimeout> | undefined
+    const release = () => {
+      pinned.current = null
+      if (timer !== undefined) globalThis.clearTimeout(timer)
+      globalThis.removeEventListener('scrollend', release)
+    }
+    globalThis.addEventListener('scrollend', release, { once: true })
+    timer = globalThis.setTimeout(release, 1200)
+  }, [])
+
+  return [current, pin]
 }
 
 export function SiteHeader() {
   const links = m.nav.links
-  const current = useCurrentSection(NAV_HREFS)
+  const [current, pinCurrent] = useCurrentSection(NAV_HREFS)
 
   return (
     <>
@@ -121,14 +145,15 @@ export function SiteHeader() {
             <Text style={styles.wordmark}>{m.site.name}</Text>
           </Link>
 
-          <Stack direction="row" gap="s4" align="center" style={styles.desktopOnly}>
+          <Stack direction="row" gap="s24" align="center" style={styles.desktopOnly}>
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                variant="navPill"
+                variant="navHeader"
                 current={current === link.href}
                 onActivate={() => {
+                  pinCurrent(link.href)
                   track({ name: 'nav_clicked', props: { target: link.href } })
                 }}
               >
@@ -174,6 +199,7 @@ export function SiteHeader() {
               variant="plain"
               style={styles.menuLink}
               onActivate={() => {
+                pinCurrent(link.href)
                 track({ name: 'nav_clicked', props: { target: link.href } })
               }}
             >

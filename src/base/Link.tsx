@@ -6,7 +6,7 @@ import { color, motion, radius, shadow, space, text } from '../styles/tokens.sty
 /** A link that looks like a button is `variant="button"` — NOT `Button as="a"`.
  *  The canvas has 6 brand-background anchors against 2 real buttons, so this is
  *  the common case, and it keeps the semantics honest. */
-export type LinkVariant = 'plain' | 'inline' | 'nav' | 'navPill' | 'button' | 'buttonSecondary'
+export type LinkVariant = 'plain' | 'inline' | 'nav' | 'navHeader' | 'button' | 'buttonSecondary'
 
 const variants = stylex.create({
   /** No visual treatment — for links that wrap their own composed content,
@@ -22,17 +22,17 @@ const variants = stylex.create({
     fontWeight: text.weightMedium,
     textDecoration: 'none',
   },
-  navPill: {
-    backgroundColor: { default: 'transparent', ':hover': color.surfaceAccent },
-    borderRadius: radius.md,
+  navHeader: {
+    borderBlockEndColor: { default: 'transparent', ':hover': color.textLink },
+    borderBlockEndStyle: 'solid',
+    borderBlockEndWidth: '2px',
     color: { default: color.textSecondary, ':hover': color.textLink },
     fontSize: text.md,
     fontWeight: text.weightMedium,
-    paddingBlock: space.s6,
-    paddingInline: space.s10,
+    paddingBlockEnd: space.s4,
     textDecoration: 'none',
     transitionDuration: motion.fast,
-    transitionProperty: 'background-color, color',
+    transitionProperty: 'color, border-color',
     transitionTimingFunction: motion.ease,
   },
   button: {
@@ -73,9 +73,8 @@ const variants = stylex.create({
 const base = stylex.create({
   link: { display: 'inline-block' },
   current: {
-    backgroundColor: color.surfaceAccent,
+    borderBlockEndColor: color.textLink,
     color: color.textLink,
-    fontWeight: text.weightSemibold,
   },
 })
 

@@ -33,6 +33,7 @@ const styles = stylex.create({
   },
   link: { fontSize: text.md },
   phone: { alignItems: 'center', display: 'inline-flex', gap: space.s6 },
+  addressLine: { alignItems: 'center', display: 'inline-flex', gap: space.s6 },
   address: { fontStyle: 'normal' },
   bottom: {
     borderBlockStartColor: color.borderDefault,
@@ -110,8 +111,9 @@ export function SiteFooter() {
                   <Icon name="phone" size="xs" />
                   {m.site.phone}
                 </Link>
-                {m.footer.addressLines.map((line) => (
-                  <Text key={line} size="md" tone="prose">
+                {m.footer.addressLines.map((line, index) => (
+                  <Text key={line} size="md" tone="prose" style={styles.addressLine}>
+                    <Icon name={index === 0 ? 'city' : 'pin'} size="xs" />
                     {line}
                   </Text>
                 ))}
