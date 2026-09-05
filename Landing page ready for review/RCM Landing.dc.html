@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#F7F9FA;color:#1F2933;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0E8A8A;text-decoration:none}a:hover{color:#0A6B6B}
+*{box-sizing:border-box}
+input,select,textarea,button{font-family:inherit}
+</style>
+</helmet>
+
+<header style="position:sticky;top:0;z-index:50;background:rgba(247,249,250,.92);backdrop-filter:blur(10px);border-bottom:1px solid #E1E7EB">
+  <nav aria-label="Main" style="max-width:1160px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="#top" aria-label="{{ name }} home" style="display:flex;align-items:center;gap:10px;color:#0F1B2D">
+      <span aria-hidden="true" style="width:32px;height:32px;border-radius:9px;background:#0E8A8A;display:grid;place-items:center"><span style="width:12px;height:12px;border-radius:3px;background:#9FD4A3;display:block"></span></span>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.01em">{{ name }}</span>
+    </a>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;align-items:center;gap:28px;font-size:14px;font-weight:500">
+        <a href="#services" style="color:#3E4C59" style-hover="color:#0A6B6B">Services</a>
+        <a href="#how" style="color:#3E4C59" style-hover="color:#0A6B6B">How It Works</a>
+        <a href="#specialties" style="color:#3E4C59" style-hover="color:#0A6B6B">Specialties</a>
+        <a href="#why" style="color:#3E4C59" style-hover="color:#0A6B6B">Why Us</a>
+        <a href="#faq" style="color:#3E4C59" style-hover="color:#0A6B6B">FAQ</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:18px">
+        <a href="tel:+15550000000" style="font-size:14px;font-weight:600;color:#0F1B2D">(555) 000-0000</a>
+        <a href="#assessment" style="background:#0E8A8A;color:#fff;font-weight:600;font-size:14px;padding:11px 18px;border-radius:10px;transition:background .15s" style-hover="background:#0A6B6B;color:#fff">Get a Free Billing Assessment</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-controls="mobile-menu" aria-label="Toggle menu" style="width:44px;height:44px;border:1px solid #D5DDE3;border-radius:10px;background:#fff;display:grid;place-items:center;cursor:pointer">
+        <span aria-hidden="true" style="display:grid;gap:5px"><span style="width:18px;height:2px;background:#0F1B2D;display:block"></span><span style="width:18px;height:2px;background:#0F1B2D;display:block"></span><span style="width:18px;height:2px;background:#0F1B2D;display:block"></span></span>
+      </button>
+    </sc-if>
+  </nav>
+  <sc-if value="{{ menuVisible }}" hint-placeholder-val="{{ false }}">
+    <div id="mobile-menu" style="border-top:1px solid #E1E7EB;background:#fff;padding:16px 24px 24px;display:grid;gap:6px;font-size:16px;font-weight:500">
+      <a href="#services" onClick="{{ closeMenu }}" style="color:#1F2933;padding:12px 4px">Services</a>
+      <a href="#how" onClick="{{ closeMenu }}" style="color:#1F2933;padding:12px 4px">How It Works</a>
+      <a href="#specialties" onClick="{{ closeMenu }}" style="color:#1F2933;padding:12px 4px">Specialties</a>
+      <a href="#why" onClick="{{ closeMenu }}" style="color:#1F2933;padding:12px 4px">Why Us</a>
+      <a href="#faq" onClick="{{ closeMenu }}" style="color:#1F2933;padding:12px 4px">FAQ</a>
+      <a href="tel:+15550000000" style="color:#1F2933;padding:12px 4px;font-weight:600">(555) 000-0000</a>
+      <a href="#assessment" onClick="{{ closeMenu }}" style="margin-top:8px;background:#0E8A8A;color:#fff;font-weight:600;padding:14px 18px;border-radius:10px;text-align:center">Get a Free Billing Assessment</a>
+    </div>
+  </sc-if>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section aria-labelledby="hero-h" style="padding:clamp(56px,8vw,104px) 24px clamp(48px,6vw,72px);background:linear-gradient(180deg,#F7F9FA 0%,#EEF6F6 100%)">
+    <div style="max-width:880px;margin:0 auto;text-align:center;display:grid;gap:24px;justify-items:center">
+      <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#0A6B6B;background:#E6F4F4;border:1px solid #CDE7E7;padding:6px 12px;border-radius:999px"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#2E9E5B;display:block"></span>Medical billing &amp; RCM for independent practices</span>
+      <h1 id="hero-h" style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(34px,5.4vw,64px);line-height:1.08;letter-spacing:-.025em;color:#0F1B2D;text-wrap:balance">Collect Every Dollar You've <span style="color:#0E8A8A">Earned</span>.<br>Cut Denials <span style="color:#2E9E5B">Before They Happen</span>.</h1>
+      <p style="margin:0;max-width:640px;font-size:clamp(16px,1.6vw,19px);line-height:1.55;color:#4B5A68;text-wrap:pretty">Specialty-assigned billing for independent practices with 1–20 providers. We work inside your existing EHR, report what we collect, and quote our price upfront.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+        <a href="#assessment" style="background:#0E8A8A;color:#fff;font-weight:600;font-size:16px;padding:15px 24px;border-radius:12px;box-shadow:0 6px 18px rgba(14,138,138,.25);transition:background .15s" style-hover="background:#0A6B6B;color:#fff">Get a Free Billing Assessment</a>
+        <a href="#services" style="background:#fff;color:#0F1B2D;font-weight:600;font-size:16px;padding:15px 24px;border-radius:12px;border:1px solid #D5DDE3;transition:border-color .15s" style-hover="border-color:#0E8A8A;color:#0A6B6B">See Our Services</a>
+      </div>
+      <ul aria-label="Trust points" style="list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;font-size:13.5px;font-weight:500;color:#3E4C59">
+        <li style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:#0E8A8A;display:block"></span>HIPAA Compliant</li>
+        <li style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:#0E8A8A;display:block"></span>BAA on Day One</li>
+        <li style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:#0E8A8A;display:block"></span>No Setup Fees</li>
+        <li style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:#0E8A8A;display:block"></span>No Long-Term Contract</li>
+        <li style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:#0E8A8A;display:block"></span>US-facing team · 24-hour processing</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section aria-labelledby="problem-h" style="padding:clamp(56px,7vw,88px) 24px">
+    <div style="max-width:1160px;margin:0 auto;display:grid;gap:36px">
+      <div style="max-width:640px;display:grid;gap:12px">
+        <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C0392B">The problem</span>
+        <h2 id="problem-h" style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.02em;color:#0F1B2D;text-wrap:balance">Revenue leaks quietly, one claim at a time.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px">
+        <article style="background:#fff;border:1px solid #E7ECEF;border-radius:14px;padding:24px;display:grid;gap:12px;box-shadow:0 1px 2px rgba(15,27,45,.04);transition:transform .15s,box-shadow .15s" style-hover="transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,27,45,.08)">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:28px;color:#C0392B;background:#FFF0F0;padding:6px 12px;border-radius:8px;justify-self:start">[X%]</span>
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:17px;color:#0F1B2D">Rising denials</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">Denial rates keep climbing while appeal windows quietly close.</p>
+        </article>
+        <article style="background:#fff;border:1px solid #E7ECEF;border-radius:14px;padding:24px;display:grid;gap:12px;box-shadow:0 1px 2px rgba(15,27,45,.04);transition:transform .15s,box-shadow .15s" style-hover="transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,27,45,.08)">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:28px;color:#C0392B;background:#FFF0F0;padding:6px 12px;border-radius:8px;justify-self:start">[X days]</span>
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:17px;color:#0F1B2D">Aged AR nobody works</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">Claims past 90 days sit untouched until they time out.</p>
+        </article>
+        <article style="background:#fff;border:1px solid #E7ECEF;border-radius:14px;padding:24px;display:grid;gap:12px;box-shadow:0 1px 2px rgba(15,27,45,.04);transition:transform .15s,box-shadow .15s" style-hover="transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,27,45,.08)">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:28px;color:#C0392B;background:#FFF0F0;padding:6px 12px;border-radius:8px;justify-self:start">[X%]</span>
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:17px;color:#0F1B2D">No revenue visibility</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">You learn about collection problems weeks after they happen.</p>
+        </article>
+        <article style="background:#fff;border:1px solid #E7ECEF;border-radius:14px;padding:24px;display:grid;gap:12px;box-shadow:0 1px 2px rgba(15,27,45,.04);transition:transform .15s,box-shadow .15s" style-hover="transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,27,45,.08)">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:28px;color:#C0392B;background:#FFF0F0;padding:6px 12px;border-radius:8px;justify-self:start">[X wks]</span>
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:17px;color:#0F1B2D">Providers not enrolled</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">New hires see patients before payers will pay for them.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" aria-labelledby="services-h" style="padding:clamp(56px,7vw,96px) 24px;background:#E6F4F4;scroll-margin-top:68px">
+    <div style="max-width:1160px;margin:0 auto;display:grid;gap:40px">
+      <div style="max-width:680px;display:grid;gap:12px">
+        <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0A6B6B">Services</span>
+        <h2 id="services-h" style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.02em;color:#0A6B6B;text-wrap:balance">The full revenue cycle, handled by people who know your specialty.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px">
+        <article style="background:#fff;border-radius:16px;padding:28px 24px;display:grid;gap:16px;align-content:start;box-shadow:0 2px 6px rgba(15,27,45,.05);transition:transform .15s,box-shadow .15s" style-hover="transform:translateY(-3px);box-shadow:0 14px 30px rgba(10,107,107,.14)">
+          <span aria-hidden="true" style="width:44px;height:44px;border-radius:12px;background:#E6F4F4;display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" fill="none" stroke="#0E8A8A" stroke-width="2.2"></circle><circle cx="10" cy="10" r="2.5" fill="#0E8A8A"></circle></svg></span>
+          <div style="display:grid;gap:6px">
+            <span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0E8A8A">Front-end</span>
+            <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:1.25;color:#0F1B2D">Get paid-ready before the visit</h3>
+            <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">Confirm coverage and enrollment so clean claims start at the front desk.</p>
+          </div>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:14.5px;line-height:1.45;color:#1F2933">
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Insurance Eligibility &amp; Benefits Verification</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Provider Credentialing &amp; Payer Enrollment (CAQH, PECOS, commercial payers)</li>
+          </ul>
+        </article>
+        <article style="background:#fff;border-radius:16px;padding:28px 24px;display:grid;gap:16px;align-content:start;box-shadow:0 2px 6px rgba(15,27,45,.05);transition:transform .15s,box-shadow .15s" style-hover="transform:translateY(-3px);box-shadow:0 14px 30px rgba(10,107,107,.14)">
+          <span aria-hidden="true" style="width:44px;height:44px;border-radius:12px;background:#E6F4F4;display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="2" fill="none" stroke="#0E8A8A" stroke-width="2.2"></rect><path d="M6.5 10.5l2.5 2.5 4.5-5" fill="none" stroke="#0E8A8A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+          <div style="display:grid;gap:6px">
+            <span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0E8A8A">Mid-cycle</span>
+            <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:1.25;color:#0F1B2D">Code and submit it right the first time</h3>
+            <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">Certified coders and pre-submission scrubbing to protect first-pass rate.</p>
+          </div>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:14.5px;line-height:1.45;color:#1F2933">
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Medical Coding (ICD-10, CPT, HCPCS) by certified coders</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Charge Entry &amp; Claim Scrubbing</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Electronic Claims Submission via clearinghouse</li>
+          </ul>
+        </article>
+        <article style="background:#fff;border-radius:16px;padding:28px 24px;display:grid;gap:16px;align-content:start;box-shadow:0 2px 6px rgba(15,27,45,.05);transition:transform .15s,box-shadow .15s" style-hover="transform:translateY(-3px);box-shadow:0 14px 30px rgba(10,107,107,.14)">
+          <span aria-hidden="true" style="width:44px;height:44px;border-radius:12px;background:#E6F4F4;display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 14l4-4 3 3 7-7" fill="none" stroke="#0E8A8A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M13 6h4v4" fill="none" stroke="#0E8A8A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+          <div style="display:grid;gap:6px">
+            <span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0E8A8A">Back-end</span>
+            <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:1.25;color:#0F1B2D">Collect every dollar owed</h3>
+            <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">Every payment posted, every denial worked, every balance followed up.</p>
+          </div>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:14.5px;line-height:1.45;color:#1F2933">
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Payment Posting (ERA / EOB)</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Accounts Receivable Follow-up (30/60/90-day protocol)</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Denial Management &amp; Appeals</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Patient Statements &amp; Balance Follow-up</li>
+          </ul>
+        </article>
+        <article style="background:#fff;border-radius:16px;padding:28px 24px;display:grid;gap:16px;align-content:start;box-shadow:0 2px 6px rgba(15,27,45,.05);transition:transform .15s,box-shadow .15s" style-hover="transform:translateY(-3px);box-shadow:0 14px 30px rgba(10,107,107,.14)">
+          <span aria-hidden="true" style="width:44px;height:44px;border-radius:12px;background:#E6F4F4;display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="11" width="3" height="6" rx="1" fill="#0E8A8A"></rect><rect x="8.5" y="7" width="3" height="10" rx="1" fill="#0E8A8A"></rect><rect x="14" y="3" width="3" height="14" rx="1" fill="#0E8A8A"></rect></svg></span>
+          <div style="display:grid;gap:6px">
+            <span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0E8A8A">Visibility</span>
+            <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;line-height:1.25;color:#0F1B2D">Know where your revenue stands</h3>
+            <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">The numbers that matter, reported the same way every month.</p>
+          </div>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:14.5px;line-height:1.45;color:#1F2933">
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Monthly KPI Reporting: net collections, denial rate, days in AR, first-pass rate</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:7px;width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>{{ dashboardLine }}</li>
+          </ul>
+        </article>
+      </div>
+      <p style="margin:0;text-align:center;font-size:15px;color:#3E4C59">Available as a full end-to-end package or à la carte (credentialing and AR cleanup can be engaged separately).</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" aria-labelledby="how-h" style="padding:clamp(56px,7vw,96px) 24px;scroll-margin-top:68px">
+    <div style="max-width:1160px;margin:0 auto;display:grid;gap:40px">
+      <div style="max-width:640px;display:grid;gap:12px">
+        <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0A6B6B">How it works</span>
+        <h2 id="how-h" style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.02em;color:#0F1B2D;text-wrap:balance">From first look to steady collections in four steps.</h2>
+      </div>
+      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;counter-reset:step">
+        <li style="position:relative;display:grid;gap:14px;padding:24px;background:#fff;border:1px solid #E7ECEF;border-radius:14px">
+          <span style="width:36px;height:36px;border-radius:50%;background:#0E8A8A;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;display:grid;place-items:center">1</span>
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:17px;color:#0F1B2D">Free billing assessment</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">We review a sample of your claims and AR and show you what we find.</p>
+        </li>
+        <li style="position:relative;display:grid;gap:14px;padding:24px;background:#fff;border:1px solid #E7ECEF;border-radius:14px">
+          <span style="width:36px;height:36px;border-radius:50%;background:#0E8A8A;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;display:grid;place-items:center">2</span>
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:17px;color:#0F1B2D">Custom plan and BAA</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">A scoped plan, a quoted rate, and a signed BAA before any data moves.</p>
+        </li>
+        <li style="position:relative;display:grid;gap:14px;padding:24px;background:#fff;border:1px solid #E7ECEF;border-radius:14px">
+          <span style="width:36px;height:36px;border-radius:50%;background:#0E8A8A;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;display:grid;place-items:center">3</span>
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:17px;color:#0F1B2D">14-day onboarding</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">Inside your existing EHR/PM — no software switch, no re-training.</p>
+        </li>
+        <li style="position:relative;display:grid;gap:14px;padding:24px;background:#fff;border:1px solid #E7ECEF;border-radius:14px">
+          <span style="width:36px;height:36px;border-radius:50%;background:#2E9E5B;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;display:grid;place-items:center">4</span>
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:17px;color:#0F1B2D">Ongoing billing</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">Daily claims work with a monthly performance review you can act on.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SPECIALTIES -->
+  <section id="specialties" aria-labelledby="spec-h" style="padding:clamp(48px,6vw,80px) 24px;background:#fff;border-top:1px solid #E7ECEF;border-bottom:1px solid #E7ECEF;scroll-margin-top:68px">
+    <div style="max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:center">
+      <div style="display:grid;gap:12px;max-width:440px">
+        <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0A6B6B">Specialties</span>
+        <h2 id="spec-h" style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(26px,3vw,36px);line-height:1.15;letter-spacing:-.02em;color:#0F1B2D">Coders assigned by specialty, not by queue.</h2>
+        <p style="margin:0;font-size:15px;line-height:1.55;color:#4B5A68">Each practice is matched with coders who work your specialty's codes and payer rules every day.</p>
+      </div>
+      <ul aria-label="Specialties served" style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px">
+        <li style="padding:10px 16px;border-radius:999px;background:#0E8A8A;color:#fff;font-size:14px;font-weight:600">[SPECIALTY 1]</li>
+        <li style="padding:10px 16px;border-radius:999px;background:#0E8A8A;color:#fff;font-size:14px;font-weight:600">[SPECIALTY 2]</li>
+        <li style="padding:10px 16px;border-radius:999px;background:#0E8A8A;color:#fff;font-size:14px;font-weight:600">[SPECIALTY 3]</li>
+        <li style="padding:10px 16px;border-radius:999px;background:#E6F4F4;color:#0A6B6B;font-size:14px;font-weight:500">Primary Care</li>
+        <li style="padding:10px 16px;border-radius:999px;background:#E6F4F4;color:#0A6B6B;font-size:14px;font-weight:500">Behavioral Health</li>
+        <li style="padding:10px 16px;border-radius:999px;background:#E6F4F4;color:#0A6B6B;font-size:14px;font-weight:500">Physical Therapy</li>
+        <li style="padding:10px 16px;border-radius:999px;background:#E6F4F4;color:#0A6B6B;font-size:14px;font-weight:500">Urgent Care</li>
+        <li style="padding:10px 16px;border-radius:999px;background:#E6F4F4;color:#0A6B6B;font-size:14px;font-weight:500">Internal Medicine</li>
+        <li style="padding:10px 16px;border-radius:999px;background:#E6F4F4;color:#0A6B6B;font-size:14px;font-weight:500">Pediatrics</li>
+        <li style="padding:10px 16px;border-radius:999px;border:1px dashed #9FB3B3;color:#4B5A68;font-size:14px;font-weight:500">+ more</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SYSTEMS -->
+  <section aria-labelledby="systems-h" style="padding:clamp(40px,5vw,64px) 24px">
+    <div style="max-width:1160px;margin:0 auto;display:grid;gap:22px;text-align:center;justify-items:center">
+      <h2 id="systems-h" style="margin:0;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#5B6B7A">Works with your systems</h2>
+      <ul aria-label="Supported practice management and EHR platforms" style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 14px">
+        <li style="padding:10px 18px;border-radius:10px;background:#fff;border:1px solid #E7ECEF;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;color:#3E4C59">eClinicalWorks</li>
+        <li style="padding:10px 18px;border-radius:10px;background:#fff;border:1px solid #E7ECEF;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;color:#3E4C59">athenahealth</li>
+        <li style="padding:10px 18px;border-radius:10px;background:#fff;border:1px solid #E7ECEF;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;color:#3E4C59">Kareo / Tebra</li>
+        <li style="padding:10px 18px;border-radius:10px;background:#fff;border:1px solid #E7ECEF;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;color:#3E4C59">AdvancedMD</li>
+        <li style="padding:10px 18px;border-radius:10px;background:#fff;border:1px solid #E7ECEF;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;color:#3E4C59">NextGen</li>
+        <li style="padding:10px 18px;border-radius:10px;background:#fff;border:1px solid #E7ECEF;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;color:#3E4C59">Office Ally</li>
+        <li style="padding:10px 18px;border-radius:10px;background:#fff;border:1px solid #E7ECEF;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;color:#3E4C59">DrChrono</li>
+        <li style="padding:10px 18px;border-radius:10px;background:#fff;border:1px solid #E7ECEF;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;color:#3E4C59">Practice Fusion</li>
+      </ul>
+      <p style="margin:0;font-size:15px;color:#3E4C59">No forced migration — we work inside the system you already use.</p>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why" aria-labelledby="why-h" style="padding:clamp(56px,7vw,96px) 24px;scroll-margin-top:68px">
+    <div style="max-width:1160px;margin:0 auto;display:grid;gap:36px">
+      <div style="max-width:640px;display:grid;gap:12px">
+        <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0A6B6B">Why us</span>
+        <h2 id="why-h" style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.02em;color:#0F1B2D;text-wrap:balance">The terms most billing vendors won't put in writing.</h2>
+      </div>
+      <div style="background:#0F1B2D;border-radius:16px;padding:clamp(8px,2vw,20px);box-shadow:0 20px 50px rgba(15,27,45,.25);overflow-x:auto">
+        <table style="width:100%;min-width:600px;border-collapse:separate;border-spacing:0;color:#fff;font-size:15px">
+          <thead>
+            <tr>
+              <th scope="col" style="text-align:left;padding:18px 20px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A99AC;border-bottom:1px solid rgba(255,255,255,.12)"></th>
+              <th scope="col" style="text-align:left;padding:18px 20px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A99AC;border-bottom:1px solid rgba(255,255,255,.12)">Typical billing vendor</th>
+              <th scope="col" style="text-align:left;padding:18px 20px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9FD4A3;border-bottom:1px solid rgba(255,255,255,.12)">{{ name }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" style="text-align:left;padding:18px 20px;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.08)">Setup fees</th>
+              <td style="padding:18px 20px;color:#B4BFCC;border-bottom:1px solid rgba(255,255,255,.08)">Common</td>
+              <td style="padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)"><span style="display:inline-block;padding:4px 10px;border-radius:6px;background:rgba(159,212,163,.14);color:#9FD4A3;font-weight:600;font-size:14px">None</span></td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align:left;padding:18px 20px;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.08)">Contract</th>
+              <td style="padding:18px 20px;color:#B4BFCC;border-bottom:1px solid rgba(255,255,255,.08)">Multi-year</td>
+              <td style="padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)"><span style="display:inline-block;padding:4px 10px;border-radius:6px;background:rgba(159,212,163,.14);color:#9FD4A3;font-weight:600;font-size:14px">Month-to-month</span></td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align:left;padding:18px 20px;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.08)">Pricing</th>
+              <td style="padding:18px 20px;color:#B4BFCC;border-bottom:1px solid rgba(255,255,255,.08)">Opaque</td>
+              <td style="padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)"><span style="display:inline-block;padding:4px 10px;border-radius:6px;background:rgba(159,212,163,.14);color:#9FD4A3;font-weight:600;font-size:14px">% of collections, quoted upfront</span></td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align:left;padding:18px 20px;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.08)">Reporting</th>
+              <td style="padding:18px 20px;color:#B4BFCC;border-bottom:1px solid rgba(255,255,255,.08)">Monthly PDF</td>
+              <td style="padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)"><span style="display:inline-block;padding:4px 10px;border-radius:6px;background:rgba(159,212,163,.14);color:#9FD4A3;font-weight:600;font-size:14px">Live / monthly KPI dashboard</span></td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align:left;padding:18px 20px;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.08)">Team</th>
+              <td style="padding:18px 20px;color:#B4BFCC;border-bottom:1px solid rgba(255,255,255,.08)">Pooled generalists</td>
+              <td style="padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)"><span style="display:inline-block;padding:4px 10px;border-radius:6px;background:rgba(159,212,163,.14);color:#9FD4A3;font-weight:600;font-size:14px">Specialty-assigned team</span></td>
+            </tr>
+            <tr>
+              <th scope="row" style="text-align:left;padding:18px 20px;font-weight:600;color:#fff">Account manager</th>
+              <td style="padding:18px 20px;color:#B4BFCC">Ticket queue</td>
+              <td style="padding:18px 20px"><span style="display:inline-block;padding:4px 10px;border-radius:6px;background:rgba(159,212,163,.14);color:#9FD4A3;font-weight:600;font-size:14px">Named US-hours contact</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIT -->
+  <section aria-labelledby="fit-h" style="padding:clamp(48px,6vw,80px) 24px;background:#fff;border-top:1px solid #E7ECEF;border-bottom:1px solid #E7ECEF">
+    <div style="max-width:1160px;margin:0 auto;display:grid;gap:32px">
+      <h2 id="fit-h" style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(26px,3vw,36px);line-height:1.15;letter-spacing:-.02em;color:#0F1B2D">Who we're built for</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px">
+        <div style="border-radius:14px;padding:26px;background:#E6F4F4;display:grid;gap:14px;align-content:start">
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;color:#0A6B6B">A strong fit if</h3>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:15px;line-height:1.45;color:#1F2933">
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:4px;width:16px;height:16px;border-radius:50%;background:#2E9E5B;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">✓</span>You're an independent practice with 1–20 providers</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:4px;width:16px;height:16px;border-radius:50%;background:#2E9E5B;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">✓</span>Denials are rising or AR is aging</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:4px;width:16px;height:16px;border-radius:50%;background:#2E9E5B;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">✓</span>You want real visibility into collections</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:4px;width:16px;height:16px;border-radius:50%;background:#2E9E5B;color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center">✓</span>You're adding providers who need credentialing</li>
+          </ul>
+        </div>
+        <div style="border-radius:14px;padding:26px;background:#F7F9FA;border:1px solid #E7ECEF;display:grid;gap:14px;align-content:start">
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;color:#3E4C59">Less of a fit if</h3>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:15px;line-height:1.45;color:#4B5A68">
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:9px;width:12px;height:2px;background:#9AA5B1"></span>You need hospital or facility (UB-04) billing</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:9px;width:12px;height:2px;background:#9AA5B1"></span>Your practice is mostly cash-pay</li>
+            <li style="display:flex;gap:10px"><span aria-hidden="true" style="flex:none;margin-top:9px;width:12px;height:2px;background:#9AA5B1"></span>You want to keep a full in-house billing team</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section aria-labelledby="results-h" style="padding:clamp(56px,7vw,88px) 24px">
+    <div style="max-width:1160px;margin:0 auto;display:grid;gap:32px">
+      <div style="max-width:640px;display:grid;gap:12px">
+        <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0A6B6B">Results</span>
+        <h2 id="results-h" style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.02em;color:#0F1B2D">What changes when the cycle is worked.</h2>
+      </div>
+      <sc-if value="{{ showPlaceholders }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px">
+          <sc-for list="{{ results }}" as="r" hint-placeholder-count="3">
+            <article style="background:#fff;border:1px dashed #B8C4CC;border-radius:14px;padding:24px;display:grid;gap:12px;align-content:start">
+              <span style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#8A99AC">[PLACEHOLDER — replace with real client results]</span>
+              <span style="font-size:13px;font-weight:600;color:#0A6B6B">{{ r.specialty }}</span>
+              <div style="display:flex;align-items:baseline;gap:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;letter-spacing:-.02em">
+                <span style="font-size:22px;color:#9AA5B1;text-decoration:line-through">{{ r.before }}</span>
+                <span aria-hidden="true" style="color:#9AA5B1;font-size:18px">→</span>
+                <span style="font-size:30px;color:#2E9E5B">{{ r.after }}</span>
+              </div>
+              <span style="font-size:13px;color:#5B6B7A">{{ r.metric }}</span>
+              <p style="margin:0;font-size:14.5px;line-height:1.5;color:#4B5A68">{{ r.summary }}</p>
+            </article>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showComingSoon }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px dashed #B8C4CC;border-radius:14px;padding:40px 24px;text-align:center;display:grid;gap:8px;justify-items:center;color:#5B6B7A">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:#3E4C59">Early results coming soon</span>
+          <p style="margin:0;font-size:14.5px;max-width:420px">We publish client outcomes only once they're measured and approved for sharing.</p>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" aria-labelledby="faq-h" style="padding:clamp(56px,7vw,88px) 24px;background:#fff;border-top:1px solid #E7ECEF;scroll-margin-top:68px">
+    <div style="max-width:800px;margin:0 auto;display:grid;gap:32px">
+      <div style="display:grid;gap:12px">
+        <span style="font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0A6B6B">FAQ</span>
+        <h2 id="faq-h" style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.02em;color:#0F1B2D">Common questions</h2>
+      </div>
+      <div style="display:grid;gap:10px">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+          <div style="border:1px solid #E7ECEF;border-radius:12px;background:#F7F9FA;overflow:hidden">
+            <h3 style="margin:0">
+              <button type="button" onClick="{{ f.toggle }}" aria-expanded="{{ f.open }}" aria-controls="{{ f.panelId }}" id="{{ f.btnId }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;padding:18px 20px;background:transparent;border:0;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16.5px;color:#0F1B2D;min-height:56px" style-hover="color:#0A6B6B" style-focus="outline:2px solid #0E8A8A;outline-offset:-2px;border-radius:12px">
+                <span>{{ f.q }}</span>
+                <span aria-hidden="true" style="flex:none;width:26px;height:26px;border-radius:50%;background:#E6F4F4;color:#0A6B6B;display:grid;place-items:center;font-size:18px;font-weight:500;line-height:1">{{ f.sym }}</span>
+              </button>
+            </h3>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+              <div id="{{ f.panelId }}" role="region" aria-labelledby="{{ f.btnId }}" style="padding:0 20px 20px;font-size:15px;line-height:1.55;color:#4B5A68">{{ f.a }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + FORM -->
+  <section id="assessment" aria-labelledby="cta-h" style="padding:clamp(56px,7vw,96px) 24px;background:#E6F4F4;scroll-margin-top:68px">
+    <div style="max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:start">
+      <div style="display:grid;gap:18px;max-width:460px">
+        <span style="display:inline-flex;align-items:center;gap:8px;justify-self:start;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#0F1B2D;background:#FFD166;padding:6px 12px;border-radius:999px">Free · No obligation</span>
+        <h2 id="cta-h" style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(30px,3.8vw,46px);line-height:1.1;letter-spacing:-.025em;color:#0A6B6B;text-wrap:balance">Get a Free Billing Assessment</h2>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#3E4C59">Send us a sample of recent claims and your AR aging. We'll show you where revenue is leaking and what it would take to fix it.</p>
+        <ul style="margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:15px;color:#1F2933">
+          <li style="display:flex;gap:10px;align-items:center"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Written findings within [X] business days</li>
+          <li style="display:flex;gap:10px;align-items:center"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>Reviewed by a coder in your specialty</li>
+          <li style="display:flex;gap:10px;align-items:center"><span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:#0E8A8A"></span>BAA signed before any data is shared</li>
+        </ul>
+      </div>
+      <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submit }}" aria-label="Billing assessment request" style="background:#fff;border-radius:16px;padding:clamp(22px,3vw,32px);box-shadow:0 16px 40px rgba(10,107,107,.12);display:grid;gap:16px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+            <label style="display:grid;gap:6px;font-size:13.5px;font-weight:600;color:#1F2933">Full name<input name="name" type="text" required autocomplete="name" style="height:46px;padding:0 14px;border:1px solid #D5DDE3;border-radius:10px;font-size:15px;background:#fff;color:#1F2933" style-focus="outline:2px solid #0E8A8A;border-color:#0E8A8A"></label>
+            <label style="display:grid;gap:6px;font-size:13.5px;font-weight:600;color:#1F2933">Work email<input name="email" type="email" required autocomplete="email" style="height:46px;padding:0 14px;border:1px solid #D5DDE3;border-radius:10px;font-size:15px;background:#fff;color:#1F2933" style-focus="outline:2px solid #0E8A8A;border-color:#0E8A8A"></label>
+            <label style="display:grid;gap:6px;font-size:13.5px;font-weight:600;color:#1F2933">Phone<input name="phone" type="tel" autocomplete="tel" style="height:46px;padding:0 14px;border:1px solid #D5DDE3;border-radius:10px;font-size:15px;background:#fff;color:#1F2933" style-focus="outline:2px solid #0E8A8A;border-color:#0E8A8A"></label>
+            <label style="display:grid;gap:6px;font-size:13.5px;font-weight:600;color:#1F2933">Practice name<input name="practice" type="text" autocomplete="organization" style="height:46px;padding:0 14px;border:1px solid #D5DDE3;border-radius:10px;font-size:15px;background:#fff;color:#1F2933" style-focus="outline:2px solid #0E8A8A;border-color:#0E8A8A"></label>
+            <label style="display:grid;gap:6px;font-size:13.5px;font-weight:600;color:#1F2933">Specialty<select name="specialty" style="height:46px;padding:0 14px;border:1px solid #D5DDE3;border-radius:10px;font-size:15px;background:#fff;color:#1F2933" style-focus="outline:2px solid #0E8A8A;border-color:#0E8A8A"><option value="">Select…</option><option>[SPECIALTY 1]</option><option>[SPECIALTY 2]</option><option>[SPECIALTY 3]</option><option>Primary Care</option><option>Behavioral Health</option><option>Physical Therapy</option><option>Urgent Care</option><option>Internal Medicine</option><option>Pediatrics</option><option>Other</option></select></label>
+            <label style="display:grid;gap:6px;font-size:13.5px;font-weight:600;color:#1F2933">Number of providers<select name="providers" style="height:46px;padding:0 14px;border:1px solid #D5DDE3;border-radius:10px;font-size:15px;background:#fff;color:#1F2933" style-focus="outline:2px solid #0E8A8A;border-color:#0E8A8A"><option value="">Select…</option><option>1</option><option>2–5</option><option>6–10</option><option>11–20</option><option>20+</option></select></label>
+          </div>
+          <label style="display:grid;gap:6px;font-size:13.5px;font-weight:600;color:#1F2933">Primary concern<select name="concern" style="height:46px;padding:0 14px;border:1px solid #D5DDE3;border-radius:10px;font-size:15px;background:#fff;color:#1F2933" style-focus="outline:2px solid #0E8A8A;border-color:#0E8A8A"><option value="">Select…</option><option>Denials</option><option>Aged AR</option><option>Credentialing</option><option>Eligibility / Prior auth</option><option>Full outsourcing</option><option>Not sure</option></select></label>
+          <label style="display:grid;gap:6px;font-size:13.5px;font-weight:600;color:#1F2933">Message <span style="font-weight:400;color:#7B8794">(optional)</span><textarea name="message" rows="3" style="padding:12px 14px;border:1px solid #D5DDE3;border-radius:10px;font-size:15px;background:#fff;color:#1F2933;resize:vertical" style-focus="outline:2px solid #0E8A8A;border-color:#0E8A8A"></textarea></label>
+          <button type="submit" style="height:52px;border:0;border-radius:12px;background:#0E8A8A;color:#fff;font-weight:600;font-size:16px;cursor:pointer;transition:background .15s" style-hover="background:#0A6B6B">Get a Free Billing Assessment</button>
+          <p style="margin:0;text-align:center;font-size:13px;color:#5B6B7A">HIPAA-compliant · BAA before any data moves · No obligation.</p>
+        </form>
+      </sc-if>
+      <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="background:#fff;border-radius:16px;padding:40px 32px;box-shadow:0 16px 40px rgba(10,107,107,.12);display:grid;gap:12px;justify-items:center;text-align:center">
+          <span aria-hidden="true" style="width:48px;height:48px;border-radius:50%;background:#2E9E5B;color:#fff;font-size:22px;display:grid;place-items:center">✓</span>
+          <h3 style="margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;color:#0F1B2D">Request received</h3>
+          <p style="margin:0;font-size:15px;color:#4B5A68;max-width:360px">We'll reach out within one business day to schedule your assessment and send the BAA.</p>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+</main>
+
+<footer style="background:#0F1B2D;color:#B4BFCC;padding:clamp(48px,6vw,72px) 24px 32px">
+  <div style="max-width:1160px;margin:0 auto;display:grid;gap:48px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:36px">
+      <div style="display:grid;gap:14px;align-content:start;grid-column:span 1">
+        <a href="#top" style="display:flex;align-items:center;gap:10px;color:#fff">
+          <span aria-hidden="true" style="width:32px;height:32px;border-radius:9px;background:#0E8A8A;display:grid;place-items:center"><span style="width:12px;height:12px;border-radius:3px;background:#9FD4A3;display:block"></span></span>
+          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px">{{ name }}</span>
+        </a>
+        <p style="margin:0;font-size:14px;line-height:1.55;max-width:280px">Specialty-driven medical billing and revenue cycle management for independent US practices.</p>
+        <div style="display:flex;gap:10px">
+          <a href="#" aria-label="LinkedIn" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center" style-hover="background:#0E8A8A;color:#fff">in</a>
+          <a href="#" aria-label="X (Twitter)" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center" style-hover="background:#0E8A8A;color:#fff">X</a>
+          <a href="#" aria-label="YouTube" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center" style-hover="background:#0E8A8A;color:#fff">YT</a>
+        </div>
+      </div>
+      <nav aria-label="Services" style="display:grid;gap:10px;align-content:start;font-size:14px">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9FD4A3;margin-bottom:4px">Services</span>
+        <a href="#services" style="color:#B4BFCC" style-hover="color:#fff">Front-end: eligibility &amp; credentialing</a>
+        <a href="#services" style="color:#B4BFCC" style-hover="color:#fff">Mid-cycle: coding &amp; claims</a>
+        <a href="#services" style="color:#B4BFCC" style-hover="color:#fff">Back-end: AR &amp; denials</a>
+        <a href="#services" style="color:#B4BFCC" style-hover="color:#fff">Visibility: KPI reporting</a>
+      </nav>
+      <nav aria-label="Specialties" style="display:grid;gap:10px;align-content:start;font-size:14px">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9FD4A3;margin-bottom:4px">Specialties</span>
+        <a href="#specialties" style="color:#B4BFCC" style-hover="color:#fff">[SPECIALTY 1]</a>
+        <a href="#specialties" style="color:#B4BFCC" style-hover="color:#fff">[SPECIALTY 2]</a>
+        <a href="#specialties" style="color:#B4BFCC" style-hover="color:#fff">[SPECIALTY 3]</a>
+        <a href="#specialties" style="color:#B4BFCC" style-hover="color:#fff">Primary Care</a>
+        <a href="#specialties" style="color:#B4BFCC" style-hover="color:#fff">Behavioral Health</a>
+      </nav>
+      <address style="display:grid;gap:10px;align-content:start;font-size:14px;font-style:normal">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9FD4A3;margin-bottom:4px">Contact</span>
+        <a href="mailto:hello@example.com" style="color:#B4BFCC" style-hover="color:#fff">hello@[domain].com</a>
+        <a href="tel:+15550000000" style="color:#B4BFCC" style-hover="color:#fff">(555) 000-0000</a>
+        <span style="line-height:1.5">[Street address]<br>[City, ST ZIP]</span>
+      </address>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;font-size:13px">
+      <span>© 2026 {{ name }}. All rights reserved.</span>
+      <div style="display:flex;flex-wrap:wrap;gap:20px">
+        <a href="#" style="color:#B4BFCC" style-hover="color:#fff">HIPAA Notice</a>
+        <a href="#" style="color:#B4BFCC" style-hover="color:#fff">Privacy Policy</a>
+        <a href="#" style="color:#B4BFCC" style-hover="color:#fff">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startupName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Execile&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Brand&quot;},&quot;resultsMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;placeholder&quot;,&quot;options&quot;:[&quot;placeholder&quot;,&quot;coming-soon&quot;],&quot;tsType&quot;:&quot;'placeholder' | 'coming-soon'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;dashboardAvailable&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+const FAQ = [
+  ["How is pricing structured?", "A percentage of what we collect, quoted upfront before you sign. No setup fees, no per-claim surprises. Credentialing and AR cleanup projects are quoted as flat scopes."],
+  ["How long is onboarding?", "About 14 days. We get access to your existing EHR/PM, map your payers and fee schedules, and start submitting claims — no software switch."],
+  ["Do you replace our staff?", "No. Most practices keep front-desk and clinical staff exactly as they are. We take over the billing work behind them and coordinate with whoever you name as our contact."],
+  ["How do you handle HIPAA and data security with an offshore team?", "A BAA is signed before any data moves. Access is role-based and logged, PHI stays inside your systems, and every team member completes HIPAA training. Your named account contact works US hours."],
+  ["Which EHRs do you support?", "eClinicalWorks, athenahealth, Kareo/Tebra, AdvancedMD, NextGen, Office Ally, DrChrono, Practice Fusion, and most other cloud PM systems. If yours isn't listed, ask — we work inside whatever you already use."],
+  ["Can we start with just credentialing or AR cleanup?", "Yes. Both are available à la carte with their own scope and timeline, and many practices start there before moving to full-cycle billing."]
+];
+const RESULTS = [
+  { specialty: "[Specialty]", before: "[X%]", after: "[Y%]", metric: "Denial rate, first 90 days", summary: "[One-line summary of what changed and why.]" },
+  { specialty: "[Specialty]", before: "[X days]", after: "[Y days]", metric: "Days in AR", summary: "[One-line summary of what changed and why.]" },
+  { specialty: "[Specialty]", before: "[X%]", after: "[Y%]", metric: "Net collection rate", summary: "[One-line summary of what changed and why.]" }
+];
+class Component extends DCLogic {
+  state = { mobile: false, menuOpen: false, openFaq: 0, submitted: false };
+  componentDidMount() {
+    this.mq = window.matchMedia("(max-width: 940px)");
+    this.onMq = () => this.setState({ mobile: this.mq.matches, menuOpen: false });
+    this.onMq();
+    this.mq.addEventListener("change", this.onMq);
+  }
+  componentWillUnmount() { this.mq && this.mq.removeEventListener("change", this.onMq); }
+  renderVals() {
+    const name = this.props.startupName ?? "[STARTUP NAME]";
+    const resultsMode = this.props.resultsMode ?? "placeholder";
+    const dash = this.props.dashboardAvailable ?? true;
+    const { mobile, menuOpen, openFaq, submitted } = this.state;
+    return {
+      name,
+      desktop: !mobile, mobile, menuOpen, menuVisible: mobile && menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      dashboardLine: dash ? "Live dashboard access" : "Monthly reporting",
+      showPlaceholders: resultsMode === "placeholder",
+      showComingSoon: resultsMode !== "placeholder",
+      results: RESULTS,
+      faqs: FAQ.map(([q, a], i) => ({
+        q, a, open: openFaq === i, sym: openFaq === i ? "–" : "+",
+        panelId: "faq-panel-" + i, btnId: "faq-btn-" + i,
+        toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i }))
+      })),
+      submitted, notSubmitted: !submitted,
+      submit: e => { e.preventDefault(); this.setState({ submitted: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
