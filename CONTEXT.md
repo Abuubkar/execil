@@ -24,6 +24,10 @@ Vocabulary for the Execile landing-page effort. Glossary only; decisions live in
 - **Messages** — the single English-only `messages.json` that holds every user-facing string. No locale layer.
 - **Base component** — a reusable wrapper around a raw HTML element. Feature and page code composes base components and never uses raw elements.
 - **Design system** — the StyleX token set (colour, type, spacing, radius, shadow, motion) every component styles from. No arbitrary values.
+- **Ramp** — a raw value scale inside a token group, named by hue and step (`ink500`, `teal700`). Ramps are the palette layer; feature code never names one.
+- **Role** — a token named for its job rather than its value (`textProse`, `surfaceBrand`, `borderDashed`). Roles derive from Ramp keys in the same group, and are the only tokens components import.
+- **Dark theme** — the StyleX `createTheme` applied to the footer and the Systems card, overriding Role values for those subtrees. Not a user-facing colour-scheme preference; the site is light.
+- **Inverse surface** — a Section that renders on the dark ground and therefore carries the Dark theme.
 - **Legal links** — the footer's HIPAA Notice, Privacy Policy and Terms of Service links. Dead links for v1; their fate is decided at the end.
 - **Inbox** — the Google Workspace mailbox that receives every Assessment Form submission. Google Workspace is a destination, not a sending platform.
 - **Turnstile** — Cloudflare's bot check on the Assessment Form.
