@@ -11,7 +11,7 @@ import { space } from '../styles/tokens.stylex'
 const HEADING_ID = 'not-found-h'
 
 const styles = stylex.create({
-  cta: { marginBlockStart: space.s12 },
+  cta: { alignSelf: 'flex-start', marginBlockStart: space.s12 },
 })
 
 export function NotFound() {
