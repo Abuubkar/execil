@@ -1,6 +1,4 @@
-# The Sitemap line needs the real domain. Static files cannot read
-# VITE_SITE_URL, so it is filled in at provisioning (issue #32).
 User-agent: *
 Allow: /
 
-Sitemap: https://REPLACE_AT_PROVISIONING/sitemap.xml
+Sitemap: https://execil.net/sitemap.xml

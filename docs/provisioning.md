@@ -85,18 +85,18 @@ Attach `<domain>` (and `www` if wanted).
 
 ## Variable map
 
-| Name | Kind | From step |
-|---|---|---|
-| `CLOUDFLARE_ACCOUNT_ID` | GitHub secret | 1 |
-| `CLOUDFLARE_API_TOKEN` | GitHub secret | 1 |
-| `VITE_SITE_URL` | GitHub variable | 2 |
-| `ASSESSMENT_TO` | wrangler var | 3 |
-| `VITE_CONTACT_EMAIL` | GitHub variable | 3 |
-| `SENDER_DOMAIN` | wrangler var | 4 |
-| `EMAIL` | wrangler binding | 5 |
-| `VITE_TURNSTILE_SITEKEY` | GitHub variable | 6 |
-| `TURNSTILE_SECRET` | Worker secret | 6 |
-| `VITE_POSTHOG_PROJECT_TOKEN` | GitHub variable | 7 |
+| Name | Kind | From step | Known value |
+|---|---|---|---|
+| `CLOUDFLARE_ACCOUNT_ID` | GitHub secret | 1 | |
+| `CLOUDFLARE_API_TOKEN` | GitHub secret | 1 | |
+| `VITE_SITE_URL` | GitHub variable | 2 | `https://execil.net` |
+| `ASSESSMENT_TO` | wrangler var | 3 | |
+| `VITE_CONTACT_EMAIL` | GitHub variable | 3 | `contact@execil.net` |
+| `SENDER_DOMAIN` | wrangler var | 4 | |
+| `EMAIL` | wrangler binding | 5 | |
+| `VITE_TURNSTILE_SITEKEY` | GitHub variable | 6 | |
+| `TURNSTILE_SECRET` | Worker secret | 6 | |
+| `VITE_POSTHOG_PROJECT_TOKEN` | GitHub variable | 7 | |
 
 ## What already works with no accounts
 

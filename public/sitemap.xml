@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- <loc> needs the real domain; filled in at provisioning (issue #32). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://REPLACE_AT_PROVISIONING/</loc>
+    <loc>https://execil.net/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>

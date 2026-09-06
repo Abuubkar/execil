@@ -1,10 +1,13 @@
 import * as stylex from '@stylexjs/stylex'
 
+import { Dot } from '../base/Dot'
 import { Eyebrow } from '../base/Eyebrow'
 import { Heading } from '../base/Heading'
+import { List, ListItem } from '../base/List'
 import { Prose } from '../base/Prose'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
+import { Text } from '../base/Text'
 import { m } from '../messages'
 import { color, layout, radius, space } from '../styles/tokens.stylex'
 
@@ -27,8 +30,11 @@ const styles = stylex.create({
     borderWidth: '1px',
     paddingBlock: space.s40,
     paddingInline: space.s24,
-    textAlign: 'center',
   },
+  measures: { maxWidth: layout.containerText },
+  item: { alignItems: 'flex-start' },
+  itemDot: { marginBlockStart: space.s8 },
+  itemText: { flex: 1 },
 })
 
 export function Results() {
@@ -43,8 +49,27 @@ export function Results() {
         </Stack>
 
         {SHOW_CASE_STUDIES ? null : (
-          <Stack style={styles.notice}>
+          <Stack gap="s24" style={styles.notice}>
             <Prose>{m.results.comingSoon}</Prose>
+
+            <Stack gap="s12" style={styles.measures}>
+              <Heading level={3} size="lg">
+                {m.results.measuresTitle}
+              </Heading>
+              <List gap="s10">
+                {m.results.measures.map((measure) => (
+                  <ListItem key={measure} style={styles.item}>
+                    <Dot tone="brand" size="xs" style={styles.itemDot} />
+                    <Text size="md" tone="body" style={styles.itemText}>
+                      {measure}
+                    </Text>
+                  </ListItem>
+                ))}
+              </List>
+              <Text as="p" size="sm" tone="muted">
+                {m.results.measuresNote}
+              </Text>
+            </Stack>
           </Stack>
         )}
       </Stack>

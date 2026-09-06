@@ -286,8 +286,15 @@
   "results": {
     "eyebrow": "Results",
     "title": "What changes when the cycle is worked.",
-    "comingSoon": "We publish client outcomes only once they're measured and approved for sharing.",
-    "placeholderNotice": "[PLACEHOLDER: replace with real client results]",
+    "comingSoon": "Execile is new, so there are no client outcomes to publish here yet. We will publish them once they are measured and the client has approved sharing them, not before.",
+    "measuresTitle": "What we report, every month",
+    "measures": [
+      "Net collections against what was billable",
+      "Denial rate, with the reason codes behind it",
+      "Days in AR, and how much sits past 120 days",
+      "First-pass acceptance rate"
+    ],
+    "measuresNote": "The AAFP puts days in AR below 50 at minimum, and 30 to 40 as preferable. That is the target we work to from the first month.",
     "items": []
   },
   "faq": {
@@ -331,7 +338,7 @@
     "title": "Get a Free Billing Assessment",
     "lead": "Send us a sample of recent claims and your AR aging. We'll show you where revenue is leaking and what it would take to fix it.",
     "bullets": [
-      "Written findings within [X] business days",
+      "Written findings within 5 business days",
       "Reviewed by a coder in your specialty",
       "BAA signed before any data is shared"
     ],
@@ -451,7 +458,7 @@
         "text": "Primary Care"
       }
     ],
-    "email": "[hello@domain.com]",
+    "email": "contact@execil.net",
     "emailHref": "mailto:hello@example.com",
     "addressLines": ["New York, NY", "United States"],
     "legalLabel": "Legal",
