@@ -318,12 +318,24 @@
     "comingSoon": "Execile is new, so there are no client outcomes to publish here yet. We will publish them once they are measured and the client has approved sharing them, not before.",
     "measuresTitle": "What we report, every month",
     "measures": [
-      "Net collections against what was billable",
-      "Denial rate, with the reason codes behind it",
-      "Days in AR, and how much sits past 120 days",
-      "First-pass acceptance rate"
+      {
+        "title": "Net collections",
+        "blurb": "What actually arrived, against what was billable. This is the number your fee is calculated on."
+      },
+      {
+        "title": "Denial rate",
+        "blurb": "The share of claims denied, with the reason codes behind them, so you can see the cause and not just the total."
+      },
+      {
+        "title": "Days in AR",
+        "blurb": "How long money sits before it reaches you, and how much of it has aged past 120 days.",
+        "source": "Benchmark: the AAFP puts days in AR below 50 at minimum, and 30 to 40 as preferable."
+      },
+      {
+        "title": "First-pass acceptance",
+        "blurb": "The share of claims accepted on first submission, before anyone has to rework them."
+      }
     ],
-    "measuresNote": "The AAFP puts days in AR below 50 at minimum, and 30 to 40 as preferable. That is the target we work to from the first month.",
     "items": []
   },
   "faq": {
