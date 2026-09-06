@@ -149,7 +149,7 @@
         "blurb": "The numbers that matter, reported the same way every month.",
         "items": [
           "Monthly KPI Reporting: net collections, denial rate, days in AR, first-pass rate",
-          "[Dashboard access: confirm with client]"
+          "Read-only KPI Dashboard Access"
         ]
       }
     ]
