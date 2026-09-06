@@ -1,8 +1,8 @@
 {
   "site": {
     "name": "Execile",
-    "phone": "(555) 000-0000",
-    "phoneHref": "tel:+15550000000"
+    "phone": "+1 (914) 513-4535",
+    "phoneHref": "tel:+19145134535"
   },
   "meta": {
     "title": "Execile | Medical Billing & RCM for Independent Practices",
@@ -399,7 +399,7 @@
       "submit": "Get a Free Billing Assessment",
       "submitting": "Sending…",
       "disclaimer": "HIPAA-compliant · BAA before any data moves · No obligation.",
-      "noscript": "JavaScript is required to send this form. Please call (555) 000-0000 instead."
+      "noscript": "JavaScript is required to send this form. Please call +1 (914) 513-4535 instead."
     },
     "success": {
       "title": "Request received",

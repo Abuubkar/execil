@@ -17,9 +17,9 @@ export const OG_IMAGE = absolute('/og.png')
  * (the registered address is a residence), so LocalBusiness would be both wrong
  * and ineffective. See issue #30.
  *
- * telephone and sameAs are OMITTED rather than placeholdered — structured data
- * carrying a bracketed placeholder is worse than an absent field, because
- * Google can flag it.
+ * sameAs is OMITTED rather than placeholdered — structured data carrying a
+ * bracketed placeholder is worse than an absent field, because Google can flag
+ * it. telephone was omitted on the same grounds until a real number existed.
  */
 export const organizationLd = {
   '@context': 'https://schema.org',
@@ -28,6 +28,7 @@ export const organizationLd = {
   legalName: m.meta.legalName,
   url: SITE_URL,
   logo: OG_IMAGE,
+  telephone: m.site.phoneHref.replace('tel:', ''),
   description: m.meta.description,
   address: {
     '@type': 'PostalAddress',
