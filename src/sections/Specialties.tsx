@@ -1,8 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 
 import { Eyebrow } from '../base/Eyebrow'
+import { Grid } from '../base/Grid'
 import { Heading } from '../base/Heading'
 import { List, ListItem } from '../base/List'
+import { Prose } from '../base/Prose'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
@@ -14,8 +16,8 @@ const HEADING_ID = 'spec-h'
 const styles = stylex.create({
   intro: { maxWidth: layout.containerText },
   pill: {
-    backgroundColor: color.surfaceRaised,
-    borderColor: color.borderDefault,
+    backgroundColor: color.surfaceAccent,
+    borderColor: 'transparent',
     borderRadius: radius.full,
     borderStyle: 'solid',
     borderWidth: '1px',
@@ -25,24 +27,29 @@ const styles = stylex.create({
     paddingInline: space.s16,
   },
   // Dashed outline marks the open-ended "+ more" pill, matching the canvas.
-  pillMore: { borderColor: color.borderDashed, borderStyle: 'dashed' },
+  pillMore: {
+    backgroundColor: 'transparent',
+    borderColor: color.borderDashed,
+    borderStyle: 'dashed',
+  },
 })
 
 export function Specialties() {
   return (
     <Section id="specialties" labelledBy={HEADING_ID} tone="raised" size="md">
-      <Stack gap="s32">
+      <Grid floor="lg" gap="s32" align="center">
         <Stack gap="s12" style={styles.intro}>
           <Eyebrow>{m.specialties.eyebrow}</Eyebrow>
           <Heading level={2} size="displayMd" id={HEADING_ID}>
             {m.specialties.title}
           </Heading>
+          <Prose>{m.specialties.lead}</Prose>
         </Stack>
 
         <List direction="row" wrap gap="s10" label={m.specialties.label}>
           {m.specialties.items.map((item) => (
             <ListItem key={item} style={styles.pill}>
-              <Text size="md" tone="prose">
+              <Text size="md" tone="link">
                 {item}
               </Text>
             </ListItem>
@@ -53,7 +60,7 @@ export function Specialties() {
             </Text>
           </ListItem>
         </List>
-      </Stack>
+      </Grid>
     </Section>
   )
 }

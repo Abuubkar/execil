@@ -7,7 +7,7 @@ import { color, text } from '../styles/tokens.stylex'
 /** `level` sets semantics; `size` sets appearance. Deliberately independent,
  *  so an h3 can render large without lying about document structure. */
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6
-export type HeadingSize = 'displayLg' | 'displayMd' | '3xl' | '2xl' | 'xl' | 'lg'
+export type HeadingSize = 'displayLg' | 'displayMd' | '3xl' | '2xl' | 'xl' | 'lg' | 'label'
 
 const sizes = stylex.create({
   displayLg: { fontSize: text.displayLg, lineHeight: text.leadingTight },
@@ -16,6 +16,16 @@ const sizes = stylex.create({
   '2xl': { fontSize: text['2xl'], lineHeight: text.leadingSnug },
   xl: { fontSize: text.xl, lineHeight: text.leadingSnug },
   lg: { fontSize: text.lg, lineHeight: text.leadingSnug },
+  /** A heading that reads as an Eyebrow: for a section whose own title should
+   *  not compete with the sections around it. Applied after base.heading, so
+   *  it overrides the display weight and tracking rather than inheriting. */
+  label: {
+    fontSize: text.base,
+    fontWeight: text.weightSemibold,
+    letterSpacing: text.trackingWide,
+    lineHeight: text.leadingSnug,
+    textTransform: 'uppercase',
+  },
 })
 
 const tones = stylex.create({

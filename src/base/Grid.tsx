@@ -30,19 +30,32 @@ const gaps = stylex.create({
   s48: { gap: space.s48 },
 })
 
+const aligns = stylex.create({
+  start: { alignItems: 'start' },
+  center: { alignItems: 'center' },
+})
+
 const base = stylex.create({ grid: { display: 'grid' } })
 
 /** Intrinsic layout — auto-fit with a minmax floor, no media queries. */
 export function Grid({
   floor = 'md',
   gap = 's18',
+  align,
   children,
   style,
 }: {
   floor?: GridFloor
   gap?: SpaceStep
+  /** Cross-axis alignment. Omit to keep the default stretch, which is what a
+   *  row of equal-height cards wants. */
+  align?: 'start' | 'center'
   children?: React.ReactNode
   style?: StyleProp
 }) {
-  return <div {...stylex.props(base.grid, floors[floor], gaps[gap], style)}>{children}</div>
+  return (
+    <div {...stylex.props(base.grid, floors[floor], gaps[gap], align && aligns[align], style)}>
+      {children}
+    </div>
+  )
 }

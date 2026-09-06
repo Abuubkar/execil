@@ -199,6 +199,7 @@
   "specialties": {
     "eyebrow": "Specialties",
     "title": "Coders assigned by specialty, not by queue.",
+    "lead": "Each practice is matched with coders who work your specialty's codes and payer rules every day.",
     "label": "Specialties served",
     "items": [
       "Orthopedics",
