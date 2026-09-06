@@ -20,6 +20,6 @@ narrowest scope that works. Do not silence a rule repo-wide to fix one file.
 ## Agent skills
 
 - **Issue tracker:** GitHub Issues on this repo. Conventions in `docs/agents/issue-tracker.md`.
-- **Wayfinder map:** issue #1 (`wayfinder:map`). Tickets are its sub-issues; blocking uses native issue dependencies. Resume with `/wayfinder 1`.
+- **Wayfinder map:** issue #1 (`wayfinder:map`), closed. All 18 decision tickets and the spec (#20) it produced are resolved. Remaining launch work is on #34.
 - **Domain docs:** single context. `CONTEXT.md` at the root, ADRs in `docs/adr/`.
 - **Research findings:** `docs/research/<slug>.md`, one file per research ticket.
