@@ -51,7 +51,7 @@ export function Hero() {
 
         <Stack direction="row" gap="s12" justify="center" wrap>
           <Link
-            href="#assessment"
+            href="/#assessment"
             variant="button"
             onActivate={() => {
               track({ name: 'cta_clicked', props: { location: 'hero', variant: 'primary' } })
@@ -60,7 +60,7 @@ export function Hero() {
             {m.hero.ctaPrimary}
           </Link>
           <Link
-            href="#services"
+            href="/#services"
             variant="buttonSecondary"
             onActivate={() => {
               track({ name: 'cta_clicked', props: { location: 'hero', variant: 'secondary' } })

@@ -5,7 +5,7 @@ import { m } from './messages'
  *  string, which `??` keeps and `new URL()` then rejects, failing prerender. */
 export const SITE_URL = import.meta.env.VITE_SITE_URL || 'http://localhost:3000'
 
-const absolute = (path: string) => new URL(path, SITE_URL).toString()
+export const absolute = (path: string) => new URL(path, SITE_URL).toString()
 
 export const OG_IMAGE = absolute('/og.png')
 

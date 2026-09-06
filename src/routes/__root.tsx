@@ -53,7 +53,6 @@ export const Route = createRootRoute({
             { rel: 'stylesheet', href: `${appCss}?direct` },
           ]
         : [{ rel: 'stylesheet', href: appCss }]),
-      { rel: 'canonical', href: SITE_URL },
       { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
     ],
     scripts: [

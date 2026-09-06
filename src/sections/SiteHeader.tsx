@@ -88,7 +88,7 @@ function useCurrentSection(hrefs: readonly string[]): [string | null, (href: str
   const pinned = useRef<string | null>(null)
 
   useEffect(() => {
-    const ids = hrefs.map((href) => href.slice(1))
+    const ids = hrefs.map((href) => href.slice(href.indexOf('#') + 1))
     const targets = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null)
@@ -103,7 +103,7 @@ function useCurrentSection(hrefs: readonly string[]): [string | null, (href: str
         }
         if (pinned.current !== null) return
         const topmost = ids.find((id) => inBand.has(id))
-        if (topmost) setCurrent(`#${topmost}`)
+        if (topmost !== undefined) setCurrent(hrefs[ids.indexOf(topmost)] ?? null)
       },
       { rootMargin: '-35% 0px -55% 0px' },
     )
@@ -141,11 +141,12 @@ export function SiteHeader() {
       <Box as="header" style={styles.header}>
         <Box as="nav" aria-label={m.nav.label} style={styles.nav}>
           <Link
-            href="#top"
+            href="/"
             variant="plain"
             aria-label={m.nav.home}
             style={styles.brand}
             onActivate={(event) => {
+              if (globalThis.location.pathname !== '/') return
               event.preventDefault()
               globalThis.scrollTo({ top: 0, behavior: 'smooth' })
             }}
@@ -184,7 +185,7 @@ export function SiteHeader() {
               {m.site.phone}
             </Link>
             <Link
-              href="#assessment"
+              href="/#assessment"
               variant="button"
               style={styles.headerCta}
               onActivate={() => {
@@ -227,7 +228,7 @@ export function SiteHeader() {
             {m.site.phone}
           </Link>
           <Link
-            href="#assessment"
+            href="/#assessment"
             variant="button"
             style={styles.menuCta}
             onActivate={() => {

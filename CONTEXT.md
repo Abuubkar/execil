@@ -28,7 +28,7 @@ Vocabulary for the Execile landing-page effort. Glossary only; decisions live in
 - **Role** — a token named for its job rather than its value (`textProse`, `surfaceBrand`, `borderDashed`). Roles derive from Ramp keys in the same group, and are the only tokens components import.
 - **Dark theme** — the StyleX `createTheme` applied to the footer and the Systems card, overriding Role values for those subtrees. Not a user-facing colour-scheme preference; the site is light.
 - **Inverse surface** — a Section that renders on the dark ground and therefore carries the Dark theme.
-- **Legal links** — the footer's HIPAA Notice, Privacy Policy and Terms of Service links. Dead links for v1; their fate is decided at the end.
+- **Legal links** — the footer's HIPAA Statement, Privacy Policy and Terms of Service links. Each is a prerendered page of its own (`/hipaa`, `/privacy`, `/terms`) whose text lives in `src/legal.json`, kept apart from `messages.json` so it is bundled only with those routes.
 - **Inbox** — the Google Workspace mailbox that receives every Assessment Form submission. Google Workspace is a destination, not a sending platform.
 - **Turnstile** — Cloudflare's bot check on the Assessment Form.
 - **Brand font** — Satoshi, from Fontshare. Replaces the earlier FT Kunst Grotesk decision.

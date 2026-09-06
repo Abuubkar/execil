@@ -10,6 +10,20 @@
     "ogTitle": "Collect Every Dollar You've Earned",
     "ogImageAlt": "Execile: medical billing and revenue cycle management for independent practices",
     "legalName": "EXECIL PVT LTD",
+    "legal": {
+      "privacy": {
+        "title": "Privacy Policy",
+        "description": "What execil.net collects, why, and what happens to it. The site sets no cookies and collects only what you type into the assessment form."
+      },
+      "terms": {
+        "title": "Terms of Service",
+        "description": "The terms for using execil.net. Billing services themselves are governed by a written agreement signed before any work begins."
+      },
+      "hipaa": {
+        "title": "HIPAA Statement",
+        "description": "How Execile handles protected health information as a business associate, and why the website is not a channel for it."
+      }
+    },
     "addressRegion": "NY",
     "addressCountry": "US",
     "areaServed": "United States"
@@ -22,23 +36,23 @@
     "cta": "Get a Free Billing Assessment",
     "links": [
       {
-        "href": "#services",
+        "href": "/#services",
         "text": "Services"
       },
       {
-        "href": "#how",
+        "href": "/#how",
         "text": "How It Works"
       },
       {
-        "href": "#specialties",
+        "href": "/#specialties",
         "text": "Specialties"
       },
       {
-        "href": "#why",
+        "href": "/#why",
         "text": "Why Us"
       },
       {
-        "href": "#faq",
+        "href": "/#faq",
         "text": "FAQ"
       }
     ]
@@ -421,41 +435,41 @@
     "contactLabel": "Contact",
     "services": [
       {
-        "href": "#services",
+        "href": "/#services",
         "text": "Front-end: eligibility & credentialing"
       },
       {
-        "href": "#services",
+        "href": "/#services",
         "text": "Mid-cycle: coding & claims"
       },
       {
-        "href": "#services",
+        "href": "/#services",
         "text": "Back-end: AR & denials"
       },
       {
-        "href": "#services",
+        "href": "/#services",
         "text": "Visibility: KPI reporting"
       }
     ],
     "specialties": [
       {
-        "href": "#specialties",
+        "href": "/#specialties",
         "text": "Orthopedics"
       },
       {
-        "href": "#specialties",
+        "href": "/#specialties",
         "text": "OB/GYN"
       },
       {
-        "href": "#specialties",
+        "href": "/#specialties",
         "text": "Dermatology"
       },
       {
-        "href": "#specialties",
+        "href": "/#specialties",
         "text": "Podiatry"
       },
       {
-        "href": "#specialties",
+        "href": "/#specialties",
         "text": "Primary Care"
       }
     ],
@@ -465,15 +479,15 @@
     "legalLabel": "Legal",
     "legalLinks": [
       {
-        "href": "#",
-        "text": "HIPAA Notice"
+        "href": "/hipaa",
+        "text": "HIPAA Statement"
       },
       {
-        "href": "#",
+        "href": "/privacy",
         "text": "Privacy Policy"
       },
       {
-        "href": "#",
+        "href": "/terms",
         "text": "Terms of Service"
       }
     ],

@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
+import { SITE_URL } from '../seo'
+
 import { Box } from '../base/Box'
 import { Assessment } from '../sections/Assessment'
 import { Faq } from '../sections/Faq'
@@ -15,7 +17,10 @@ import { Specialties } from '../sections/Specialties'
 import { Systems } from '../sections/Systems'
 import { WhyUs } from '../sections/WhyUs'
 
-export const Route = createFileRoute('/')({ component: Home })
+export const Route = createFileRoute('/')({
+  head: () => ({ links: [{ rel: 'canonical', href: SITE_URL }] }),
+  component: Home,
+})
 
 /** tabIndex -1 so SkipLink can move focus here, not just scroll. */
 function Home() {

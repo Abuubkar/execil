@@ -1,17 +1,9 @@
-// Lists every remaining bracketed placeholder in messages.json with its key
+// Lists every remaining bracketed placeholder in the copy files with its key
 // path. Exits non-zero while any remain, so it can gate the production deploy
 // (issue #32) while only reporting on pull requests. See issue #11.
 import { readFile } from 'node:fs/promises'
 
-const path = new URL('../src/messages.json', import.meta.url)
-
-let messages
-try {
-  messages = JSON.parse(await readFile(path, 'utf8'))
-} catch {
-  console.log('no src/messages.json yet — nothing to check')
-  process.exit(0)
-}
+const files = ['messages', 'legal']
 
 const hits = []
 const walk = (node, keyPath) => {
@@ -23,7 +15,18 @@ const walk = (node, keyPath) => {
     }
   }
 }
-walk(messages, '')
+
+for (const name of files) {
+  const path = new URL(`../src/${name}.json`, import.meta.url)
+  let copy
+  try {
+    copy = JSON.parse(await readFile(path, 'utf8'))
+  } catch {
+    console.log(`no src/${name}.json yet — nothing to check`)
+    continue
+  }
+  walk(copy, name)
+}
 
 for (const [keyPath, placeholder] of hits) {
   console.log(`${keyPath.padEnd(48)} ${placeholder}`)

@@ -58,7 +58,15 @@ export default defineConfig({
     stylex.vite({ lightningcssOptions: { minify: true } }),
 
     cloudflare({ viteEnvironment: { name: 'ssr' } }),
-    tanstackStart({ prerender: { enabled: true } }),
+    tanstackStart({
+      prerender: {
+        enabled: true,
+        // Every nav link is root-relative (/#services) so it works from the
+        // legal pages too. The crawler would otherwise treat each fragment as
+        // a page of its own and render / six extra times.
+        filter: ({ path }) => !path.includes('#'),
+      },
+    }),
     viteReact(),
   ],
 

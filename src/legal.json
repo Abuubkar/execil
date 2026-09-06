@@ -1,0 +1,278 @@
+{
+  "shared": {
+    "updatedLabel": "Last updated ",
+    "contactHeading": "Contact",
+    "contactBody": "Questions about this page, or a request under it, go to ",
+    "contactOr": " or ",
+    "contactEnd": "."
+  },
+  "privacy": {
+    "updated": "September 7, 2026",
+    "intro": [
+      "This policy explains what Execile collects when you use execil.net, why, and what happens to it. Execile is the trading name of EXECIL PVT LTD, a company registered in New York.",
+      "The short version: the site sets no cookies, we do not sell your information or share it with advertisers, and the only information we collect directly is what you type into the assessment form."
+    ],
+    "sections": [
+      {
+        "heading": "What we collect",
+        "blocks": [
+          "The assessment form. If you request a billing assessment, we receive what you enter: your name, work email, phone number, practice name, specialty, number of providers, primary concern and, if you add one, a message. The form also includes an automated anti-spam check, described below.",
+          "Connection details. Like any website, our hosting provider records standard connection details such as your IP address, browser type and the pages requested. We do not add tracking of our own on top of this.",
+          "Usage measurement. We may measure how the page is used, in a way that cannot recognise you across visits. This is described in its own section below."
+        ]
+      },
+      {
+        "heading": "How we use it",
+        "blocks": [
+          "We use what you send through the form to respond to you, prepare the assessment you asked for, and follow up about our services. We keep a record of the enquiry as an ordinary business record.",
+          "We do not sell your information, share it with advertisers, or use it to build a profile of you."
+        ]
+      },
+      {
+        "heading": "Where the form goes",
+        "blocks": [
+          "When you submit the form, a small program running on Cloudflare's network sends the contents to our mailbox by email. The site does not keep a copy in a database of its own.",
+          "Server logs record whether the delivery succeeded and which fields were filled in, never what they contained. If delivery fails, the page offers to open your own email client with the message instead."
+        ]
+      },
+      {
+        "heading": "Bot protection",
+        "blocks": [
+          {
+            "parts": [
+              "To keep automated submissions out, the form uses Cloudflare Turnstile. It loads only when you start filling in the form, and it looks at browser and connection signals to tell people from bots. Cloudflare processes those signals under ",
+              {
+                "text": "Cloudflare's privacy policy",
+                "href": "https://www.cloudflare.com/privacypolicy/",
+                "external": true
+              },
+              ". Turnstile may store a small amount of data in your browser to complete its check."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Usage measurement",
+        "blocks": [
+          "We may use PostHog to see how the page is used: which sections are viewed, how far people scroll, and which buttons are clicked.",
+          "It runs in a mode that sets no cookies, uses no local storage and assigns no persistent identifier, so it cannot recognise you from one visit to the next. It does not record your screen or your keystrokes, and it never receives anything you type into the form.",
+          {
+            "parts": [
+              "The data is processed in the United States under ",
+              {
+                "text": "PostHog's privacy policy",
+                "href": "https://posthog.com/privacy",
+                "external": true
+              },
+              ". When measurement is switched off, no analytics script loads at all."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Cookies",
+        "blocks": [
+          "This site sets no cookies of its own and does not use local storage to track you. The only thing that may store data in your browser is the Turnstile check described above."
+        ]
+      },
+      {
+        "heading": "Service providers",
+        "blocks": [
+          "A small number of providers process data on our behalf, each only to provide its service to us:",
+          {
+            "items": [
+              "Cloudflare, which hosts the site, runs the bot check and delivers form submissions to our mailbox.",
+              "Our business email provider, where form submissions arrive and are read.",
+              "PostHog, for usage measurement, when it is enabled."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "How long we keep it",
+        "blocks": [
+          "Form submissions stay in our mailbox for as long as we need them to respond to you and to keep ordinary business records. You can ask us to delete an enquiry at any time and we will, unless the law requires us to keep it."
+        ]
+      },
+      {
+        "heading": "Your choices",
+        "blocks": [
+          "You can ask what information we hold about you, ask us to correct or delete it, or ask us to stop contacting you. Write to the address at the end of this page and we will respond promptly."
+        ]
+      },
+      {
+        "heading": "Patient information",
+        "blocks": [
+          {
+            "parts": [
+              "This website is not a channel for patient information. Please do not include patient names, dates of birth, diagnoses, claim details or any other protected health information in the form or in email to us. Our ",
+              {
+                "text": "HIPAA Statement",
+                "href": "/hipaa",
+                "external": false
+              },
+              " explains how patient information is handled once a practice becomes a client and a business associate agreement is in place."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Children",
+        "blocks": [
+          "The site is aimed at medical practices and is not directed at anyone under 18. We do not knowingly collect information from children."
+        ]
+      },
+      {
+        "heading": "Changes",
+        "blocks": [
+          "If this policy changes, the date at the top of this page changes with it. A material change will be noted here."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "updated": "September 7, 2026",
+    "intro": [
+      "These terms cover your use of execil.net. They do not cover billing services themselves, which are governed by a written services agreement and a business associate agreement signed before any work begins."
+    ],
+    "sections": [
+      {
+        "heading": "Who we are",
+        "blocks": [
+          "Execile is the trading name of EXECIL PVT LTD, a company registered in New York. Contact details are at the end of this page."
+        ]
+      },
+      {
+        "heading": "Using the site",
+        "blocks": [
+          "You may use the site to learn about our services and to request a billing assessment. You agree not to interfere with the site, attempt to gain access to any part of it you are not meant to reach, submit false information, or use automated tools to submit the form."
+        ]
+      },
+      {
+        "heading": "Information on the site",
+        "blocks": [
+          "The site describes our services in general terms. It is not legal, financial, coding or compliance advice for your practice, and reading it does not make you a client.",
+          "Statistics on the site are cited to their sources. Descriptions of our own services reflect what we offer at the date at the top of this page and may change."
+        ]
+      },
+      {
+        "heading": "The free billing assessment",
+        "blocks": [
+          "Requesting an assessment is free and creates no obligation on either side. We will contact you using the details you provide.",
+          "An assessment is a preliminary review based on the information you give us. It is not a guarantee of results. Work on your billing begins only under a signed services agreement and business associate agreement.",
+          {
+            "parts": [
+              "Do not send patient information through the form. Our ",
+              {
+                "text": "HIPAA Statement",
+                "href": "/hipaa",
+                "external": false
+              },
+              " explains why, and how patient information is handled once an agreement is in place."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Intellectual property",
+        "blocks": [
+          "The content of this site belongs to EXECIL PVT LTD or its licensors. You may read it and share links to it. You may not copy it for commercial use without our written permission.",
+          "The practice management and EHR products named on the site are trademarks of their respective owners. They are named so you can see which systems we work in. Naming them does not imply any partnership, endorsement or affiliation."
+        ]
+      },
+      {
+        "heading": "Links to other sites",
+        "blocks": [
+          "The site links to other companies' websites. We are not responsible for their content or their privacy practices."
+        ]
+      },
+      {
+        "heading": "No warranties",
+        "blocks": [
+          "The site is provided as it is. We try to keep it accurate and available, but we do not guarantee that it is error-free or always reachable."
+        ]
+      },
+      {
+        "heading": "Limitation of liability",
+        "blocks": [
+          "To the extent the law allows, we are not liable for indirect or consequential loss arising from your use of the site. Nothing in these terms limits liability that cannot be limited by law."
+        ]
+      },
+      {
+        "heading": "Governing law",
+        "blocks": [
+          "These terms are governed by the law of the State of New York. Any dispute about them will be heard in the courts of New York."
+        ]
+      },
+      {
+        "heading": "Changes",
+        "blocks": [
+          "We may update these terms. The date at the top of this page shows when they last changed."
+        ]
+      }
+    ]
+  },
+  "hipaa": {
+    "updated": "September 7, 2026",
+    "intro": [
+      "Execile provides medical billing and revenue cycle management to medical practices. In HIPAA terms, we are a business associate of each practice we work for. This page explains what that means in practice and what we commit to.",
+      "It is not a Notice of Privacy Practices. That is the document your practice gives its patients."
+    ],
+    "sections": [
+      {
+        "heading": "Agreement first",
+        "blocks": [
+          "We sign a business associate agreement with every client before any protected health information is shared with us. No claims, notes or patient data move until it is in place.",
+          "The agreement sets out what we may do with protected health information, how we protect it, and what happens if something goes wrong."
+        ]
+      },
+      {
+        "heading": "Where the data lives",
+        "blocks": [
+          "We work inside the practice's own practice management and EHR systems, under user accounts the practice controls. Patient records and claims stay in those systems. We do not move them into a separate database of our own.",
+          "This also means that if a practice stops working with us, there is nothing to hand back. The practice removes our access and its data is exactly where it always was."
+        ]
+      },
+      {
+        "heading": "Minimum necessary",
+        "blocks": [
+          "Each person on our team can see only what their work requires. Access is tied to a role, reviewed regularly, and removed when someone's role changes or they leave."
+        ]
+      },
+      {
+        "heading": "Safeguards",
+        "blocks": [
+          "Everyone who handles protected health information is trained before they start and at least once a year. We keep written privacy and security policies and a named person is responsible for them.",
+          {
+            "items": [
+              "Every person has their own login. Shared accounts are not used.",
+              "Multi-factor authentication is used wherever the practice's systems support it.",
+              "Connections to the practice's systems are encrypted.",
+              "Protected health information is never sent over ordinary email or messaging.",
+              "It is not printed or saved to removable media."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Subcontractors",
+        "blocks": [
+          "If we use a subcontractor who will handle protected health information, they sign a business associate agreement with us that carries the same obligations we have to you."
+        ]
+      },
+      {
+        "heading": "If something goes wrong",
+        "blocks": [
+          "If we discover a breach of unsecured protected health information, we notify the practice without unreasonable delay and within the time set in the business associate agreement, and we help with the practice's own notification obligations."
+        ]
+      },
+      {
+        "heading": "This website",
+        "blocks": [
+          "This website does not collect protected health information and is not a way to send it to us. Do not include patient names, dates of birth, diagnoses, claim details or similar information in the assessment form or in email.",
+          "If you have a question about a specific claim, tell us and we will arrange a secure channel once an agreement is in place."
+        ]
+      }
+    ]
+  }
+}

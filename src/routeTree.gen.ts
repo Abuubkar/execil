@@ -10,11 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HipaaRouteImport } from './routes/hipaa'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ApiAssessmentRouteImport } from './routes/api/assessment'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HipaaRoute = HipaaRouteImport.update({
+  id: '/hipaa',
+  path: '/hipaa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAssessmentRoute = ApiAssessmentRouteImport.update({
@@ -25,27 +43,39 @@ const ApiAssessmentRoute = ApiAssessmentRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/hipaa': typeof HipaaRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/api/assessment': typeof ApiAssessmentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/hipaa': typeof HipaaRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/api/assessment': typeof ApiAssessmentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/hipaa': typeof HipaaRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/api/assessment': typeof ApiAssessmentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/assessment'
+  fullPaths: '/' | '/hipaa' | '/privacy' | '/terms' | '/api/assessment'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/assessment'
-  id: '__root__' | '/' | '/api/assessment'
+  to: '/' | '/hipaa' | '/privacy' | '/terms' | '/api/assessment'
+  id: '__root__' | '/' | '/hipaa' | '/privacy' | '/terms' | '/api/assessment'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HipaaRoute: typeof HipaaRoute
+  PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
   ApiAssessmentRoute: typeof ApiAssessmentRoute
 }
 
@@ -56,6 +86,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hipaa': {
+      id: '/hipaa'
+      path: '/hipaa'
+      fullPath: '/hipaa'
+      preLoaderRoute: typeof HipaaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/assessment': {
@@ -70,6 +121,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HipaaRoute: HipaaRoute,
+  PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
   ApiAssessmentRoute: ApiAssessmentRoute,
 }
 export const routeTree = rootRouteImport
