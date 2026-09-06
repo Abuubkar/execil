@@ -252,7 +252,8 @@
         "href": "https://www.practicefusion.com/"
       }
     ],
-    "note": "We work inside the system you already use, so nothing has to be migrated. If yours is not listed, ask."
+    "more": "+ more",
+    "note": "We work inside the system you already use, so nothing has to be migrated."
   },
   "why": {
     "eyebrow": "Why us",

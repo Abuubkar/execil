@@ -6,6 +6,7 @@ import { List, ListItem } from '../base/List'
 import { Prose } from '../base/Prose'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
+import { Text } from '../base/Text'
 import { m } from '../messages'
 import { color, motion, radius, space, text } from '../styles/tokens.stylex'
 
@@ -17,10 +18,6 @@ const HEADING_ID = 'systems-h'
  * an Eyebrow's weight rather than a display size and makes the pills read as
  * plain product chips. Two loud pill rows in a row look like one repeated
  * section.
- *
- * That is also why the list has no "+ more" pill. Specialties already uses one,
- * and repeating it here restated the motif that made the two sections look
- * alike. The note carries the same point in prose instead.
  */
 const styles = stylex.create({
   pill: {
@@ -42,6 +39,13 @@ const styles = stylex.create({
     transitionProperty: 'background-color, border-color, color',
     transitionTimingFunction: motion.ease,
   },
+  /** Not a link: there is no vendor behind it. Dashed, like the "+ more" in
+   *  Specialties, which is the page's existing mark for an open-ended list. */
+  more: {
+    borderColor: color.borderDashed,
+    borderStyle: 'dashed',
+    fontWeight: text.weightMedium,
+  },
 })
 
 export function Systems() {
@@ -59,6 +63,11 @@ export function Systems() {
               </Link>
             </ListItem>
           ))}
+          <ListItem>
+            <Text size="md" tone="muted" style={[styles.pill, styles.more]}>
+              {m.systems.more}
+            </Text>
+          </ListItem>
         </List>
         <Prose>{m.systems.note}</Prose>
       </Stack>
