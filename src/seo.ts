@@ -1,7 +1,9 @@
 import { m } from './messages'
 
-/** Canonical, og:url and the absolute OG image URL all derive from this. */
-export const SITE_URL = import.meta.env.VITE_SITE_URL ?? 'http://localhost:3000'
+/** Canonical, og:url and the absolute OG image URL all derive from this.
+ *  `||` rather than `??`: an unset GitHub Actions variable arrives as an empty
+ *  string, which `??` keeps and `new URL()` then rejects, failing prerender. */
+export const SITE_URL = import.meta.env.VITE_SITE_URL || 'http://localhost:3000'
 
 const absolute = (path: string) => new URL(path, SITE_URL).toString()
 
