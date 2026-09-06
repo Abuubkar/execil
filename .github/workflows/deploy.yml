@@ -12,6 +12,11 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Every Cloudflare step reads these. They are also tested in `if:` guards
+    # below, which cannot see the secrets context directly but can see env.
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -32,24 +37,24 @@ jobs:
           VITE_CONTACT_EMAIL: ${{ vars.VITE_CONTACT_EMAIL }}
           VITE_POSTHOG_PROJECT_TOKEN: ${{ vars.VITE_POSTHOG_PROJECT_TOKEN }}
 
-      # HARD GATE, production only. The copy ships with bracketed placeholders
-      # deliberately until launch, so this cannot run on pull requests -- it
-      # would leave CI red for the whole build phase and train everyone to
-      # ignore it. On PRs the CI workflow reports the same list without failing.
+      # HARD GATE on the production deploy. The copy ships with bracketed
+      # placeholders deliberately until launch, so this cannot run on pull
+      # requests -- it would leave CI red for the whole build phase and train
+      # everyone to ignore it. On PRs the CI workflow reports the same list
+      # without failing. It is also skipped while Cloudflare credentials are
+      # absent: nothing can reach production then, so there is nothing to gate,
+      # and it comes back the moment the secrets are added.
       - name: Placeholder gate
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && env.CLOUDFLARE_API_TOKEN != ''
         run: pnpm run placeholders
 
+      # Both Cloudflare steps stay skipped until the account exists (issue #32,
+      # step 1). Without the guard they fail on every push to main and the
+      # branch reads red for reasons nobody can act on yet.
       - name: Upload preview version
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && env.CLOUDFLARE_API_TOKEN != ''
         run: pnpm exec wrangler versions upload
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy to production
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && env.CLOUDFLARE_API_TOKEN != ''
         run: pnpm exec wrangler deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
