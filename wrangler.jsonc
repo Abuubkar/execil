@@ -5,6 +5,13 @@
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
 
+  // Prerender writes each page as <path>/index.html, and Cloudflare's default
+  // html_handling would answer /privacy with a 307 to /privacy/. Every link and
+  // canonical on the site is the unslashed form, so drop the slash instead.
+  "assets": {
+    "html_handling": "drop-trailing-slash",
+  },
+
   // Plaintext config. Real values arrive at provisioning (issue #32).
   "vars": {
     "ASSESSMENT_TO": "placeholder@example.com",

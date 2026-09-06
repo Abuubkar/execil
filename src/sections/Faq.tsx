@@ -3,8 +3,10 @@ import * as stylex from '@stylexjs/stylex'
 import { Disclosure } from '../base/Disclosure'
 import { Eyebrow } from '../base/Eyebrow'
 import { Heading } from '../base/Heading'
+import { Link } from '../base/Link'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
+import { Text } from '../base/Text'
 import { track } from '../analytics/posthog'
 import { m } from '../messages'
 import { layout } from '../styles/tokens.stylex'
@@ -29,21 +31,33 @@ export function Faq() {
         </Stack>
 
         <Stack gap="s10">
-          {m.faq.items.map((item) => (
-            <Disclosure
-              key={item.id}
-              name={FAQ_GROUP}
-              summary={item.q}
-              // Stable slug, NEVER an index: copy edits reorder questions and
-              // an index-keyed event would silently re-point to a different
-              // question, corrupting history already collected (issue #13).
-              onOpen={() => {
-                track({ name: 'faq_opened', props: { question_id: item.id } })
-              }}
-            >
-              {item.a}
-            </Disclosure>
-          ))}
+          {m.faq.items.map((item) => {
+            const link = 'link' in item ? item.link : undefined
+            return (
+              <Disclosure
+                key={item.id}
+                name={FAQ_GROUP}
+                summary={item.q}
+                // Stable slug, NEVER an index: copy edits reorder questions and
+                // an index-keyed event would silently re-point to a different
+                // question, corrupting history already collected (issue #13).
+                onOpen={() => {
+                  track({ name: 'faq_opened', props: { question_id: item.id } })
+                }}
+              >
+                <Stack gap="s10">
+                  <Text size="md" tone="prose">
+                    {item.a}
+                  </Text>
+                  {link ? (
+                    <Link href={link.href} variant="inline">
+                      {link.text}
+                    </Link>
+                  ) : null}
+                </Stack>
+              </Disclosure>
+            )
+          })}
         </Stack>
       </Stack>
     </Section>

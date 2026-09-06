@@ -207,6 +207,9 @@ export function Assessment() {
               </ListItem>
             ))}
           </List>
+          <Text size="sm" tone="muted">
+            {m.assessment.findings}
+          </Text>
         </Stack>
 
         {state.status === 'success' ? (

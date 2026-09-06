@@ -3,6 +3,10 @@ import { useEffect } from 'react'
 import * as stylex from '@stylexjs/stylex'
 
 import { initAnalytics } from '../analytics/posthog'
+import { Box } from '../base/Box'
+import { NotFound } from '../sections/NotFound'
+import { SiteFooter } from '../sections/SiteFooter'
+import { SiteHeader } from '../sections/SiteHeader'
 import { OG_IMAGE, SITE_URL, organizationLd } from '../seo'
 import { color, text } from '../styles/tokens.stylex'
 
@@ -63,7 +67,22 @@ export const Route = createRootRoute({
     ],
   }),
   shellComponent: RootDocument,
+  notFoundComponent: NotFoundPage,
 })
+
+/** Wears the site chrome so an unknown address still looks like the site.
+ *  Prerendered to /404.html by the pages entry in vite.config.ts. */
+function NotFoundPage() {
+  return (
+    <>
+      <SiteHeader />
+      <Box as="main" id="top" tabIndex={-1}>
+        <NotFound />
+      </Box>
+      <SiteFooter />
+    </>
+  )
+}
 
 /** The page's base surface, text colour and font stack. These belong on <body>
  *  rather than in a component: every element inherits them, and putting the

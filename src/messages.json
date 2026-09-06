@@ -28,6 +28,12 @@
     "addressCountry": "US",
     "areaServed": "United States"
   },
+  "notFound": {
+    "title": "That page does not exist",
+    "lead": "The link may be out of date, or the address may have a typo. Everything on this site is on the home page.",
+    "cta": "Back to the home page",
+    "ctaHref": "/"
+  },
   "nav": {
     "label": "Main",
     "home": "Execile home",
@@ -182,7 +188,7 @@
       },
       {
         "title": "14-day onboarding",
-        "blurb": "You keep your existing EHR/PM. There is no software switch and nobody has to be retrained."
+        "blurb": "You keep your existing EHR/PM. There is no software switch and nobody has to be retrained. Claims already in flight keep moving while we take over."
       },
       {
         "title": "Ongoing billing",
@@ -272,6 +278,14 @@
           "cells": ["Monthly PDF", "Live / monthly KPI dashboard"]
         },
         {
+          "label": "Your data",
+          "cells": ["Lives in the vendor's system", "Stays in your EHR, on your accounts"]
+        },
+        {
+          "label": "Switching",
+          "cells": ["Weeks of parallel running", "14 days, no gap in submissions"]
+        },
+        {
           "label": "Team",
           "cells": ["Pooled generalists", "Specialty-assigned team"]
         },
@@ -337,9 +351,20 @@
         "a": "A percentage of collections, quoted upfront before any work begins."
       },
       {
+        "id": "control",
+        "q": "Will we lose control of our billing?",
+        "a": "No. We work inside your EHR under accounts you create and can revoke. Every claim, note and payment stays in your system, and the read-only KPI dashboard shows the same numbers we work from. If you leave, there is nothing to hand back."
+      },
+      {
+        "id": "switching",
+        "q": "What happens to claims already out when we switch?",
+        "a": "They keep moving. We pick up your open AR and the existing work queue on day one, so submissions never stop while onboarding runs."
+      },
+      {
         "id": "hipaa",
         "q": "How is patient data protected?",
-        "a": "A BAA is signed before any data moves, and every workflow is HIPAA compliant."
+        "a": "A BAA is signed before any data moves, and patient records stay in your systems rather than moving into ours.",
+        "link": { "href": "/hipaa", "text": "Read the HIPAA Statement" }
       },
       {
         "id": "ar-cleanup",
@@ -352,6 +377,7 @@
     "badge": "Free · No obligation",
     "title": "Get a Free Billing Assessment",
     "lead": "Send us a sample of recent claims and your AR aging. We'll show you where revenue is leaking and what it would take to fix it.",
+    "findings": "The written findings name your top denial reasons with their codes, how much of your AR sits past 120 days, and what we would work first.",
     "bullets": [
       "Written findings within 5 business days",
       "Reviewed by a coder in your specialty",

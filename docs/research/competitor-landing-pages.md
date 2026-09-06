@@ -267,6 +267,35 @@ For the record, because the question was what to add: a phone number in the head
 
 ---
 
+## The results disclosure rule
+
+Recommendation 12 said to write this now and publish later. Here it is, so that
+the first client outcome is not drafted under launch pressure.
+
+When Results mode flips from the coming-soon notice to real numbers, every
+published outcome carries, in the same visual block as the number:
+
+1. The measure, named exactly as the practice's own report names it. "Days in
+   AR" and "net collections" are measures. "Revenue increase" is not, because it
+   does not say increase over what.
+2. The baseline and the comparison window, both as dates. "13.5% to 4.1% denial
+   rate, Jan to Jun 2027" is a claim. "60% fewer denials" is not.
+3. The practice's specialty and provider count, because a number from a
+   twelve-provider orthopedic group does not describe a solo dermatologist.
+4. A sentence saying the result is one client's and is not a promise.
+5. Written consent from the practice, recorded before publication.
+
+athenahealth footnotes every testimonial on
+https://www.athenahealth.com/solutions/practice-management with a line saying the
+result is that customer's own and not a guarantee. That is the shape. No other
+reviewed site does it, and the ones that do not are exactly the sites whose
+numbers cannot be checked.
+
+Anything that cannot meet all five stays out. A result that has to be rounded,
+averaged across clients, or stated without a window is not ready to publish.
+
+---
+
 ## Things not to copy
 
 **Unsourced outcome statistics.** "98% first-pass" (CureMD, Practolytics, MBC as 98.4%, MedCare as 98.5%), "30% fewer AR days" (Practolytics), "35% increase in revenue" (MedCare), "40% reduction in claim denials" (STAT), "up to $5 million" lost by solo practices (CloudRCM), "$180K Avg. Annual Loss Per Provider" (MBC). None cites a source, several contradict each other on the same site (CureMD 98% vs 96%; MedCare 150,000 vs 80,000 providers), and MBC's "industry" comparators (91.2% first-pass, 34 days AR) match no published benchmark. Execile's rule that every number is cited already excludes all of these.
