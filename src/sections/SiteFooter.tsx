@@ -1,7 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
 import { Box } from '../base/Box'
-import { BrandMark } from '../base/BrandMark'
 import { Grid } from '../base/Grid'
 import { Icon } from '../base/Icon'
 import { Link } from '../base/Link'
@@ -9,6 +8,7 @@ import { List, ListItem } from '../base/List'
 import { Prose } from '../base/Prose'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
+import { Wordmark } from '../base/Wordmark'
 import { darkSurface } from '../styles/theme'
 import { m } from '../messages'
 import { color, layout, space, text } from '../styles/tokens.stylex'
@@ -21,12 +21,7 @@ const styles = stylex.create({
     paddingInline: space.gutter,
   },
   container: { marginInline: 'auto', maxWidth: layout.containerWide, width: '100%' },
-  brand: { alignItems: 'center', display: 'flex', gap: space.s10 },
-  wordmark: {
-    fontSize: text.lg,
-    fontWeight: text.weightBlack,
-    letterSpacing: text.trackingTight,
-  },
+  brand: { alignItems: 'center', display: 'flex' },
   colTitle: {
     letterSpacing: text.trackingWide,
     textTransform: 'uppercase',
@@ -54,10 +49,7 @@ export function SiteFooter() {
         <Grid floor="md" gap="s32">
           <Stack gap="s16">
             <Box style={styles.brand}>
-              <BrandMark />
-              <Text tone="heading" style={styles.wordmark}>
-                {m.site.name}
-              </Text>
+              <Wordmark title={m.site.name} />
             </Box>
             <Prose>{m.footer.tagline}</Prose>
           </Stack>

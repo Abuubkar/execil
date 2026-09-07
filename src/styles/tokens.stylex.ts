@@ -78,6 +78,10 @@ export const color = stylex.defineVars({
    *  headline emphasis at clamp(34px, 5.4vw, 64px). Never use it below 24px. */
   textAccentDisplay: palette.teal600,
   textStat: palette.clay700,
+  /** Foreground on surfaceBrand. Distinct from surfaceRaised, which the Dark
+   *  theme turns translucent — anything sitting ON the brand fill needs a
+   *  colour that survives that override. */
+  textOnBrand: palette.white,
 
   // --- Roles: surface
   surfacePage: palette.ink50,

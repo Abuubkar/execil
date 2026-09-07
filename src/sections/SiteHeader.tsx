@@ -3,14 +3,13 @@ import * as stylex from '@stylexjs/stylex'
 
 import { useTrack } from '../analytics/useTrack'
 import { Box } from '../base/Box'
-import { BrandMark } from '../base/BrandMark'
 import { Icon } from '../base/Icon'
 import { IconButton } from '../base/IconButton'
 import { Link } from '../base/Link'
 import { MenuPanel } from '../base/MenuPanel'
 import { SkipLink } from '../base/SkipLink'
 import { Stack } from '../base/Stack'
-import { Text } from '../base/Text'
+import { Wordmark } from '../base/Wordmark'
 import { m } from '../messages'
 import { color, layout, motion, radius, screen, space, text } from '../styles/tokens.stylex'
 
@@ -39,17 +38,7 @@ const styles = stylex.create({
     maxWidth: layout.containerWide,
     paddingInline: space.gutter,
   },
-  brand: {
-    alignItems: 'center',
-    color: color.textHeading,
-    display: 'flex',
-    gap: space.s10,
-  },
-  wordmark: {
-    fontSize: text.lg,
-    fontWeight: text.weightBlack,
-    letterSpacing: text.trackingTight,
-  },
+  brand: { alignItems: 'center', display: 'flex' },
   desktopOnly: { display: { default: 'none', [screen.navUp]: 'flex' } },
   mobileOnly: { display: { default: 'flex', [screen.navUp]: 'none' } },
   phone: {
@@ -152,8 +141,7 @@ export function SiteHeader() {
               globalThis.scrollTo({ top: 0, behavior: 'smooth' })
             }}
           >
-            <BrandMark />
-            <Text style={styles.wordmark}>{m.site.name}</Text>
+            <Wordmark />
           </Link>
 
           <Stack direction="row" gap="s24" align="center" style={styles.desktopOnly}>
