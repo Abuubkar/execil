@@ -90,13 +90,6 @@ export const color = stylex.defineVars({
   surfaceAccentSoft: palette.teal25,
   surfaceBrand: palette.teal700,
   surfaceBrandHover: palette.teal800,
-  /** The Wordmark badge, and only that. A step brighter than surfaceBrand
-   *  because the badge touches the ink900 letterforms: teal700 separates from
-   *  them by 2.74:1 and reads as part of the "i", teal600 by 4.13:1. Issue #8
-   *  restricted teal600 as a TEXT colour; this is a fill inside a logotype,
-   *  which WCAG 1.4.3 and 1.4.11 both exempt. Same value on either ground, so
-   *  the Dark theme leaves it alone. */
-  surfaceMark: palette.teal600,
   surfaceDanger: palette.red50,
   surfaceNotice: palette.amber300,
   surfaceInverse: palette.ink900,

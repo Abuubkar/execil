@@ -9,7 +9,7 @@
     <path transform="translate(2270.0 0)" d="M58.0 0.0V500.0H212.0V0.0ZZ"/>
     <path transform="translate(2540.0 0)" d="M212.0 0.0H58.0V754.0H212.0Z"/>
   </g>
-  <circle cx="2403.5" cy="665.5" r="141.8" fill="#0E8A8A"/>
+  <circle cx="2403.5" cy="665.5" r="141.8" fill="#0A6B6B"/>
   <rect x="2352.5" y="648.1" width="102.1" height="34.7" rx="6.4" fill="#FFFFFF"/><rect x="2386.1" y="614.5" width="34.7" height="102.1" rx="6.4" fill="#FFFFFF"/>
   <g fill="#0A6B6B" transform="translate(569.9 -307.3) scale(0.14)">
     <path transform="translate(0.0 0)" d="M205.2 0.0H80.9V731.0H205.2L440.8 149.0L676.8 731.0H802.8V0.0H678.5V225.2Q678.5 280.4 678.6 317.7Q678.8 355.1 679.6 381.2Q680.5 407.4 681.8 427.2Q683.2 447.0 685.6 467.1L499.8 0.0H381.8L196.7 466.2Q202.2 433.0 203.7 381.8Q205.2 330.7 205.2 261.6Z"/>

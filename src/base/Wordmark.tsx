@@ -12,7 +12,7 @@ const sizes = stylex.create({
 
 const styles = stylex.create({
   root: { color: color.textHeading, display: 'block', flex: 'none', width: 'auto' },
-  badge: { fill: color.surfaceMark },
+  badge: { fill: color.surfaceBrand },
   cross: { fill: color.textOnBrand },
 })
 

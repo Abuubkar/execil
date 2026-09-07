@@ -9,7 +9,7 @@
     <path transform="translate(2270.0 0)" d="M58.0 0.0V500.0H212.0V0.0ZZ"/>
     <path transform="translate(2540.0 0)" d="M212.0 0.0H58.0V754.0H212.0Z"/>
   </g>
-  <circle cx="2403.5" cy="665.5" r="141.8" fill="#0E8A8A"/>
+  <circle cx="2403.5" cy="665.5" r="141.8" fill="#0A6B6B"/>
   <rect x="2352.5" y="648.1" width="102.1" height="34.7" rx="6.4" fill="#FFFFFF"/><rect x="2386.1" y="614.5" width="34.7" height="102.1" rx="6.4" fill="#FFFFFF"/>
   </g>
 </svg>
