@@ -10,7 +10,6 @@ import { MenuPanel } from '../base/MenuPanel'
 import { SkipLink } from '../base/SkipLink'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
-import { track } from '../analytics/posthog'
 import { m } from '../messages'
 import { color, layout, motion, radius, screen, space, text } from '../styles/tokens.stylex'
 
@@ -164,7 +163,6 @@ export function SiteHeader() {
                 current={current === link.href}
                 onActivate={() => {
                   pinCurrent(link.href)
-                  track({ name: 'nav_clicked', props: { target: link.href } })
                 }}
               >
                 {link.text}
@@ -173,25 +171,11 @@ export function SiteHeader() {
           </Stack>
 
           <Stack direction="row" gap="s18" align="center" style={styles.desktopOnly}>
-            <Link
-              href={m.site.phoneHref}
-              variant="plain"
-              style={styles.phone}
-              onActivate={() => {
-                track({ name: 'phone_clicked', props: { location: 'header' } })
-              }}
-            >
+            <Link href={m.site.phoneHref} variant="plain" style={styles.phone}>
               <Icon name="phone" size="xs" />
               {m.site.phone}
             </Link>
-            <Link
-              href="/#assessment"
-              variant="button"
-              style={styles.headerCta}
-              onActivate={() => {
-                track({ name: 'cta_clicked', props: { location: 'header', variant: 'primary' } })
-              }}
-            >
+            <Link href="/#assessment" variant="button" style={styles.headerCta}>
               {m.nav.cta}
             </Link>
           </Stack>
@@ -210,31 +194,16 @@ export function SiteHeader() {
               style={styles.menuLink}
               onActivate={() => {
                 pinCurrent(link.href)
-                track({ name: 'nav_clicked', props: { target: link.href } })
               }}
             >
               {link.text}
             </Link>
           ))}
-          <Link
-            href={m.site.phoneHref}
-            variant="plain"
-            style={styles.menuLink}
-            onActivate={() => {
-              track({ name: 'phone_clicked', props: { location: 'mobile_menu' } })
-            }}
-          >
+          <Link href={m.site.phoneHref} variant="plain" style={styles.menuLink}>
             <Icon name="phone" size="xs" />
             {m.site.phone}
           </Link>
-          <Link
-            href="/#assessment"
-            variant="button"
-            style={styles.menuCta}
-            onActivate={() => {
-              track({ name: 'cta_clicked', props: { location: 'mobile_menu', variant: 'primary' } })
-            }}
-          >
+          <Link href="/#assessment" variant="button" style={styles.menuCta}>
             {m.nav.cta}
           </Link>
         </MenuPanel>

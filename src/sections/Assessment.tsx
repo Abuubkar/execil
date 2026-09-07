@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
 import * as stylex from '@stylexjs/stylex'
 
 import { Badge } from '../base/Badge'
@@ -18,7 +19,6 @@ import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
 import { VisuallyHidden } from '../base/VisuallyHidden'
 import type { AssessmentResult } from '../routes/api/assessment'
-import { track } from '../analytics/posthog'
 import { m } from '../messages'
 import { color, layout, radius, space, text } from '../styles/tokens.stylex'
 
@@ -91,6 +91,7 @@ function formatSubmission(data: FormData): string {
 }
 
 export function Assessment() {
+  const posthog = usePostHog()
   const [state, setState] = useState<FormState>({ status: 'idle' })
   const turnstileLoaded = useRef(false)
   const widgetRef = useRef<HTMLDivElement>(null)
@@ -103,15 +104,6 @@ export function Assessment() {
    *  By the time a field is focused it has seconds before a submit is
    *  possible, and the submit path awaits it rather than assuming it is
    *  ready (issue #18). */
-  const formStarted = useRef(false)
-
-  const onFirstInteraction = () => {
-    if (!formStarted.current) {
-      formStarted.current = true
-      track({ name: 'form_started' })
-    }
-    loadTurnstile()
-  }
 
   const loadTurnstile = () => {
     if (turnstileLoaded.current || !TURNSTILE_SITEKEY) return
@@ -149,17 +141,15 @@ export function Assessment() {
       .then(async (response) => {
         const result = (await response.json()) as AssessmentResult
         if (result.ok) {
-          track({ name: 'assessment_submitted' })
+          posthog?.capture('assessment_submitted')
           setState({ status: 'success' })
           return
         }
-        // The tripwire for Email Service's Beta status becoming a real
-        // problem rather than a noted risk (issue #13).
-        track({ name: 'assessment_failed', props: { reason: result.error } })
+        posthog?.capture('assessment_submission_failed', { reason: result.error })
         setState({ status: 'failure', reason: result.error })
       })
       .catch(() => {
-        track({ name: 'assessment_failed', props: { reason: 'delivery' } })
+        posthog?.capture('assessment_submission_failed', { reason: 'delivery' })
         setState({ status: 'failure', reason: 'delivery' })
       })
       .finally(() => {
@@ -175,9 +165,9 @@ export function Assessment() {
    *  no user gesture. Confirm only on success, so the label never claims
    *  "Copied" when nothing was. The mailto path still works either way. */
   const copy = () => {
-    track({ name: 'email_fallback_used', props: { method: 'copy_message' } })
     navigator.clipboard.writeText(submission).then(
       () => {
+        posthog?.capture('assessment_details_copied')
         setCopied(true)
       },
       () => {
@@ -235,7 +225,7 @@ export function Assessment() {
               <Button
                 variant="secondary"
                 onClick={() => {
-                  track({ name: 'email_fallback_used', props: { method: 'open_email' } })
+                  posthog?.capture('assessment_email_fallback_opened')
                   globalThis.open(mailto)
                 }}
               >
@@ -250,8 +240,7 @@ export function Assessment() {
           <Form
             label={m.assessment.form.label}
             onSubmit={handleSubmit}
-            onFocusCapture={onFirstInteraction}
-            noCapture
+            onFocusCapture={loadTurnstile}
           >
             <Grid floor="sm" gap="s14">
               <Field label={m.assessment.form.fields.name.label}>

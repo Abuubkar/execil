@@ -10,7 +10,6 @@ import { RichText } from '../base/RichText'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
-import { track } from '../analytics/posthog'
 import { heroTitle, m } from '../messages'
 import { layout, space, text } from '../styles/tokens.stylex'
 
@@ -50,22 +49,10 @@ export function Hero() {
         </Prose>
 
         <Stack direction="row" gap="s12" justify="center" wrap>
-          <Link
-            href="/#assessment"
-            variant="button"
-            onActivate={() => {
-              track({ name: 'cta_clicked', props: { location: 'hero', variant: 'primary' } })
-            }}
-          >
+          <Link href="/#assessment" variant="button">
             {m.hero.ctaPrimary}
           </Link>
-          <Link
-            href="/#services"
-            variant="buttonSecondary"
-            onActivate={() => {
-              track({ name: 'cta_clicked', props: { location: 'hero', variant: 'secondary' } })
-            }}
-          >
+          <Link href="/#services" variant="buttonSecondary">
             {m.hero.ctaSecondary}
           </Link>
         </Stack>

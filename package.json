@@ -17,7 +17,7 @@
     "@stylexjs/stylex": "^0.19.0",
     "@tanstack/react-router": "latest",
     "@tanstack/react-start": "latest",
-    "posthog-js": "^1.427.1",
+    "posthog-js": "^1.427.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
