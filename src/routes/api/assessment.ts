@@ -142,6 +142,31 @@ export const Route = createFileRoute('/api/assessment')({
         // 4. Deliver through Resend. Its verification records live on
         //    send.<domain>, so the apex MX and SPF carrying the mailbox are
         //    untouched -- an MX only affects the name it sits on.
+
+        // A local run NEVER calls Resend, even with a real key in .dev.vars.
+        // Development must not put mail in the client's inbox, and a working
+        // key on a developer's machine is otherwise one submit away from doing
+        // exactly that. Logs the message instead and reports success, so the
+        // form's success path stays exercisable offline.
+        //
+        // `import.meta.env.DEV` is statically false in a production build, so
+        // this branch is removed at build time rather than shipped behind a
+        // runtime check that could be reached by spoofing a header.
+        if (import.meta.env.DEV) {
+          console.info(
+            [
+              'assessment: DRY RUN — not sending, this is a local build',
+              `  from:    ${bindings.RESEND_FROM ?? '(unset)'}`,
+              `  to:      ${bindings.ASSESSMENT_TO ?? '(unset)'}`,
+              `  replyTo: ${values.email}`,
+              `  subject: New assessment request — ${values.practice || values.name}`,
+              '',
+              plainTextBody(values),
+            ].join('\n'),
+          )
+          return json({ ok: true }, 200)
+        }
+
         const apiKey = bindings.RESEND_API_KEY
         if (!apiKey) {
           // No key locally or in preview. The submission cannot be delivered,
