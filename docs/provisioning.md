@@ -2,7 +2,7 @@
 
 Ordered by dependency. Each step names what it produces and which variable it fills. Everything before step 1 already works locally with **no accounts** — see "What already works" at the bottom.
 
-Decisions behind this: [issue #16](https://github.com/Abuubkar/execile/issues/16).
+Decisions behind this: [issue #16](https://github.com/Abuubkar/execil/issues/16).
 
 ---
 
@@ -23,7 +23,7 @@ Free plan is enough.
 
 Purchase the domain, point its nameservers at Cloudflare, wait for the zone to go active.
 
-- → GitHub **variable** `VITE_SITE_URL` (e.g. `https://execile.com`)
+- → GitHub **variable** `VITE_SITE_URL` (e.g. `https://execil.com`)
 - → Replace `REPLACE_AT_PROVISIONING` in `public/robots.txt` and `public/sitemap.xml`. These hard-code the domain because static files cannot read env vars.
 
 ## 3 · Google Workspace mailbox

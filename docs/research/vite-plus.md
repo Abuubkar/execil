@@ -6,7 +6,7 @@ Ticket: `.scratch/landing-page/issues/01-vite-plus.md`. Researched 2026-09-05 ag
 
 Vite+ (`vp`) is VoidZero's single CLI that wraps Vite 8 + Rolldown, Vitest, Oxlint, Oxfmt, tsdown and the Vite Task runner, and also manages the Node runtime and the package manager. Current release is **v0.3.0 (2026-08-24), beta**, bundling Vite 8.2.2, Rolldown 1.2.5, Vitest 4.1.11, Oxlint 1.79.0, Oxfmt 0.64.0 and `oxlint-tsgolint` 7.0.2001. All configuration lives in one `vite.config.ts` (`lint`, `fmt`, `check`, `staged`, `test` blocks next to ordinary Vite config).
 
-Recommendation for Execile:
+Recommendation for Execil:
 
 1. **Scaffold with `vp create @tanstack/start`**, which runs `@tanstack/cli create --no-install --no-toolchain`, then `vp migrate` the result (it pins `vite-plus`, aliases `vite` to `@voidzero-dev/vite-plus-core`, rewrites `defineConfig` to come from `vite-plus`, and offers hook setup). Alternatively scaffold with `npx @tanstack/cli@latest create --toolchain none` and run `vp migrate`; same end state.
 2. **Use Vite+'s built-in lint/format** (Oxlint + Oxfmt) configured in the `lint` / `fmt` blocks with `typeAware: true, typeCheck: true`. `vp check` then formats, lints and type-checks in one pass.

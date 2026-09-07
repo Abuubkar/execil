@@ -1,18 +1,18 @@
-# Execile — Domain Glossary
+# Execil — Domain Glossary
 
-Vocabulary for the Execile landing-page effort. Glossary only; decisions live in `docs/adr/` and `.scratch/`.
+Vocabulary for the Execil landing-page effort. Glossary only; decisions live in `docs/adr/` and `.scratch/`.
 
 ## Business terms
 
-- **Execile** — the brand. A medical billing and revenue cycle management service for independent US practices. The `name` prop in the design canvas.
+- **Execil** — the brand. A medical billing and revenue cycle management service for independent US practices. The `name` prop in the design canvas.
 - **RCM (Revenue Cycle Management)** — the full billing lifecycle a practice runs to get paid: eligibility, credentialing, coding, claim submission, payment posting, AR follow-up, denials, patient statements, reporting.
 - **Practice** — the customer. An independent medical practice with 1–20 providers.
 - **Provider** — a clinician in a Practice who bills payers. Providers must be credentialed and enrolled before payers will pay for them.
 - **Payer** — an insurer or program that pays claims.
-- **Specialty** — a medical field (Primary Care, Behavioral Health, …). Execile assigns coders by Specialty.
+- **Specialty** — a medical field (Primary Care, Behavioral Health, …). Execil assigns coders by Specialty.
 - **Assessment** — the free billing assessment. The single conversion goal of the landing page; requested through the Assessment Form.
 - **BAA (Business Associate Agreement)** — the HIPAA contract signed before any Practice data moves.
-- **Fit** — the section stating who Execile is and is not built for.
+- **Fit** — the section stating who Execil is and is not built for.
 
 ## Landing-page terms
 

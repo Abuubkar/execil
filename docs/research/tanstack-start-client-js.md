@@ -1,6 +1,6 @@
 # TanStack Start client JS on a prerendered page
 
-Investigated 2026-09-05 for [issue #18](https://github.com/Abuubkar/execile/issues/18). Numbers are **measured from a real production build**, not estimates: a probe app matching TanStack's own `react-start.minimal` benchmark scenario plus the assessment form.
+Investigated 2026-09-05 for [issue #18](https://github.com/Abuubkar/execil/issues/18). Numbers are **measured from a real production build**, not estimates: a probe app matching TanStack's own `react-start.minimal` benchmark scenario plus the assessment form.
 
 Versions: `react` 19.2.8, `react-dom` 19.2.8, `@tanstack/react-router` 1.170.32, `@tanstack/react-start` 1.168.49, `@tanstack/router-core` 1.171.27, Vite 8.2.2 (Rolldown), `tanstackStart({ prerender: { enabled: true } })`.
 

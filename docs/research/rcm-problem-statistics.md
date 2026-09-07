@@ -4,7 +4,7 @@ Ticket: none — direct request. Researched 2026-09-05 against MGMA, HFMA, CAQH,
 
 **Audience constraint that governs everything here.** The page speaks to independent US practices with 1–20 providers. Most published RCM statistics measure hospitals and health systems. A hospital's denial rate or aged-AR percentage is a different number about a different business, and putting one in front of a five-provider practice is a factual misstatement, not a rounding error. Population is called out for every figure.
 
-**Framing constraint.** Execile has no clients and no track record. Every number below is an industry figure attributable to a named third party. None of them may appear on the page without a visible citation, because without one the reader will read them as Execile's own results.
+**Framing constraint.** Execil has no clients and no track record. Every number below is an industry figure attributable to a named third party. None of them may appear on the page without a visible citation, because without one the reader will read them as Execil's own results.
 
 ## Verification statuses used
 
@@ -440,7 +440,7 @@ If the card needs to convey financial impact, the honest route is the mechanism 
 
 ## Publishing rules for whatever ships
 
-1. **Every number gets a visible citation** — organisation, report name, year — next to or beneath the figure. Without it, a reader on a billing company's homepage reads any percentage as that company's own result. Execile has no results.
+1. **Every number gets a visible citation** — organisation, report name, year — next to or beneath the figure. Without it, a reader on a billing company's homepage reads any percentage as that company's own result. Execil has no results.
 2. **Date the older figures in the visible citation.** The MGMA aged-AR number is 2020 data. Shown undated it looks like a current claim about the reader.
 3. **Name the population where it is not the reader's.** "Multispecialty practices," "award-winning physician practices," "providers surveyed."
 4. **Never present survey perception as measured rate.** "41% of providers say" — not "41% of claims."
