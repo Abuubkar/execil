@@ -8,16 +8,33 @@ Decisions behind this: [issue #16](https://github.com/Abuubkar/execil/issues/16)
 
 ## ⚠️ Read before step 4
 
-**Email Routing goes on a subdomain, never the apex.** Enabling Email Routing on the apex domain replaces Google's MX records and **breaks the client's mail**. This is the one step in this runbook that can cause real damage in the wrong order.
+**Email Routing goes on a subdomain, never the apex.** Enabling Email Routing on the apex domain replaces the mailbox provider's MX records and **breaks the client's mail**. The mailbox is Hostinger, so the apex MX belongs to Hostinger and nothing in this runbook may touch it. This is the one step in this runbook that can cause real damage in the wrong order.
 
 ---
 
-## 1 · Cloudflare account
+## 1 · Cloudflare account and Workers Builds
 
 Free plan is enough.
 
-- Account ID → GitHub **secret** `CLOUDFLARE_ACCOUNT_ID`
-- Create a scoped API token with *Workers Scripts: Edit* → GitHub **secret** `CLOUDFLARE_API_TOKEN`
+Deployment is **Cloudflare Workers Builds**, connected to the GitHub repository —
+not GitHub Actions. There is no API token and no GitHub secret: Cloudflare
+builds on push and deploys itself. `.github/workflows/ci.yml` still runs format,
+lint, types, build and the placeholder report on every push and pull request.
+
+In the Worker's **Settings › Build**:
+
+- **Branch**: `main`
+- **Build command**: `pnpm run build:deploy` — this is `placeholders && build`,
+  so the hard gate runs before every production build. Do not set it to a bare
+  `pnpm run build`; that skips the gate.
+- **Build variables and secrets**: every `VITE_` value in the table below.
+  These are build-time only. Runtime values live under *Settings › Variables &
+  Secrets* and come from the `vars` block in `wrangler.jsonc`.
+
+> **`VITE_SITE_URL` matters more than it looks.** `src/seo.ts` falls back to
+> `http://localhost:3000` when it is unset, and that value becomes the
+> `canonical` and `og:url` on every prerendered page. A build with no variables
+> set ships a production site that tells search engines it lives on localhost.
 
 ## 2 · Domain and DNS
 
@@ -26,9 +43,11 @@ Purchase the domain, point its nameservers at Cloudflare, wait for the zone to g
 - → GitHub **variable** `VITE_SITE_URL` (e.g. `https://execil.com`)
 - → Replace `REPLACE_AT_PROVISIONING` in `public/robots.txt` and `public/sitemap.xml`. These hard-code the domain because static files cannot read env vars.
 
-## 3 · Google Workspace mailbox
+## 3 · Hostinger mailbox
 
-The address that receives submissions. **The apex MX stays pointed at Google throughout** — nothing in this runbook changes it.
+The address that receives submissions. **The apex MX stays pointed at Hostinger throughout** — nothing in this runbook changes it.
+
+The provider is irrelevant to the delivery mechanism: the Worker sends to a *verified destination address* (step 5), and Cloudflare verifies it by emailing a link to that mailbox. Keep DNS on Cloudflare and add Hostinger's MX, SPF and DKIM records to the Cloudflare zone by hand — moving nameservers to Hostinger would break Email Routing, the Worker custom domain and the WAF rule.
 
 - → wrangler var `ASSESSMENT_TO`
 - → GitHub **variable** `VITE_CONTACT_EMAIL` (used by the form's failure-panel `mailto:`)
@@ -93,17 +112,15 @@ Attach `<domain>` (and `www` if wanted).
 
 | Name | Kind | From step | Known value |
 |---|---|---|---|
-| `CLOUDFLARE_ACCOUNT_ID` | GitHub secret | 1 | |
-| `CLOUDFLARE_API_TOKEN` | GitHub secret | 1 | |
-| `VITE_SITE_URL` | GitHub variable | 2 | `https://execil.net` |
+| `VITE_SITE_URL` | Cloudflare build variable | 2 | `https://execil.net` |
 | `ASSESSMENT_TO` | wrangler var | 3 | |
-| `VITE_CONTACT_EMAIL` | GitHub variable | 3 | `contact@execil.net` |
+| `VITE_CONTACT_EMAIL` | Cloudflare build variable | 3 | `contact@execil.net` |
 | `SENDER_DOMAIN` | wrangler var | 4 | |
 | `EMAIL` | wrangler binding | 5 | |
-| `VITE_TURNSTILE_SITEKEY` | GitHub variable | 6 | |
+| `VITE_TURNSTILE_SITEKEY` | Cloudflare build variable | 6 | |
 | `TURNSTILE_SECRET` | Worker secret | 6 | |
-| `VITE_PUBLIC_POSTHOG_PROJECT_TOKEN` | GitHub variable | 7 | |
-| `VITE_PUBLIC_POSTHOG_HOST` | GitHub variable | 7 | `https://us.i.posthog.com` |
+| `VITE_PUBLIC_POSTHOG_PROJECT_TOKEN` | Cloudflare build variable | 7 | |
+| `VITE_PUBLIC_POSTHOG_HOST` | Cloudflare build variable | 7 | `https://us.i.posthog.com` |
 
 ## What already works with no accounts
 

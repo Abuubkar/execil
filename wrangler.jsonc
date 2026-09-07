@@ -11,6 +11,8 @@
   "assets": {
     "html_handling": "drop-trailing-slash",
   },
+  "workers_dev": true,
+  "preview_urls": true,
 
   // Plaintext config. Real values arrive at provisioning (issue #32).
   "vars": {
