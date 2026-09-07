@@ -6,12 +6,6 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "dev"],
       "port": 3000
-    },
-    {
-      "name": "execil-dev-verify",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["exec", "vite", "dev", "--port", "3100"],
-      "port": 3100
     }
   ]
 }
