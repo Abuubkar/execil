@@ -17,13 +17,14 @@
   // Plaintext config, and deliberately in git rather than the dashboard: these
   // are not secrets, and a reviewer should see where submissions go.
   //
-  // ASSESSMENT_TO is still a placeholder. The route passes it as the `to`
-  // address, so until it is a VERIFIED destination in the Cloudflare account
-  // every submission fails with reason "delivery".
+  // ASSESSMENT_TO is where submissions land: the Hostinger mailbox behind the
+  // apex MX. Resend delivers to it like any other recipient -- no verification
+  // step, unlike the Cloudflare binding this replaced.
   "vars": {
-    "ASSESSMENT_TO": "placeholder@example.com",
-    // Bare domain. The route sends from assessment@forms.<SENDER_DOMAIN>, so
-    // this is the apex even though Email Routing is enabled on the subdomain.
+    "ASSESSMENT_TO": "contact@execil.net",
+    // Bare domain. The route composes assessment@forms.<SENDER_DOMAIN>, so this
+    // is the apex -- the subdomain is added by the route, not stored here.
+    // forms.execil.net is the domain verified in Resend.
     "SENDER_DOMAIN": "execil.net",
   },
 
