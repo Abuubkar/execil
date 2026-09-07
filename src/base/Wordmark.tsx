@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import * as stylex from '@stylexjs/stylex'
 
 import type { StyleProp } from './Box'
@@ -21,6 +22,12 @@ const styles = stylex.create({
  * replaced by the cross badge — the letterforms are paths, not live text, so
  * the badge can sit exactly where the dot was at any size.
  *
+ * The badge is knocked out of the letterforms by a ring 20% of its radius
+ * wide, so it separates from the ink it touches by space rather than by
+ * colour. The ring shows whatever ground the mark sits on, which is why this
+ * is a mask and not a filled circle: it works on the light page and on the
+ * inverse footer without a second token.
+ *
  * Generated from the same geometry as `public/brand/cross-dot/`. Regenerate
  * both together rather than editing the path data by hand.
  *
@@ -36,6 +43,9 @@ export function Wordmark({
   title?: string
   style?: StyleProp
 }) {
+  // Two instances render per page (header, footer) and an id must be unique.
+  const maskId = `${useId()}-notch`
+
   return (
     <svg
       viewBox="0 0 2890 887"
@@ -44,8 +54,15 @@ export function Wordmark({
       aria-label={title}
       {...stylex.props(styles.root, sizes[size], style)}
     >
+      <defs>
+        {/* Mask luminance, not design colour: white keeps, black cuts. */}
+        <mask id={maskId} maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="4890" height="2887">
+          <rect x="-1000" y="-1000" width="4890" height="2887" fill="#fff" />
+          <circle cx="2403.5" cy="665.5" r="170.1" fill="#000" />
+        </mask>
+      </defs>
       <g transform="translate(40.0 847.2) scale(1 -1)">
-        <g fill="currentColor">
+        <g fill="currentColor" mask={`url(#${maskId})`}>
           <path
             transform="translate(0.0 0)"
             d="M547.0 0.0H77.0V740.0H547.0V590.0H194.0L239.0 632.0V445.0H512.0V303.0H239.0V108.0L194.0 150.0H547.0Z"

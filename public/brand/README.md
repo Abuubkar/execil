@@ -28,6 +28,19 @@ one drawing: change one and change the other.**
 
 `public/favicon.svg` is `execil-mark.svg` fitted to a 32×32 box.
 
+### Clearance
+
+The badge replaces the tittle of the "i", so it sits against the letterforms
+rather than against the page — and at `teal700` it separates from `ink900` by
+only 2.74:1, which at header size reads as one dark mass rather than as a mark.
+
+It is separated by space instead. A ring 20% of the badge radius wide is masked
+out of the letterforms, so the ground shows through around the badge. It is a
+mask rather than a filled circle on purpose: the ring shows whatever the mark is
+placed on, so the same drawing works on the light page and on the inverse
+footer without a second colour. Narrower than about 15% stops registering at
+28px; wider than about 25% starts eating the stem of the "i".
+
 ## plus-split — not in use
 
 "+ execil" lowercase at wght 900, cut by a diagonal two-tone split through the
