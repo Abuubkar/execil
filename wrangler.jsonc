@@ -22,10 +22,10 @@
   // step, unlike the Cloudflare binding this replaced.
   "vars": {
     "ASSESSMENT_TO": "contact@execil.net",
-    // Bare domain. The route composes assessment@forms.<SENDER_DOMAIN>, so this
-    // is the apex -- the subdomain is added by the route, not stored here.
-    // forms.execil.net is the domain verified in Resend.
-    "SENDER_DOMAIN": "execil.net",
+    // The whole From header, not a domain to assemble. Resend verifies
+    // execil.net itself and puts its own MX and SPF on send.execil.net, so the
+    // apex MX and SPF that carry the mailbox are never touched.
+    "RESEND_FROM": "Execil Assessment <assessment@execil.net>",
   },
 
   // No send_email binding. Cloudflare Email Service needs the APEX onboarded

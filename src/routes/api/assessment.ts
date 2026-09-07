@@ -18,7 +18,7 @@ export type AssessmentResult =
 type AssessmentEnv = {
   TURNSTILE_SECRET?: string
   ASSESSMENT_TO?: string
-  SENDER_DOMAIN?: string
+  RESEND_FROM?: string
   RESEND_API_KEY?: string
 }
 
@@ -138,10 +138,9 @@ export const Route = createFileRoute('/api/assessment')({
           return json({ ok: false, error: 'validation', fields }, 400)
         }
 
-        // 4. Deliver, through Resend rather than Cloudflare Email Service.
-        //    The sender is a SUBDOMAIN so Resend's verification records live on
-        //    forms.<domain> and the apex MX, SPF and DMARC -- which carry the
-        //    business mailbox -- are never touched.
+        // 4. Deliver through Resend. Its verification records live on
+        //    send.<domain>, so the apex MX and SPF carrying the mailbox are
+        //    untouched -- an MX only affects the name it sits on.
         const apiKey = bindings.RESEND_API_KEY
         if (!apiKey) {
           // No key locally or in preview. The submission cannot be delivered,
@@ -158,7 +157,7 @@ export const Route = createFileRoute('/api/assessment')({
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              from: `assessment@forms.${bindings.SENDER_DOMAIN ?? 'example.com'}`,
+              from: bindings.RESEND_FROM ?? '',
               // Resend takes an array here, not a bare string.
               to: [bindings.ASSESSMENT_TO ?? ''],
               reply_to: values.email,
