@@ -14,12 +14,29 @@
   "workers_dev": true,
   "preview_urls": true,
 
-  // Plaintext config. Real values arrive at provisioning (issue #32).
+  // Plaintext config, and deliberately in git rather than the dashboard: these
+  // are not secrets, and a reviewer should see where submissions go.
+  //
+  // ASSESSMENT_TO is still a placeholder. The route passes it as the `to`
+  // address, so until it is a VERIFIED destination in the Cloudflare account
+  // every submission fails with reason "delivery".
   "vars": {
     "ASSESSMENT_TO": "placeholder@example.com",
+    // Bare domain. The route sends from assessment@forms.<SENDER_DOMAIN>, so
+    // this is the apex even though Email Routing is enabled on the subdomain.
+    "SENDER_DOMAIN": "execil.net",
   },
 
-  // Declared at provisioning, not now — both need an account to exist:
-  //   "send_email": [{ "name": "EMAIL", "destination_address": "<verified mailbox>" }]
-  //   TURNSTILE_SECRET via `wrangler secret put` (locally: .dev.vars)
+  // Cloudflare Email Service. Sends to a verified destination address are free
+  // on every plan and count against no quota.
+  //
+  // No `destination_address` yet: with one set, the binding is pinned to that
+  // single recipient and a `to` that differs is rejected. Adding it is the
+  // safer shape and should happen once the mailbox is verified (step 5) --
+  // it must then match ASSESSMENT_TO exactly.
+  "send_email": [{ "name": "EMAIL" }],
+
+  // TURNSTILE_SECRET is NOT here. It is a secret, this file is committed, and
+  // Cloudflare's own guidance is to keep sensitive values out of `vars`.
+  // Set it under Settings > Variables & Secrets (locally: .dev.vars).
 }
