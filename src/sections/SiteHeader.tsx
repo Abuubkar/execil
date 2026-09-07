@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import * as stylex from '@stylexjs/stylex'
 
+import { useTrack } from '../analytics/useTrack'
 import { Box } from '../base/Box'
 import { BrandMark } from '../base/BrandMark'
 import { Icon } from '../base/Icon'
@@ -130,6 +131,7 @@ function useCurrentSection(hrefs: readonly string[]): [string | null, (href: str
 }
 
 export function SiteHeader() {
+  const track = useTrack()
   const links = m.nav.links
   const [current, pinCurrent] = useCurrentSection(NAV_HREFS)
 
@@ -163,6 +165,7 @@ export function SiteHeader() {
                 current={current === link.href}
                 onActivate={() => {
                   pinCurrent(link.href)
+                  track({ name: 'nav_clicked', props: { target: link.href } })
                 }}
               >
                 {link.text}
@@ -171,11 +174,25 @@ export function SiteHeader() {
           </Stack>
 
           <Stack direction="row" gap="s18" align="center" style={styles.desktopOnly}>
-            <Link href={m.site.phoneHref} variant="plain" style={styles.phone}>
+            <Link
+              href={m.site.phoneHref}
+              variant="plain"
+              style={styles.phone}
+              onActivate={() => {
+                track({ name: 'phone_clicked', props: { location: 'header' } })
+              }}
+            >
               <Icon name="phone" size="xs" />
               {m.site.phone}
             </Link>
-            <Link href="/#assessment" variant="button" style={styles.headerCta}>
+            <Link
+              href="/#assessment"
+              variant="button"
+              style={styles.headerCta}
+              onActivate={() => {
+                track({ name: 'cta_clicked', props: { location: 'header', variant: 'primary' } })
+              }}
+            >
               {m.nav.cta}
             </Link>
           </Stack>
@@ -194,16 +211,31 @@ export function SiteHeader() {
               style={styles.menuLink}
               onActivate={() => {
                 pinCurrent(link.href)
+                track({ name: 'nav_clicked', props: { target: link.href } })
               }}
             >
               {link.text}
             </Link>
           ))}
-          <Link href={m.site.phoneHref} variant="plain" style={styles.menuLink}>
+          <Link
+            href={m.site.phoneHref}
+            variant="plain"
+            style={styles.menuLink}
+            onActivate={() => {
+              track({ name: 'phone_clicked', props: { location: 'mobile_menu' } })
+            }}
+          >
             <Icon name="phone" size="xs" />
             {m.site.phone}
           </Link>
-          <Link href="/#assessment" variant="button" style={styles.menuCta}>
+          <Link
+            href="/#assessment"
+            variant="button"
+            style={styles.menuCta}
+            onActivate={() => {
+              track({ name: 'cta_clicked', props: { location: 'mobile_menu', variant: 'primary' } })
+            }}
+          >
             {m.nav.cta}
           </Link>
         </MenuPanel>

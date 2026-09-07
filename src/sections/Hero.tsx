@@ -1,5 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
+import { useTrack } from '../analytics/useTrack'
 import { Badge } from '../base/Badge'
 import { Dot } from '../base/Dot'
 import { Heading } from '../base/Heading'
@@ -27,6 +28,8 @@ const styles = stylex.create({
 export const HERO_HEADING_ID = 'hero-h'
 
 export function Hero() {
+  const track = useTrack()
+
   return (
     <Section
       labelledBy={HERO_HEADING_ID}
@@ -49,10 +52,22 @@ export function Hero() {
         </Prose>
 
         <Stack direction="row" gap="s12" justify="center" wrap>
-          <Link href="/#assessment" variant="button">
+          <Link
+            href="/#assessment"
+            variant="button"
+            onActivate={() => {
+              track({ name: 'cta_clicked', props: { location: 'hero', variant: 'primary' } })
+            }}
+          >
             {m.hero.ctaPrimary}
           </Link>
-          <Link href="/#services" variant="buttonSecondary">
+          <Link
+            href="/#services"
+            variant="buttonSecondary"
+            onActivate={() => {
+              track({ name: 'cta_clicked', props: { location: 'hero', variant: 'secondary' } })
+            }}
+          >
             {m.hero.ctaSecondary}
           </Link>
         </Stack>

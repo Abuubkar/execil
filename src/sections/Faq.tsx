@@ -1,5 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
+import { useTrack } from '../analytics/useTrack'
 import { Disclosure } from '../base/Disclosure'
 import { Eyebrow } from '../base/Eyebrow'
 import { Heading } from '../base/Heading'
@@ -19,6 +20,8 @@ const styles = stylex.create({
 })
 
 export function Faq() {
+  const track = useTrack()
+
   return (
     <Section id="faq" labelledBy={HEADING_ID} tone="raised" size="lg" width="hero">
       <Stack gap="s32">
@@ -33,7 +36,17 @@ export function Faq() {
           {m.faq.items.map((item) => {
             const link = 'link' in item ? item.link : undefined
             return (
-              <Disclosure key={item.id} name={FAQ_GROUP} summary={item.q}>
+              <Disclosure
+                key={item.id}
+                name={FAQ_GROUP}
+                summary={item.q}
+                // Stable slug, NEVER an index: copy edits reorder questions and
+                // an index-keyed event would silently re-point to a different
+                // question, corrupting history already collected (issue #13).
+                onOpen={() => {
+                  track({ name: 'faq_opened', props: { question_id: item.id } })
+                }}
+              >
                 <Stack gap="s10">
                   <Text size="md" tone="prose">
                     {item.a}

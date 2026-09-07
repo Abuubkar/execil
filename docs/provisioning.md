@@ -62,8 +62,14 @@ Create an **invisible** widget. Add the production hostname; Cloudflare recommen
 
 Cloud US.
 
-- → GitHub **variable** `VITE_POSTHOG_PROJECT_TOKEN`
-- Flip three project settings: enable **Cookieless server hash mode**, enable **Discard client IP data**, leave **Record user sessions** off.
+- → GitHub **variable** `VITE_PUBLIC_POSTHOG_PROJECT_TOKEN`
+- → GitHub **variable** `VITE_PUBLIC_POSTHOG_HOST` (`https://us.i.posthog.com`)
+- Enable **Cookieless server hash mode**. The client sets `cookieless_mode: 'always'`; without the matching project setting the events are sent and then dropped at ingestion, with nothing visible in the browser.
+
+> The installed integration runs on PostHog's wizard defaults otherwise:
+> autocapture, session replay, heatmaps and dead clicks are all on. That is a
+> deliberate choice and it diverges from what `/privacy` and `/hipaa` describe.
+> See the legal-review section of #34 before launch.
 
 ## 8 · WAF rate-limiting rule
 
@@ -96,7 +102,8 @@ Attach `<domain>` (and `www` if wanted).
 | `EMAIL` | wrangler binding | 5 | |
 | `VITE_TURNSTILE_SITEKEY` | GitHub variable | 6 | |
 | `TURNSTILE_SECRET` | Worker secret | 6 | |
-| `VITE_POSTHOG_PROJECT_TOKEN` | GitHub variable | 7 | |
+| `VITE_PUBLIC_POSTHOG_PROJECT_TOKEN` | GitHub variable | 7 | |
+| `VITE_PUBLIC_POSTHOG_HOST` | GitHub variable | 7 | `https://us.i.posthog.com` |
 
 ## What already works with no accounts
 
@@ -105,7 +112,7 @@ Attach `<domain>` (and `www` if wanted).
 | Full page, prerendered | `pnpm dev`, then `pnpm preview` on the production build |
 | Form POST, all six paths | `pnpm preview` runs the Worker in workerd via Miniflare |
 | Turnstile pass and fail | test keys: `1x…AA` passes, `2x…AA` fails, `3x…AA` returns "token already spent" |
-| Analytics no-ops cleanly | empty `VITE_POSTHOG_PROJECT_TOKEN` — verified: no requests, no cookies, no storage |
+| Analytics degrades without a project | the provider renders the tree untouched when either PostHog variable is absent. NOTE: `AnalyticsProvider` still **throws in dev** on a missing variable, so a fresh clone needs both set locally |
 | Lint, format, types, build | `pnpm exec vp check`, `pnpm run build` |
 | Placeholder inventory | `pnpm placeholders` |
 

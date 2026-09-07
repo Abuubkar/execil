@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { usePostHog } from 'posthog-js/react'
 import * as stylex from '@stylexjs/stylex'
 
 import { Badge } from '../base/Badge'
@@ -18,6 +17,7 @@ import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
 import { VisuallyHidden } from '../base/VisuallyHidden'
+import { useTrack } from '../analytics/useTrack'
 import type { AssessmentResult } from '../routes/api/assessment'
 import { m } from '../messages'
 import { color, layout, radius, space, text } from '../styles/tokens.stylex'
@@ -91,8 +91,9 @@ function formatSubmission(data: FormData): string {
 }
 
 export function Assessment() {
-  const posthog = usePostHog()
+  const track = useTrack()
   const [state, setState] = useState<FormState>({ status: 'idle' })
+  const formStarted = useRef(false)
   const turnstileLoaded = useRef(false)
   const widgetRef = useRef<HTMLDivElement>(null)
   const widgetId = useRef<string | null>(null)
@@ -104,6 +105,16 @@ export function Assessment() {
    *  By the time a field is focused it has seconds before a submit is
    *  possible, and the submit path awaits it rather than assuming it is
    *  ready (issue #18). */
+
+  /** Fires once per visit, on the first field touched. Carries no field
+   *  value — only that the visitor began filling the form. */
+  const onFirstInteraction = () => {
+    if (!formStarted.current) {
+      formStarted.current = true
+      track({ name: 'form_started' })
+    }
+    loadTurnstile()
+  }
 
   const loadTurnstile = () => {
     if (turnstileLoaded.current || !TURNSTILE_SITEKEY) return
@@ -141,15 +152,15 @@ export function Assessment() {
       .then(async (response) => {
         const result = (await response.json()) as AssessmentResult
         if (result.ok) {
-          posthog?.capture('assessment_submitted')
+          track({ name: 'assessment_submitted' })
           setState({ status: 'success' })
           return
         }
-        posthog?.capture('assessment_submission_failed', { reason: result.error })
+        track({ name: 'assessment_submission_failed', props: { reason: result.error } })
         setState({ status: 'failure', reason: result.error })
       })
       .catch(() => {
-        posthog?.capture('assessment_submission_failed', { reason: 'delivery' })
+        track({ name: 'assessment_submission_failed', props: { reason: 'delivery' } })
         setState({ status: 'failure', reason: 'delivery' })
       })
       .finally(() => {
@@ -167,7 +178,7 @@ export function Assessment() {
   const copy = () => {
     navigator.clipboard.writeText(submission).then(
       () => {
-        posthog?.capture('assessment_details_copied')
+        track({ name: 'assessment_details_copied' })
         setCopied(true)
       },
       () => {
@@ -225,7 +236,7 @@ export function Assessment() {
               <Button
                 variant="secondary"
                 onClick={() => {
-                  posthog?.capture('assessment_email_fallback_opened')
+                  track({ name: 'assessment_email_fallback_opened' })
                   globalThis.open(mailto)
                 }}
               >
@@ -240,7 +251,7 @@ export function Assessment() {
           <Form
             label={m.assessment.form.label}
             onSubmit={handleSubmit}
-            onFocusCapture={loadTurnstile}
+            onFocusCapture={onFirstInteraction}
           >
             <Grid floor="sm" gap="s14">
               <Field label={m.assessment.form.fields.name.label}>

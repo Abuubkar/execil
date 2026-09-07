@@ -1,7 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
-import { PostHogProvider } from 'posthog-js/react'
 
+import { AnalyticsProvider } from '../analytics/AnalyticsProvider'
 import { Box } from '../base/Box'
 import { NotFound } from '../sections/NotFound'
 import { SiteFooter } from '../sections/SiteFooter'
@@ -12,23 +12,6 @@ import { color, text } from '../styles/tokens.stylex'
 import { m } from '../messages'
 
 import appCss from '../styles/app.css?url'
-
-const POSTHOG_PROJECT_TOKEN = import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN
-const POSTHOG_HOST = import.meta.env.VITE_PUBLIC_POSTHOG_HOST
-
-if (import.meta.env.DEV) {
-  if (!POSTHOG_PROJECT_TOKEN) {
-    throw new Error(
-      'VITE_PUBLIC_POSTHOG_PROJECT_TOKEN variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once VITE_PUBLIC_POSTHOG_PROJECT_TOKEN is configured',
-    )
-  }
-
-  if (!POSTHOG_HOST) {
-    throw new Error(
-      'VITE_PUBLIC_POSTHOG_HOST variable required by PostHog is missing or un-configured, this causes events to be silently missed. This error stops appearing once VITE_PUBLIC_POSTHOG_HOST is configured',
-    )
-  }
-}
 
 export const Route = createRootRoute({
   head: () => ({
@@ -125,22 +108,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body {...stylex.props(styles.body)}>
-        {POSTHOG_PROJECT_TOKEN && POSTHOG_HOST ? (
-          <PostHogProvider
-            apiKey={POSTHOG_PROJECT_TOKEN}
-            options={{
-              api_host: POSTHOG_HOST,
-              defaults: '2025-05-24',
-              capture_exceptions: true,
-              debug: import.meta.env.DEV,
-              tracing_headers: typeof window !== 'undefined' ? [window.location.hostname] : [],
-            }}
-          >
-            {content}
-          </PostHogProvider>
-        ) : (
-          content
-        )}
+        <AnalyticsProvider>{content}</AnalyticsProvider>
       </body>
     </html>
   )

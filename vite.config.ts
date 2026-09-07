@@ -70,21 +70,41 @@ export default defineConfig({
     viteReact(),
   ],
 
-  // docs/ holds the design canvas and the research notes. Both are primary
-  // sources that must stay byte-identical, not code to be reformatted.
+  // docs/ holds the design canvas and the research notes, and .claude/skills/
+  // holds vendor-authored agent references. All are primary sources that must
+  // stay byte-identical, not code to be reformatted.
   fmt: {
-    ignorePatterns: ['docs/**', 'src/routeTree.gen.ts', 'dist/**'],
+    ignorePatterns: ['docs/**', '.claude/skills/**', 'src/routeTree.gen.ts', 'dist/**'],
     singleQuote: true,
     semi: false,
   },
 
   lint: {
-    ignorePatterns: ['docs/**', 'src/routeTree.gen.ts', 'dist/**'],
+    ignorePatterns: ['docs/**', '.claude/skills/**', 'src/routeTree.gen.ts', 'dist/**'],
     // Setting `plugins` REPLACES the default set, so the defaults are re-listed
     // alongside `react`, which is not on by default.
     plugins: ['eslint', 'typescript', 'unicorn', 'oxc', 'react'],
     options: { typeAware: true, typeCheck: true },
     overrides: [
+      {
+        // PostHog is reachable ONLY from src/analytics/. Everywhere else goes
+        // through useTrack(), which is what keeps the event vocabulary in
+        // events.ts a closed union instead of a convention nobody enforces.
+        files: ['src/routes/**', 'src/sections/**', 'src/base/**'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [
+                {
+                  group: ['posthog-js', 'posthog-js/*'],
+                  message: 'Import useTrack from src/analytics/useTrack instead.',
+                },
+              ],
+            },
+          ],
+        },
+      },
       {
         // base/ is deliberately exempt: Base components exist to render raw
         // tags, and Icon must render svg/path/circle/rect.
