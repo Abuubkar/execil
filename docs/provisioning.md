@@ -47,7 +47,7 @@ In the Worker's **Settings › Build**:
 
 Purchase the domain, point its nameservers at Cloudflare, wait for the zone to go active.
 
-- → GitHub **variable** `VITE_SITE_URL` (e.g. `https://execil.com`)
+- → Cloudflare **build variable** `VITE_SITE_URL` (e.g. `https://execil.com`)
 - → Replace `REPLACE_AT_PROVISIONING` in `public/robots.txt` and `public/sitemap.xml`. These hard-code the domain because static files cannot read env vars.
 
 ## 3 · Hostinger mailbox
@@ -57,7 +57,7 @@ The address that receives submissions. **The apex MX stays pointed at Hostinger 
 The provider is irrelevant to the delivery mechanism: the Worker sends to a *verified destination address* (step 5), and Cloudflare verifies it by emailing a link to that mailbox. Keep DNS on Cloudflare and add Hostinger's MX, SPF and DKIM records to the Cloudflare zone by hand — moving nameservers to Hostinger would break Email Routing, the Worker custom domain and the WAF rule.
 
 - → wrangler var `ASSESSMENT_TO`
-- → GitHub **variable** `VITE_CONTACT_EMAIL` (used by the form's failure-panel `mailto:`)
+- → Cloudflare **build variable** `VITE_CONTACT_EMAIL` (used by the form's failure-panel `mailto:`)
 
 ## 4 · Email Routing on a subdomain ⚠️
 
@@ -81,15 +81,15 @@ Then declare the binding in `wrangler.jsonc`:
 
 Create an **invisible** widget. Add the production hostname; Cloudflare recommends production sitekeys **not** allow `localhost`.
 
-- → GitHub **variable** `VITE_TURNSTILE_SITEKEY`
+- → Cloudflare **build variable** `VITE_TURNSTILE_SITEKEY`
 - → `pnpm exec wrangler secret put TURNSTILE_SECRET`
 
 ## 7 · PostHog project
 
 Cloud US.
 
-- → GitHub **variable** `VITE_PUBLIC_POSTHOG_PROJECT_TOKEN`
-- → GitHub **variable** `VITE_PUBLIC_POSTHOG_HOST` (`https://us.i.posthog.com`)
+- → Cloudflare **build variable** `VITE_PUBLIC_POSTHOG_PROJECT_TOKEN`
+- → Cloudflare **build variable** `VITE_PUBLIC_POSTHOG_HOST` (`https://us.i.posthog.com`)
 - Enable **Cookieless server hash mode**. The client sets `cookieless_mode: 'always'`; without the matching project setting the events are sent and then dropped at ingestion, with nothing visible in the browser.
 
 > The installed integration runs on PostHog's wizard defaults otherwise:
@@ -99,7 +99,14 @@ Cloud US.
 
 ## 8 · WAF rate-limiting rule
 
-Add a rate-limiting rule on `POST /api/assessment`.
+Add a rate-limiting rule on `/api/assessment`.
+
+> **Free plan cannot match on method.** Rate limiting on Free matches *Path* and
+> *Verified Bot* only — `Method` needs Business. Match on the path alone: the
+> route declares a `POST` handler and nothing else, so path-only matching is
+> equivalent here. Free also allows **one rule per zone** and caps the period
+> and mitigation timeout at **10 seconds**, so express the threshold as
+> requests per 10s rather than per minute.
 
 > **This rule lives only in the dashboard.** No code, no review, no history, and nothing in this repository will tell you if it is missing. If the Worker is ever recreated, this step is the easiest one to forget.
 
