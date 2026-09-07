@@ -102,7 +102,7 @@ this address.
 Create an **invisible** widget. Add the production hostname; Cloudflare recommends production sitekeys **not** allow `localhost`.
 
 - → Cloudflare **build variable** `VITE_TURNSTILE_SITEKEY`
-- → `pnpm exec wrangler secret put TURNSTILE_SECRET`
+- → Worker **secret** `TURNSTILE_SECRET` (Settings › Variables & Secrets). Not `wrangler secret put`: deployment is Workers Builds, so there is no local wrangler login.
 
 ## 7 · PostHog project
 
@@ -171,7 +171,7 @@ Attach `<domain>` (and `www` if wanted).
 
 - DNS propagation and zone activation
 - **Whether the free send lane accepts a routing-subdomain sender** (step 4)
-- Real email arriving in the Workspace inbox, and its spam placement
+- Real email arriving in the Hostinger inbox, and its spam placement
 - A real Turnstile challenge against a real hostname
 - PostHog ingestion, and how much adblockers suppress
 - WAF rate-limiting behaviour
