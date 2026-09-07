@@ -176,9 +176,15 @@ export function Assessment() {
    *  no user gesture. Confirm only on success, so the label never claims
    *  "Copied" when nothing was. The mailto path still works either way. */
   const copy = () => {
+    // Fires on the ATTEMPT, not the success branch. This event answers issue
+    // #13's question -- does the manual recovery panel actually recover leads
+    // -- and a clipboard write that rejects is exactly the case worth
+    // counting. Keeping the established name so the existing data stays
+    // continuous, even though it now reads slightly wide.
+    track({ name: 'assessment_details_copied' })
+
     navigator.clipboard.writeText(submission).then(
       () => {
-        track({ name: 'assessment_details_copied' })
         setCopied(true)
       },
       () => {

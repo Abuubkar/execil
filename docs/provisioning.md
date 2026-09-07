@@ -128,7 +128,7 @@ Attach `<domain>` (and `www` if wanted).
 
 ## Known risks carried into production
 
-- **Cloudflare Email Service is Beta** — no SLA, unspecified quotas. The form's failure panel is the mitigation; `assessment_failed{reason:"delivery"}` is the tripwire.
+- **Cloudflare Email Service is Beta** — no SLA, unspecified quotas. The form's failure panel is the mitigation; `assessment_submission_failed{reason:"delivery"}` is the tripwire.
 - **The routing-subdomain sender is unconfirmed** (step 4).
 - **PostHog undercounts** without a reverse proxy — adblockers block it. This is systematic, not random. Adding a proxy later does not backfill.
 - **The WAF rule has no representation in this repository** (step 8).

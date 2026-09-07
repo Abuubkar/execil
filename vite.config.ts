@@ -70,17 +70,16 @@ export default defineConfig({
     viteReact(),
   ],
 
-  // docs/ holds the design canvas and the research notes, and .claude/skills/
-  // holds vendor-authored agent references. All are primary sources that must
-  // stay byte-identical, not code to be reformatted.
+  // docs/ holds the design canvas and the research notes. Both are primary
+  // sources that must stay byte-identical, not code to be reformatted.
   fmt: {
-    ignorePatterns: ['docs/**', '.claude/skills/**', 'src/routeTree.gen.ts', 'dist/**'],
+    ignorePatterns: ['docs/**', 'src/routeTree.gen.ts', 'dist/**'],
     singleQuote: true,
     semi: false,
   },
 
   lint: {
-    ignorePatterns: ['docs/**', '.claude/skills/**', 'src/routeTree.gen.ts', 'dist/**'],
+    ignorePatterns: ['docs/**', 'src/routeTree.gen.ts', 'dist/**'],
     // Setting `plugins` REPLACES the default set, so the defaults are re-listed
     // alongside `react`, which is not on by default.
     plugins: ['eslint', 'typescript', 'unicorn', 'oxc', 'react'],
@@ -90,7 +89,12 @@ export default defineConfig({
         // PostHog is reachable ONLY from src/analytics/. Everywhere else goes
         // through useTrack(), which is what keeps the event vocabulary in
         // events.ts a closed union instead of a convention nobody enforces.
-        files: ['src/routes/**', 'src/sections/**', 'src/base/**'],
+        //
+        // Applied to ALL of src/ and switched off for the one directory that
+        // is allowed to import it. Enumerating the covered directories instead
+        // left router.tsx, seo.ts, messages.ts, legal.ts and styles/ outside
+        // the boundary.
+        files: ['src/**'],
         rules: {
           'no-restricted-imports': [
             'error',
@@ -104,6 +108,10 @@ export default defineConfig({
             },
           ],
         },
+      },
+      {
+        files: ['src/analytics/**'],
+        rules: { 'no-restricted-imports': 'off' },
       },
       {
         // base/ is deliberately exempt: Base components exist to render raw
