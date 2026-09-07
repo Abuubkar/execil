@@ -91,7 +91,7 @@ export default defineConfig({
 // wrangler.jsonc
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "execile-landing",
+  "name": "execil-landing",
   "compatibility_date": "2026-09-05",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",

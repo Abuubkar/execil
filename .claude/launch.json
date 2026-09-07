@@ -2,16 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "execile-dev",
+      "name": "execil-dev",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["run", "dev"],
       "port": 3000
-    },
-    {
-      "name": "execile-dev-verify",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["exec", "vite", "dev", "--port", "3100"],
-      "port": 3100
     }
   ]
 }

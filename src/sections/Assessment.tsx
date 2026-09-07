@@ -17,8 +17,8 @@ import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
 import { VisuallyHidden } from '../base/VisuallyHidden'
+import { useTrack } from '../analytics/useTrack'
 import type { AssessmentResult } from '../routes/api/assessment'
-import { track } from '../analytics/posthog'
 import { m } from '../messages'
 import { color, layout, radius, space, text } from '../styles/tokens.stylex'
 
@@ -32,7 +32,7 @@ const TURNSTILE_SCRIPT = 'https://challenges.cloudflare.com/turnstile/v0/api.js?
  *  submit handler is a stub that exercises every branch. */
 type FailureReason = 'validation' | 'challenge' | 'rate' | 'delivery'
 type TurnstileApi = {
-  render: (el: HTMLElement, options: { sitekey: string }) => string
+  render: (el: HTMLElement, options: { sitekey: string; action: string }) => string
   reset: (id: string) => void
 }
 
@@ -91,7 +91,9 @@ function formatSubmission(data: FormData): string {
 }
 
 export function Assessment() {
+  const track = useTrack()
   const [state, setState] = useState<FormState>({ status: 'idle' })
+  const formStarted = useRef(false)
   const turnstileLoaded = useRef(false)
   const widgetRef = useRef<HTMLDivElement>(null)
   const widgetId = useRef<string | null>(null)
@@ -103,8 +105,9 @@ export function Assessment() {
    *  By the time a field is focused it has seconds before a submit is
    *  possible, and the submit path awaits it rather than assuming it is
    *  ready (issue #18). */
-  const formStarted = useRef(false)
 
+  /** Fires once per visit, on the first field touched. Carries no field
+   *  value — only that the visitor began filling the form. */
   const onFirstInteraction = () => {
     if (!formStarted.current) {
       formStarted.current = true
@@ -130,7 +133,11 @@ export function Assessment() {
       const api = (globalThis as { turnstile?: TurnstileApi }).turnstile
       const node = widgetRef.current
       if (!api || !node || node.childElementCount > 0) return
-      widgetId.current = api.render(node, { sitekey: TURNSTILE_SITEKEY })
+      widgetId.current = api.render(node, {
+        sitekey: TURNSTILE_SITEKEY,
+        // Verified server-side; keep in step with TURNSTILE_ACTION.
+        action: 'assessment',
+      })
       globalThis.clearInterval(id)
     }, 150)
     return () => {
@@ -153,13 +160,11 @@ export function Assessment() {
           setState({ status: 'success' })
           return
         }
-        // The tripwire for Email Service's Beta status becoming a real
-        // problem rather than a noted risk (issue #13).
-        track({ name: 'assessment_failed', props: { reason: result.error } })
+        track({ name: 'assessment_submission_failed', props: { reason: result.error } })
         setState({ status: 'failure', reason: result.error })
       })
       .catch(() => {
-        track({ name: 'assessment_failed', props: { reason: 'delivery' } })
+        track({ name: 'assessment_submission_failed', props: { reason: 'delivery' } })
         setState({ status: 'failure', reason: 'delivery' })
       })
       .finally(() => {
@@ -175,7 +180,13 @@ export function Assessment() {
    *  no user gesture. Confirm only on success, so the label never claims
    *  "Copied" when nothing was. The mailto path still works either way. */
   const copy = () => {
-    track({ name: 'email_fallback_used', props: { method: 'copy_message' } })
+    // Fires on the ATTEMPT, not the success branch. This event answers issue
+    // #13's question -- does the manual recovery panel actually recover leads
+    // -- and a clipboard write that rejects is exactly the case worth
+    // counting. Keeping the established name so the existing data stays
+    // continuous, even though it now reads slightly wide.
+    track({ name: 'assessment_details_copied' })
+
     navigator.clipboard.writeText(submission).then(
       () => {
         setCopied(true)
@@ -235,7 +246,7 @@ export function Assessment() {
               <Button
                 variant="secondary"
                 onClick={() => {
-                  track({ name: 'email_fallback_used', props: { method: 'open_email' } })
+                  track({ name: 'assessment_email_fallback_opened' })
                   globalThis.open(mailto)
                 }}
               >
@@ -251,7 +262,6 @@ export function Assessment() {
             label={m.assessment.form.label}
             onSubmit={handleSubmit}
             onFocusCapture={onFirstInteraction}
-            noCapture
           >
             <Grid floor="sm" gap="s14">
               <Field label={m.assessment.form.fields.name.label}>

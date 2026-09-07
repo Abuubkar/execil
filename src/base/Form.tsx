@@ -21,7 +21,6 @@ export function Form({
   label,
   onSubmit,
   onFocusCapture,
-  noCapture = false,
   children,
   style,
 }: {
@@ -30,10 +29,6 @@ export function Form({
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
   /** Used to lazy-load third-party form scripts on first interaction. */
   onFocusCapture?: () => void
-  /** Opt this form out of analytics capture entirely. A data attribute rather
-   *  than a className: stylex.props() spreads its own className afterwards and
-   *  would overwrite one passed here. */
-  noCapture?: boolean
   children?: React.ReactNode
   style?: StyleProp
 }) {
@@ -43,7 +38,6 @@ export function Form({
       onSubmit={onSubmit}
       onFocusCapture={onFocusCapture}
       noValidate={false}
-      data-ph-no-capture={noCapture || undefined}
       {...stylex.props(styles.form, style)}
     >
       {children}

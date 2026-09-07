@@ -86,9 +86,8 @@ type LinkProps = {
   children?: React.ReactNode
   style?: StyleProp
   'aria-label'?: string
-  /** Fired on activation. Exists so sections can report an event without
-   *  importing the analytics module — base/ must not depend on it, and
-   *  sections must not depend on analytics either (issue #31). */
+  /** Fired on activation. A seam for side effects on click, so base/ never
+   *  has to know why a section cares. */
   onActivate?: (event: React.MouseEvent<HTMLAnchorElement>) => void
   current?: boolean
 }

@@ -1,5 +1,14 @@
 # PostHog on a static marketing site without a consent banner
 
+> **Partly superseded 2026-09-07.** The *install shape* recommended here — the
+> npm package initialised from a client-only effect on idle, with autocapture
+> narrowed — is not what is built. The app uses `PostHogProvider` from
+> `posthog-js/react`, and autocapture, session replay and heatmaps are on. That
+> divergence from issue #31 is deliberate and recorded in `docs/provisioning.md`
+> step 7. Everything below about config-option *semantics* remains accurate and
+> was used to write the current configuration.
+
+
 Research for ticket 05 (`.scratch/landing-page/issues/05-posthog-static.md`). Investigated 2026-09-05 against posthog.com/docs, the `PostHog/posthog-js` repository (commit `2d22949`, 2026-09-04), and developers.cloudflare.com. Every claim carries its source; anything not confirmed from a primary source is flagged in the last section.
 
 ## Summary and recommended configuration

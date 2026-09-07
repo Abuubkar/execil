@@ -9,8 +9,9 @@
 declare module 'cloudflare:workers' {
   export const env: {
     TURNSTILE_SECRET?: string
+    TURNSTILE_HOSTNAME?: string
     ASSESSMENT_TO?: string
-    SENDER_DOMAIN?: string
-    EMAIL?: { send: (message: Record<string, string>) => Promise<unknown> }
+    RESEND_FROM?: string
+    RESEND_API_KEY?: string
   }
 }

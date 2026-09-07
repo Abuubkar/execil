@@ -52,7 +52,7 @@ PAD = 88
 # Brand lockup
 d.rounded_rectangle([PAD, PAD, PAD + 56, PAD + 56], radius=15, fill=TEAL_700)
 d.rounded_rectangle([PAD + 20, PAD + 20, PAD + 36, PAD + 36], radius=5, fill=GREEN_200)
-d.text((PAD + 74, PAD + 12), "Execile", font=mark, fill=INK_900)
+d.text((PAD + 74, PAD + 12), "Execil", font=mark, fill=INK_900)
 
 # Headline, with the same two emphases as the hero. Broken into three lines so
 # it fits the 1200px canvas; the size is reduced until the widest line clears

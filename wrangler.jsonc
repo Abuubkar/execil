@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "execile",
+  "name": "execil",
   "compatibility_date": "2025-09-02",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
@@ -11,13 +11,34 @@
   "assets": {
     "html_handling": "drop-trailing-slash",
   },
+  "workers_dev": true,
+  "preview_urls": true,
 
-  // Plaintext config. Real values arrive at provisioning (issue #32).
+  // Plaintext config, and deliberately in git rather than the dashboard: these
+  // are not secrets, and a reviewer should see where submissions go.
+  //
+  // ASSESSMENT_TO is where submissions land: the Hostinger mailbox behind the
+  // apex MX. Resend delivers to it like any other recipient -- no verification
+  // step, unlike the Cloudflare binding this replaced.
   "vars": {
-    "ASSESSMENT_TO": "placeholder@example.com",
+    "ASSESSMENT_TO": "contact@execil.net",
+    // The whole From header, not a domain to assemble. Resend verifies
+    // execil.net itself and puts its own MX and SPF on send.execil.net, so the
+    // apex MX and SPF that carry the mailbox are never touched.
+    "RESEND_FROM": "Execil Assessment <assessment@execil.net>",
+    // The only hostname a Turnstile token may be minted on. Cloudflare adds
+    // localhost and 127.0.0.1 to every widget and they cannot be removed, so
+    // the server has to reject them itself.
+    "TURNSTILE_HOSTNAME": "execil.net",
   },
 
-  // Declared at provisioning, not now — both need an account to exist:
-  //   "send_email": [{ "name": "EMAIL", "destination_address": "<verified mailbox>" }]
-  //   TURNSTILE_SECRET via `wrangler secret put` (locally: .dev.vars)
+  // No send_email binding. Cloudflare Email Service needs the APEX onboarded
+  // to Email Routing, and its confirmation screen replaces the Hostinger MX
+  // and SPF records that carry the business mailbox. Delivery goes through
+  // Resend instead, sending from a subdomain so nothing at the apex moves.
+  //
+  // TURNSTILE_SECRET and RESEND_API_KEY are NOT here. They are secrets, this
+  // file is committed, and Cloudflare's own guidance is to keep sensitive
+  // values out of `vars`. Set both under Settings > Variables & Secrets
+  // (locally: .dev.vars).
 }

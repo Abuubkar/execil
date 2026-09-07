@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import * as stylex from '@stylexjs/stylex'
 
+import { useTrack } from '../analytics/useTrack'
 import { Box } from '../base/Box'
 import { BrandMark } from '../base/BrandMark'
 import { Icon } from '../base/Icon'
@@ -10,7 +11,6 @@ import { MenuPanel } from '../base/MenuPanel'
 import { SkipLink } from '../base/SkipLink'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
-import { track } from '../analytics/posthog'
 import { m } from '../messages'
 import { color, layout, motion, radius, screen, space, text } from '../styles/tokens.stylex'
 
@@ -131,6 +131,7 @@ function useCurrentSection(hrefs: readonly string[]): [string | null, (href: str
 }
 
 export function SiteHeader() {
+  const track = useTrack()
   const links = m.nav.links
   const [current, pinCurrent] = useCurrentSection(NAV_HREFS)
 

@@ -1,14 +1,14 @@
 {
   "site": {
-    "name": "Execile",
+    "name": "Execil",
     "phone": "+1 (914) 513-4535",
     "phoneHref": "tel:+19145134535"
   },
   "meta": {
-    "title": "Execile | Medical Billing & RCM for Independent Practices",
+    "title": "Execil | Medical Billing & RCM for Independent Practices",
     "description": "Specialty-assigned medical billing and revenue cycle management for independent practices with 1-20 providers. We work inside the EHR you already use, you see what we collect, and you know the price before you sign.",
     "ogTitle": "Collect Every Dollar You've Earned",
-    "ogImageAlt": "Execile: medical billing and revenue cycle management for independent practices",
+    "ogImageAlt": "Execil: medical billing and revenue cycle management for independent practices",
     "legalName": "EXECIL PVT LTD",
     "legal": {
       "privacy": {
@@ -21,7 +21,7 @@
       },
       "hipaa": {
         "title": "HIPAA Statement",
-        "description": "How Execile handles protected health information as a business associate, and why the website is not a channel for it."
+        "description": "How Execil handles protected health information as a business associate, and why the website is not a channel for it."
       }
     },
     "addressRegion": "NY",
@@ -36,7 +36,7 @@
   },
   "nav": {
     "label": "Main",
-    "home": "Execile home",
+    "home": "Execil home",
     "skip": "Skip to content",
     "menuLabel": "Menu",
     "cta": "Get a Free Billing Assessment",
@@ -259,8 +259,8 @@
     "eyebrow": "Why us",
     "title": "The terms most billing vendors won't put in writing.",
     "table": {
-      "caption": "Execile compared with a typical billing vendor",
-      "columns": ["", "Typical billing vendor", "Execile"],
+      "caption": "Execil compared with a typical billing vendor",
+      "columns": ["", "Typical billing vendor", "Execil"],
       "rows": [
         {
           "label": "Setup fees",
@@ -316,7 +316,7 @@
   "results": {
     "eyebrow": "Results",
     "title": "What changes when the cycle is worked.",
-    "comingSoon": "Execile is new, so there are no client outcomes to publish here yet. We will publish them once they are measured and the client has approved sharing them, not before.",
+    "comingSoon": "Execil is new, so there are no client outcomes to publish here yet. We will publish them once they are measured and the client has approved sharing them, not before.",
     "measuresTitle": "What we report, every month",
     "measures": [
       {

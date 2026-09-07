@@ -86,6 +86,34 @@ export default defineConfig({
     options: { typeAware: true, typeCheck: true },
     overrides: [
       {
+        // PostHog is reachable ONLY from src/analytics/. Everywhere else goes
+        // through useTrack(), which is what keeps the event vocabulary in
+        // events.ts a closed union instead of a convention nobody enforces.
+        //
+        // Applied to ALL of src/ and switched off for the one directory that
+        // is allowed to import it. Enumerating the covered directories instead
+        // left router.tsx, seo.ts, messages.ts, legal.ts and styles/ outside
+        // the boundary.
+        files: ['src/**'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [
+                {
+                  group: ['posthog-js', 'posthog-js/*'],
+                  message: 'Import useTrack from src/analytics/useTrack instead.',
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
+        files: ['src/analytics/**'],
+        rules: { 'no-restricted-imports': 'off' },
+      },
+      {
         // base/ is deliberately exempt: Base components exist to render raw
         // tags, and Icon must render svg/path/circle/rect.
         files: ['src/sections/**', 'src/routes/**'],

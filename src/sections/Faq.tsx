@@ -1,5 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
+import { useTrack } from '../analytics/useTrack'
 import { Disclosure } from '../base/Disclosure'
 import { Eyebrow } from '../base/Eyebrow'
 import { Heading } from '../base/Heading'
@@ -7,7 +8,6 @@ import { Link } from '../base/Link'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
-import { track } from '../analytics/posthog'
 import { m } from '../messages'
 import { layout } from '../styles/tokens.stylex'
 
@@ -20,6 +20,8 @@ const styles = stylex.create({
 })
 
 export function Faq() {
+  const track = useTrack()
+
   return (
     <Section id="faq" labelledBy={HEADING_ID} tone="raised" size="lg" width="hero">
       <Stack gap="s32">

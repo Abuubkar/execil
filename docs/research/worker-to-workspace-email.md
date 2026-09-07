@@ -1,5 +1,16 @@
 # Worker to Google Workspace email
 
+> **SUPERSEDED 2026-09-07. Do not implement this document.** Its conclusion —
+> Cloudflare Email Service, sending from a subdomain enabled for Email Routing —
+> cannot be built. Email Routing has no subdomain-only path: the dashboard
+> reaches Settings › Subdomains through the apex, and onboarding the apex
+> replaces the `MX` and `SPF` records carrying the live mailbox. The mailbox is
+> also Hostinger now, not Google Workspace. Delivery goes through Resend.
+> See `docs/provisioning.md` step 4 for what is actually built. The findings
+> below remain accurate as of their investigation date and are kept as a record
+> of what was checked.
+
+
 Research ticket: `.scratch/landing-page/issues/04-worker-to-workspace-email.md`. Investigated 2026-09-05 against primary sources (Cloudflare docs, Google Workspace and Gmail API docs, provider docs). Google Workspace is the *destination* inbox; the question is how the Cloudflare Worker that receives the Assessment Form submission gets an email into it.
 
 ## Summary and recommendation

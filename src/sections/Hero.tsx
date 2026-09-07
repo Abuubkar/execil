@@ -1,5 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
+import { useTrack } from '../analytics/useTrack'
 import { Badge } from '../base/Badge'
 import { Dot } from '../base/Dot'
 import { Heading } from '../base/Heading'
@@ -10,7 +11,6 @@ import { RichText } from '../base/RichText'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
-import { track } from '../analytics/posthog'
 import { heroTitle, m } from '../messages'
 import { layout, space, text } from '../styles/tokens.stylex'
 
@@ -28,6 +28,8 @@ const styles = stylex.create({
 export const HERO_HEADING_ID = 'hero-h'
 
 export function Hero() {
+  const track = useTrack()
+
   return (
     <Section
       labelledBy={HERO_HEADING_ID}

@@ -21,7 +21,7 @@ const styles = stylex.create({
     letterSpacing: text.trackingTight,
   },
   /** Attribution. Every statistic here is an industry figure from a named
-   *  third party — never a claim about Execile's own results (issue #19). */
+   *  third party — never a claim about Execil's own results (issue #19). */
   source: { marginBlockStart: space.s12 },
 })
 

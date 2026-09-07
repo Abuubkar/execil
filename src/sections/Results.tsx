@@ -14,7 +14,7 @@ import { layout, space } from '../styles/tokens.stylex'
 const HEADING_ID = 'results-h'
 
 /**
- * Results mode. Launches in "coming soon" because Execile has no measured
+ * Results mode. Launches in "coming soon" because Execil has no measured
  * client outcomes yet, and placeholder case studies would read as real ones
  * (see CONTEXT.md). Flip to case studies only when the numbers exist and the
  * client has approved sharing them. The disclosure every published outcome
@@ -25,7 +25,7 @@ const SHOW_CASE_STUDIES = false
 const styles = stylex.create({
   intro: { maxWidth: layout.containerText },
   /** Attribution, as in Problem: a third party's benchmark, never a claim
-   *  about Execile's own results. `auto` pins it to the foot of the card, so
+   *  about Execil's own results. `auto` pins it to the foot of the card, so
    *  the one card that carries a source still lines up with the row. */
   source: { marginBlockStart: 'auto', paddingBlockStart: space.s12 },
 })
