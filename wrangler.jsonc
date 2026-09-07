@@ -26,6 +26,10 @@
     // execil.net itself and puts its own MX and SPF on send.execil.net, so the
     // apex MX and SPF that carry the mailbox are never touched.
     "RESEND_FROM": "Execil Assessment <assessment@execil.net>",
+    // The only hostname a Turnstile token may be minted on. Cloudflare adds
+    // localhost and 127.0.0.1 to every widget and they cannot be removed, so
+    // the server has to reject them itself.
+    "TURNSTILE_HOSTNAME": "execil.net",
   },
 
   // No send_email binding. Cloudflare Email Service needs the APEX onboarded

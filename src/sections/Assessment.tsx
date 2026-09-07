@@ -32,7 +32,7 @@ const TURNSTILE_SCRIPT = 'https://challenges.cloudflare.com/turnstile/v0/api.js?
  *  submit handler is a stub that exercises every branch. */
 type FailureReason = 'validation' | 'challenge' | 'rate' | 'delivery'
 type TurnstileApi = {
-  render: (el: HTMLElement, options: { sitekey: string }) => string
+  render: (el: HTMLElement, options: { sitekey: string; action: string }) => string
   reset: (id: string) => void
 }
 
@@ -133,7 +133,11 @@ export function Assessment() {
       const api = (globalThis as { turnstile?: TurnstileApi }).turnstile
       const node = widgetRef.current
       if (!api || !node || node.childElementCount > 0) return
-      widgetId.current = api.render(node, { sitekey: TURNSTILE_SITEKEY })
+      widgetId.current = api.render(node, {
+        sitekey: TURNSTILE_SITEKEY,
+        // Verified server-side; keep in step with TURNSTILE_ACTION.
+        action: 'assessment',
+      })
       globalThis.clearInterval(id)
     }, 150)
     return () => {

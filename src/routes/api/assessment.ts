@@ -18,12 +18,18 @@ export type AssessmentResult =
  *  missing binding is a type error instead of "[object Object]" in an email. */
 type AssessmentEnv = {
   TURNSTILE_SECRET?: string
+  TURNSTILE_HOSTNAME?: string
   ASSESSMENT_TO?: string
   RESEND_FROM?: string
   RESEND_API_KEY?: string
 }
 
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+
+/** Binds a token to this one form. A token minted against another surface
+ *  sharing the sitekey is rejected. Must match the `action` passed to
+ *  `turnstile.render` in the Assessment section. */
+const TURNSTILE_ACTION = 'assessment'
 
 /** Server-side caps. Client validation is a convenience, never a guard. */
 const LIMITS = {
@@ -115,21 +121,43 @@ export const Route = createFileRoute('/api/assessment')({
           return json({ ok: false, error: 'challenge' }, 403)
         }
 
-        const verifyBody = new FormData()
-        verifyBody.append('secret', secret)
-        verifyBody.append('response', token)
+        const verifyBody = new URLSearchParams({ secret, response: token })
+        // CF-Connecting-IP rather than X-Forwarded-For: on Workers this is the
+        // header Cloudflare sets itself and a client cannot forge.
         const ip = request.headers.get('CF-Connecting-IP')
         if (ip) verifyBody.append('remoteip', ip)
 
-        const verifyResponse = await fetch(TURNSTILE_VERIFY_URL, {
-          method: 'POST',
-          body: verifyBody,
-        })
-        const verdict = (await verifyResponse.json()) as {
-          success?: boolean
-          hostname?: string
+        let verdict: { success?: boolean; hostname?: string; action?: string }
+        try {
+          const verifyResponse = await fetch(TURNSTILE_VERIFY_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            // Without this a hung siteverify hangs the submission with it.
+            signal: AbortSignal.timeout(10_000),
+            body: verifyBody,
+          })
+          verdict = await verifyResponse.json()
+        } catch {
+          return json({ ok: false, error: 'challenge' }, 403)
         }
-        if (!verdict.success) {
+
+        // Cloudflare requires all three, not just `success`: an approved
+        // hostname, and the action the token was minted for.
+        //
+        // The hostname check is what stops a token minted on localhost being
+        // spent here. Turnstile adds localhost and 127.0.0.1 to every widget
+        // automatically and they cannot be removed, and the sitekey is public,
+        // so without it anyone could solve a challenge on their own machine and
+        // post the token to production.
+        //
+        // Both are skipped in DEV because they cannot be satisfied there:
+        // Cloudflare's TEST keys answer with hostname "example.com" and no
+        // `action` at all, whatever the widget was rendered with. `success` is
+        // still required. import.meta.env.DEV is statically false in a
+        // production build, so this relaxation cannot ship.
+        const hostnameAndActionMatch =
+          verdict.action === TURNSTILE_ACTION && verdict.hostname === bindings.TURNSTILE_HOSTNAME
+        if (!verdict.success || !(hostnameAndActionMatch || import.meta.env.DEV)) {
           return json({ ok: false, error: 'challenge' }, 403)
         }
 
