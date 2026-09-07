@@ -24,9 +24,16 @@ lint, types, build and the placeholder report on every push and pull request.
 In the Worker's **Settings › Build**:
 
 - **Branch**: `main`
-- **Build command**: `pnpm run build:deploy` — this is `placeholders && build`,
-  so the hard gate runs before every production build. Do not set it to a bare
-  `pnpm run build`; that skips the gate.
+- **Root directory**: `/`
+- **Build command**: `pnpm run build`
+- **Deploy command**: `pnpm run deploy:production` — this is
+  `placeholders && wrangler deploy`, so the hard gate runs before production
+  and **only** before production. Do not move the gate into the build command:
+  the build runs for preview versions too, and the copy ships with bracketed
+  placeholders deliberately until launch, so a gated build would fail every
+  preview.
+- **Version command**: `npx wrangler versions upload` — this is what produces
+  preview URLs for non-production branches. Leave it ungated.
 - **Build variables and secrets**: every `VITE_` value in the table below.
   These are build-time only. Runtime values live under *Settings › Variables &
   Secrets* and come from the `vars` block in `wrangler.jsonc`.
