@@ -1,5 +1,6 @@
 import { env } from 'cloudflare:workers'
 import { createFileRoute } from '@tanstack/react-router'
+import { Resend } from 'resend'
 
 /**
  * The Assessment Form endpoint. No component, so it is excluded from prerender
@@ -150,26 +151,18 @@ export const Route = createFileRoute('/api/assessment')({
         }
 
         try {
-          const sent = await fetch('https://api.resend.com/emails', {
-            method: 'POST',
-            headers: {
-              Authorization: `Bearer ${apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              from: bindings.RESEND_FROM ?? '',
-              // Resend takes an array here, not a bare string.
-              to: [bindings.ASSESSMENT_TO ?? ''],
-              reply_to: values.email,
-              subject: `New assessment request — ${values.practice || values.name}`,
-              text: plainTextBody(values),
-            }),
+          const { error } = await new Resend(apiKey).emails.send({
+            from: bindings.RESEND_FROM ?? '',
+            to: [bindings.ASSESSMENT_TO ?? ''],
+            replyTo: values.email,
+            subject: `New assessment request — ${values.practice || values.name}`,
+            text: plainTextBody(values),
           })
 
-          // fetch only rejects on network failure, so a 4xx/5xx from Resend
-          // would otherwise look like success and the visitor would be told
-          // their request was delivered when it was not.
-          if (!sent.ok) throw new Error(`resend ${sent.status}`)
+          // The SDK RESOLVES on an API error, returning it in `error` rather
+          // than throwing. Without this check a rejected send would look like
+          // success and the visitor would be told their request was delivered.
+          if (error) throw new Error(error.message)
         } catch {
           // Field NAMES and outcomes only — never values. No message body,
           // email address or field value is ever logged (issue #12).
