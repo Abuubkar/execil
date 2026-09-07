@@ -19,7 +19,7 @@ type AssessmentEnv = {
   TURNSTILE_SECRET?: string
   ASSESSMENT_TO?: string
   SENDER_DOMAIN?: string
-  EMAIL?: { send: (message: Record<string, string>) => Promise<unknown> }
+  RESEND_API_KEY?: string
 }
 
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
@@ -138,24 +138,39 @@ export const Route = createFileRoute('/api/assessment')({
           return json({ ok: false, error: 'validation', fields }, 400)
         }
 
-        // 4. Deliver. Sender is on the Email Routing subdomain so the apex MX
-        //    stays with Google.
-        const email = bindings.EMAIL
-        if (!email) {
-          // Locally wrangler simulates the binding; if it is genuinely absent
-          // the submission cannot be delivered and the UI offers the mailto
-          // fallback rather than pretending success.
+        // 4. Deliver, through Resend rather than Cloudflare Email Service.
+        //    The sender is a SUBDOMAIN so Resend's verification records live on
+        //    forms.<domain> and the apex MX, SPF and DMARC -- which carry the
+        //    business mailbox -- are never touched.
+        const apiKey = bindings.RESEND_API_KEY
+        if (!apiKey) {
+          // No key locally or in preview. The submission cannot be delivered,
+          // so the UI offers the mailto fallback rather than pretending
+          // success.
           return json({ ok: false, error: 'delivery' }, 502)
         }
 
         try {
-          await email.send({
-            from: `assessment@forms.${bindings.SENDER_DOMAIN ?? 'example.com'}`,
-            to: bindings.ASSESSMENT_TO ?? '',
-            replyTo: values.email,
-            subject: `New assessment request — ${values.practice || values.name}`,
-            text: plainTextBody(values),
+          const sent = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${apiKey}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              from: `assessment@forms.${bindings.SENDER_DOMAIN ?? 'example.com'}`,
+              // Resend takes an array here, not a bare string.
+              to: [bindings.ASSESSMENT_TO ?? ''],
+              reply_to: values.email,
+              subject: `New assessment request — ${values.practice || values.name}`,
+              text: plainTextBody(values),
+            }),
           })
+
+          // fetch only rejects on network failure, so a 4xx/5xx from Resend
+          // would otherwise look like success and the visitor would be told
+          // their request was delivered when it was not.
+          if (!sent.ok) throw new Error(`resend ${sent.status}`)
         } catch {
           // Field NAMES and outcomes only — never values. No message body,
           // email address or field value is ever logged (issue #12).

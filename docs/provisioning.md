@@ -6,9 +6,9 @@ Decisions behind this: [issue #16](https://github.com/Abuubkar/execil/issues/16)
 
 ---
 
-## ⚠️ Read before step 4
+## ⚠️ Read before touching DNS
 
-**Email Routing goes on a subdomain, never the apex.** Enabling Email Routing on the apex domain replaces the mailbox provider's MX records and **breaks the client's mail**. The mailbox is Hostinger, so the apex MX belongs to Hostinger and nothing in this runbook may touch it. This is the one step in this runbook that can cause real damage in the wrong order.
+**Nothing in this runbook may touch the apex mail records.** The apex `MX` and `SPF` carry the Hostinger mailbox. Cloudflare Email Routing and Email Sending both want to rewrite them — its "Verify DNS records" screen offers to remove the conflicting Hostinger records "in place" — which is why neither is used here. Sending goes through Resend from `forms.execil.net`. This is the one area in this runbook that can cause real damage.
 
 ---
 
@@ -54,28 +54,47 @@ Purchase the domain, point its nameservers at Cloudflare, wait for the zone to g
 
 The address that receives submissions. **The apex MX stays pointed at Hostinger throughout** — nothing in this runbook changes it.
 
-The provider is irrelevant to the delivery mechanism: the Worker sends to a *verified destination address* (step 5), and Cloudflare verifies it by emailing a link to that mailbox. Keep DNS on Cloudflare and add Hostinger's MX, SPF and DKIM records to the Cloudflare zone by hand — moving nameservers to Hostinger would break Email Routing, the Worker custom domain and the WAF rule.
+The provider is irrelevant to the delivery mechanism: the Worker POSTs to Resend, which delivers to whatever `ASSESSMENT_TO` names. Keep DNS on Cloudflare — the nameservers are delegated there, so Hostinger's own DNS panel is not served, and moving nameservers back to Hostinger would break the Worker custom domain and the WAF rule.
 
 - → wrangler var `ASSESSMENT_TO`
 - → Cloudflare **build variable** `VITE_CONTACT_EMAIL` (used by the form's failure-panel `mailto:`)
 
-## 4 · Email Routing on a subdomain ⚠️
+## 4 · Resend account and sending domain ⚠️
 
-Enable Email Routing on **`forms.<domain>`**, not the apex. Cloudflare writes the subdomain's MX, SPF and DKIM records itself.
+**Cloudflare Email Service is not used.** Its confirmation screen replaces the
+apex `MX` and `SPF` records — the ones carrying the Hostinger mailbox — and the
+dashboard gives no way to add a routing subdomain without onboarding the apex
+first. Email Routing and Email Sending both want the apex. Delivery goes
+through Resend instead.
 
-> **Test this before relying on the free send lane.** No primary source confirms that a *routing subdomain* is an acceptable `from` domain for free verified-destination sends. If it is rejected, the fallback is Workers Paid (USD 5/month) plus Email Sending onboarding — a cost change, not a redesign. Confirm here rather than discovering it at launch.
+Verify **`forms.execil.net`**, not the apex. Resend's DKIM and return-path
+records then live on the subdomain and nothing at the apex moves.
 
-- → wrangler var `SENDER_DOMAIN` (the bare domain; the route sends from `assessment@forms.<SENDER_DOMAIN>`)
+- Add the DNS records Resend shows you to **Cloudflare** DNS, not Hostinger —
+  Cloudflare is authoritative for this zone. Set them **DNS only (grey cloud)**.
+- → Worker **secret** `RESEND_API_KEY` (Settings › Variables & Secrets; locally
+  `.dev.vars`). Never a `var`: this is a secret and `wrangler.jsonc` is committed.
 
-## 5 · Verified destination address
+> **Do not touch the apex mail records.** Baseline to protect:
+> `MX 5 mx1.hostinger.com` / `MX 10 mx2.hostinger.com`,
+> `TXT "v=spf1 include:_spf.mail.hostinger.com ~all"`,
+> `TXT _dmarc "v=DMARC1; p=none"`.
+> Verify with `dig +short MX execil.net @1.1.1.1` after any DNS change.
 
-Add the step-3 mailbox as a verified destination; Cloudflare emails a verification link. Sends to verified destinations are free on every plan and count against no quota.
+> **Known gap, unrelated to Resend.** Hostinger's three DKIM CNAMEs
+> (`hostingermail-a/b/c._domainkey`) and the `autodiscover` / `autoconfig`
+> CNAMEs exist in Hostinger's panel but were never copied into the Cloudflare
+> zone, so outbound Hostinger mail is unsigned and mail-client autoconfig is
+> broken. Sending from a subdomain via Resend avoids depending on any of it.
 
-Then declare the binding in `wrangler.jsonc`:
+## 5 · Recipient address
 
-```jsonc
-"send_email": [{ "name": "EMAIL", "destination_address": "<the verified mailbox>" }]
-```
+- → wrangler var `ASSESSMENT_TO`, the address submissions are sent to. Plain
+  text in `wrangler.jsonc` on purpose: it is not a secret, and a reviewer
+  should see where leads go.
+
+Until it is a real address, submissions fail with reason `delivery` and the
+form shows its recovery panel. That is the designed failure path.
 
 ## 6 · Turnstile widget
 
@@ -129,8 +148,8 @@ Attach `<domain>` (and `www` if wanted).
 | `VITE_SITE_URL` | Cloudflare build variable | 2 | `https://execil.net` |
 | `ASSESSMENT_TO` | wrangler var | 3 | |
 | `VITE_CONTACT_EMAIL` | Cloudflare build variable | 3 | `contact@execil.net` |
-| `SENDER_DOMAIN` | wrangler var | 4 | |
-| `EMAIL` | wrangler binding | 5 | |
+| `SENDER_DOMAIN` | wrangler var | 4 | `execil.net` |
+| `RESEND_API_KEY` | Worker secret | 4 | |
 | `VITE_TURNSTILE_SITEKEY` | Cloudflare build variable | 6 | |
 | `TURNSTILE_SECRET` | Worker secret | 6 | |
 | `VITE_PUBLIC_POSTHOG_PROJECT_TOKEN` | Cloudflare build variable | 7 | |

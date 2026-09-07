@@ -11,6 +11,6 @@ declare module 'cloudflare:workers' {
     TURNSTILE_SECRET?: string
     ASSESSMENT_TO?: string
     SENDER_DOMAIN?: string
-    EMAIL?: { send: (message: Record<string, string>) => Promise<unknown> }
+    RESEND_API_KEY?: string
   }
 }

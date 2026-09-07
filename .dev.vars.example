@@ -3,3 +3,9 @@
 #   2x0000000000000000000000000000000AA  always fails
 #   3x0000000000000000000000000000000AA  "token already spent"
 TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+
+# Resend. Leave EMPTY to exercise the delivery-failure path: the endpoint
+# returns error "delivery" and the form shows its recovery panel. A real key
+# (re_...) sends for real, so prefer Resend's own test addresses:
+#   delivered@resend.dev  bounced@resend.dev  complained@resend.dev
+RESEND_API_KEY=

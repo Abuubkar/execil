@@ -27,16 +27,13 @@
     "SENDER_DOMAIN": "execil.net",
   },
 
-  // Cloudflare Email Service. Sends to a verified destination address are free
-  // on every plan and count against no quota.
+  // No send_email binding. Cloudflare Email Service needs the APEX onboarded
+  // to Email Routing, and its confirmation screen replaces the Hostinger MX
+  // and SPF records that carry the business mailbox. Delivery goes through
+  // Resend instead, sending from a subdomain so nothing at the apex moves.
   //
-  // No `destination_address` yet: with one set, the binding is pinned to that
-  // single recipient and a `to` that differs is rejected. Adding it is the
-  // safer shape and should happen once the mailbox is verified (step 5) --
-  // it must then match ASSESSMENT_TO exactly.
-  "send_email": [{ "name": "EMAIL" }],
-
-  // TURNSTILE_SECRET is NOT here. It is a secret, this file is committed, and
-  // Cloudflare's own guidance is to keep sensitive values out of `vars`.
-  // Set it under Settings > Variables & Secrets (locally: .dev.vars).
+  // TURNSTILE_SECRET and RESEND_API_KEY are NOT here. They are secrets, this
+  // file is committed, and Cloudflare's own guidance is to keep sensitive
+  // values out of `vars`. Set both under Settings > Variables & Secrets
+  // (locally: .dev.vars).
 }
