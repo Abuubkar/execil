@@ -4,6 +4,14 @@ Ordered by dependency. Each step names what it produces and which variable it fi
 
 Decisions behind this: [issue #16](https://github.com/Abuubkar/execil/issues/16).
 
+> **This runbook is not the source of truth.** It records what was believed
+> when it was written, much of it reasoned before any account existed. Where it
+> disagrees with the vendor's own current documentation, **the vendor wins** —
+> check the doc, follow it, and correct this file in the same change. Prefer a
+> primary source to a blog or a search result. It has already been wrong about
+> Email Routing subdomains, the mailbox provider, Free-plan rate-limiting
+> fields, and `wrangler secret put`.
+
 ---
 
 ## ⚠️ Read before touching DNS
