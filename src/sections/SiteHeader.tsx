@@ -73,37 +73,63 @@ const styles = stylex.create({
   menuCta: { marginBlockStart: space.s8, textAlign: 'center' },
 })
 
+/** Fraction of the viewport height that counts as the reading line. */
+const READING_LINE = 0.4
+
+/**
+ * Chapter ranges: a link is current from its section's top until the next
+ * linked section's top, so sections without a link belong to the one above.
+ * The last chapter ends at its own bottom — nothing is lit on the form.
+ */
 function useCurrentSection(hrefs: readonly string[]): [string | null, (href: string) => void] {
   const [current, setCurrent] = useState<string | null>(null)
   const pinned = useRef<string | null>(null)
+  const update = useRef<() => void>(() => {})
 
   useEffect(() => {
-    const ids = hrefs.map((href) => href.slice(href.indexOf('#') + 1))
-    const targets = ids
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null)
-    if (targets.length === 0) return
+    const chapters = hrefs
+      .map((href) => ({ href, el: document.getElementById(href.slice(href.indexOf('#') + 1)) }))
+      .filter((c): c is { href: string; el: HTMLElement } => c.el !== null)
+      .sort((a, b) => a.el.offsetTop - b.el.offsetTop)
+    if (chapters.length === 0) return
 
-    const inBand = new Set<string>()
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) inBand.add(entry.target.id)
-          else inBand.delete(entry.target.id)
+    let frame: number | undefined
+    const measure = () => {
+      frame = undefined
+      if (pinned.current !== null) return
+      const line = globalThis.innerHeight * READING_LINE
+      let next: string | null = null
+      for (let i = 0; i < chapters.length; i++) {
+        const chapter = chapters[i]
+        const after = chapters[i + 1]
+        if (chapter === undefined) continue
+        const rect = chapter.el.getBoundingClientRect()
+        const end = after === undefined ? rect.bottom : after.el.getBoundingClientRect().top
+        if (rect.top <= line && line < end) {
+          next = chapter.href
+          break
         }
-        if (pinned.current !== null) return
-        const topmost = ids.find((id) => inBand.has(id))
-        // Clears when nothing is in the band — over the hero, no link is current.
-        setCurrent(topmost === undefined ? null : (hrefs[ids.indexOf(topmost)] ?? null))
-      },
-      { rootMargin: '-35% 0px -55% 0px' },
-    )
-    for (const target of targets) observer.observe(target)
+      }
+      setCurrent(next)
+    }
+    const schedule = () => {
+      if (frame === undefined) frame = globalThis.requestAnimationFrame(measure)
+    }
+    update.current = measure
+
+    measure()
+    globalThis.addEventListener('scroll', schedule, { passive: true })
+    globalThis.addEventListener('resize', schedule)
     return () => {
-      observer.disconnect()
+      if (frame !== undefined) globalThis.cancelAnimationFrame(frame)
+      globalThis.removeEventListener('scroll', schedule)
+      globalThis.removeEventListener('resize', schedule)
+      update.current = () => {}
     }
   }, [hrefs])
 
+  // Holds the clicked link through the smooth scroll so chapters in between
+  // do not flash past.
   const pin = useCallback((href: string) => {
     pinned.current = href
     setCurrent(href)
@@ -113,6 +139,7 @@ function useCurrentSection(hrefs: readonly string[]): [string | null, (href: str
       pinned.current = null
       if (timer !== undefined) globalThis.clearTimeout(timer)
       globalThis.removeEventListener('scrollend', release)
+      update.current()
     }
     globalThis.addEventListener('scrollend', release, { once: true })
     timer = globalThis.setTimeout(release, 1200)
