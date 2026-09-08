@@ -37,10 +37,14 @@ const styles = stylex.create({
   },
   lead: { maxWidth: layout.containerText },
   ctas: { justifyContent: { default: 'center', [screen.navUp]: 'flex-start' } },
+  // Grid, not a wrapped flex row: with six items flex breaks the second line
+  // wherever the content happens to end, leaving the last item unaligned.
   trust: {
     columnGap: space.s20,
+    display: 'grid',
     fontSize: text.base,
-    justifyContent: { default: 'center', [screen.navUp]: 'flex-start' },
+    gridTemplateColumns: { default: 'repeat(2, auto)', [screen.navUp]: 'repeat(3, 1fr)' },
+    justifyContent: { default: 'center', [screen.navUp]: 'start' },
     marginBlockStart: space.s16,
     rowGap: space.s10,
   },

@@ -6,7 +6,7 @@
   },
   "meta": {
     "title": "Execil | Medical Billing & RCM for Independent Practices",
-    "description": "Specialty-assigned medical billing and RCM for independent practices with 35-40 providers. We work inside your existing EHR, and you know the price upfront.",
+    "description": "Medical billing and RCM for independent practices with 20+ providers, handled by coders who know your specialty. You know the price upfront.",
     "ogTitle": "Collect Every Dollar You've Earned",
     "ogImageAlt": "Execil: medical billing and revenue cycle management for independent practices",
     "legalName": "EXECIL PVT LTD",
@@ -82,7 +82,7 @@
       },
       "."
     ],
-    "lead": "Specialty-assigned billing for independent practices with 35-40 providers. We work inside the EHR you already use. You see what we collect, and you know the price before you sign anything.",
+    "lead": "We work with independent practices that have 20+ providers. Coders who know your specialty do the billing, inside the EHR you already use. You see what we collect, and you know the price before you sign.",
     "imageAlt": "A billing specialist at two monitors, reviewing a claims dashboard",
     "ctaPrimary": "Get a Free Billing Assessment",
     "ctaSecondary": "See Our Services",
@@ -290,7 +290,7 @@
         },
         {
           "label": "Team",
-          "cells": ["Pooled generalists", "Specialty-assigned team"]
+          "cells": ["Pooled generalists", "A team that knows your specialty"]
         },
         {
           "label": "Account manager",
@@ -304,7 +304,7 @@
     "goodTitle": "A strong fit if",
     "badTitle": "Less of a fit if",
     "good": [
-      "You're an independent practice with 35-40 providers",
+      "You're an independent practice with 20+ providers",
       "Denials are rising or AR is aging",
       "You want real visibility into collections",
       "You're adding providers who need credentialing"
@@ -432,7 +432,7 @@
         },
         "providers": {
           "label": "Number of providers",
-          "options": ["1", "2-5", "6-10", "11-20", "21-34", "35-40", "40+"]
+          "options": ["1", "2-5", "6-10", "11-20", "21-50", "50+"]
         },
         "concern": {
           "label": "Primary concern",

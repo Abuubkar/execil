@@ -155,13 +155,15 @@ export const space = stylex.defineVars({
   s32: '32px',
   s40: '40px',
   s48: '48px',
+  s64: '64px',
 
   // Section padding: 8 canvas clamp patterns collapsed to 4, plus the gutter.
   sectionLg: 'clamp(56px, 7vw, 96px)',
   sectionMd: 'clamp(48px, 6vw, 80px)',
   sectionSm: 'clamp(40px, 5vw, 64px)',
-  /** Hero negates this to bleed the picture to the top edge. */
-  heroTop: 'clamp(48px, 6vw, 80px)',
+  /** Hero negates this to bleed the picture to the top edge. 32px lighter
+   *  than sectionMd, which is what the header's contact strip takes. */
+  heroTop: 'clamp(32px, 4vw, 48px)',
   gutter: '24px',
 })
 
@@ -212,6 +214,8 @@ export const motion = stylex.defineConsts({
 export const screen = stylex.defineConsts({
   /** Nav and Hero layout. HERO_SIZES repeats this number; change both. */
   nav: '1040px',
+  /** Where the header has room to open its gaps up. */
+  navWide: '@media (min-width: 1300px)',
   navUp: '@media (min-width: 1040px)',
   navDown: '@media (max-width: 1039.98px)',
   /** Comparison table only — stacks below this. Issue #17. */

@@ -6,7 +6,7 @@ Vocabulary for the Execil landing-page effort. Glossary only; decisions live in 
 
 - **Execil** — the brand. A medical billing and revenue cycle management service for independent US practices. The `name` prop in the design canvas.
 - **RCM (Revenue Cycle Management)** — the full billing lifecycle a practice runs to get paid: eligibility, credentialing, coding, claim submission, payment posting, AR follow-up, denials, patient statements, reporting.
-- **Practice** — the customer. An independent medical practice with 35–40 providers.
+- **Practice** — the customer. An independent medical practice with 20+ providers.
 - **Provider** — a clinician in a Practice who bills payers. Providers must be credentialed and enrolled before payers will pay for them.
 - **Payer** — an insurer or program that pays claims.
 - **Specialty** — a medical field (Primary Care, Behavioral Health, …). Execil assigns coders by Specialty.
