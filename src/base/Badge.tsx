@@ -52,7 +52,7 @@ export function Badge({
 }) {
   return (
     <span {...stylex.props(base.badge, tones[tone])}>
-      {dot ? <Dot tone={dot} size="sm" glow /> : null}
+      {dot ? <Dot tone={dot} size="xs" glow /> : null}
       {children}
     </span>
   )
