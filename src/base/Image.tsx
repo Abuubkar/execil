@@ -3,7 +3,7 @@ import * as stylex from '@stylexjs/stylex'
 import type { StyleProp } from './Box'
 
 export type ImageFit = 'cover' | 'contain'
-export type ImageAnchor = 'center' | 'right'
+export type ImageAnchor = 'center' | 'right' | 'upperRight'
 
 const fits = stylex.create({
   cover: { objectFit: 'cover' },
@@ -13,6 +13,10 @@ const fits = stylex.create({
 const anchors = stylex.create({
   center: { objectPosition: 'center' },
   right: { objectPosition: 'right center' },
+  // Each axis only bites when that axis is the one being cropped, so this
+  // serves a box that is taller than the image and one that is wider. Upper,
+  // not top: a portrait subject usually has dead headroom above it.
+  upperRight: { objectPosition: 'right 18%' },
 })
 
 const base = stylex.create({

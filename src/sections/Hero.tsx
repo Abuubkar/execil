@@ -17,7 +17,7 @@ import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
 import { heroTitle, m } from '../messages'
-import { layout, radius, screen, space, text } from '../styles/tokens.stylex'
+import { layout, screen, space, text } from '../styles/tokens.stylex'
 
 // 1254 is the source's native size — the square render is capped there.
 const HERO_SRCSET = `${hero600} 600w, ${hero900} 900w, ${hero1254} 1254w`
@@ -30,21 +30,26 @@ const styles = stylex.create({
   // can bleed to the viewport edge and span the full padded height. Nothing
   // between here and the picture may be positioned, or it becomes the box.
   section: { overflow: 'hidden', position: 'relative' },
-  layout: { display: 'flex', flexDirection: 'column', gap: space.s40 },
-  // Centred and stacked on small screens, as the canvas draws it. Once the
-  // picture moves beside the copy the copy ranges left to meet it, and is
-  // capped so its right edge always lands inside the picture's fade.
+  layout: { display: 'flex', flexDirection: 'column' },
+  // Centred on small screens, as the canvas draws it, rising into the faded
+  // foot of the picture above it. Once the picture moves beside the copy the
+  // copy ranges left to meet it, and is capped so its right edge always lands
+  // inside the picture's fade.
   copy: {
     alignItems: { default: 'center', [screen.navUp]: 'flex-start' },
     display: 'flex',
     flexDirection: 'column',
     gap: space.s24,
+    // The overlap reaches only the quiet lower band of the picture — desk and
+    // keyboard — which the mask has already faded past half.
+    marginBlockStart: { default: '-15vw', [screen.navUp]: 0 },
     maxWidth: {
       default: layout.containerHero,
       [screen.navUp]: `min(${layout.containerText}, 55%)`,
     },
     textAlign: { default: 'center', [screen.navUp]: 'left' },
-    // Keeps the copy above the absolutely positioned picture.
+    // Keeps the copy above the picture, both when it overlaps below the
+    // breakpoint and when the picture is absolutely positioned above it.
     position: 'relative',
     zIndex: 1,
   },
@@ -57,22 +62,29 @@ const styles = stylex.create({
     marginBlockStart: space.s16,
     rowGap: space.s10,
   },
-  // In flow as a rounded 4:3 card below the copy; on desktop it leaves the
-  // flow, fills the section's height and fades into the wash on its left
-  // edge. A mask rather than a gradient overlay so no colour is named — the
-  // picture dissolves into whatever the section is painted.
+  // Below the breakpoint it comes first, bleeds past the section's padding to
+  // the viewport edges as a 4:3 band, and fades out at the foot so the copy
+  // can rise into it. On desktop it leaves the flow, fills the section's
+  // height and fades on its left edge instead. A mask rather than a gradient
+  // overlay so no colour is named — the picture dissolves into whatever the
+  // section is painted.
   picture: {
     aspectRatio: { default: '4 / 3', [screen.navUp]: 'auto' },
-    borderRadius: { default: radius['3xl'], [screen.navUp]: 0 },
     insetBlock: { default: 'auto', [screen.navUp]: 0 },
     insetInlineEnd: { default: 'auto', [screen.navUp]: 0 },
+    marginBlockStart: { default: `calc(-1 * ${space.heroTop})`, [screen.navUp]: 0 },
+    marginInline: { default: `calc(-1 * ${space.gutter})`, [screen.navUp]: 0 },
+    maxHeight: { default: layout.heroBandMax, [screen.navUp]: 'none' },
     maskImage: {
-      default: 'none',
+      default: 'linear-gradient(180deg, black 40%, transparent 100%)',
       [screen.navUp]: 'linear-gradient(90deg, transparent 0%, black 30%)',
     },
+    // First in the stack visually, after the copy in the DOM, so a screen
+    // reader still meets the heading before the picture.
+    order: { default: -1, [screen.navUp]: 0 },
     overflow: 'hidden',
     position: { default: 'relative', [screen.navUp]: 'absolute' },
-    width: { default: '100%', [screen.navUp]: '50%' },
+    width: { default: `calc(100% + 2 * ${space.gutter})`, [screen.navUp]: '50%' },
   },
 })
 
@@ -145,7 +157,10 @@ export function Hero() {
             height={1254}
             alt={m.hero.imageAlt}
             fit="cover"
-            anchor="right"
+            // Desktop's box is taller than the square, so "right" keeps the
+            // monitors; the narrow band is wider, so "upper" keeps her head
+            // without the empty band above it.
+            anchor="upperRight"
             priority
           />
         </Box>

@@ -223,6 +223,9 @@ export const layout = stylex.defineConsts({
   containerHero: '880px',
   containerText: '640px',
   containerNarrow: '440px',
+  // The hero picture below the nav breakpoint: a 4:3 band, capped so a
+  // tablet does not spend most of its first screen on it.
+  heroBandMax: '480px',
   gridFloorSm: '200px',
   gridFloorMd: '250px',
   gridFloorLg: '300px',
