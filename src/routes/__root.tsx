@@ -13,14 +13,19 @@ import { m } from '../messages'
 
 import appCss from '../styles/app.css?url'
 
+const notFoundTitle = `${m.notFound.title} | ${m.site.name}`
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: m.meta.title },
+      // No title and no robots here. Every route sets its own title, and the
+      // not-found page can only set one by rendering the tag (React 19 hoists
+      // it) — a title in the root head would win over that and leave two in
+      // the document. `index, follow` is the crawler's default anyway, so
+      // stating it bought nothing and cost the same collision.
       { name: 'description', content: m.meta.description },
-      { name: 'robots', content: 'index, follow' },
       { name: 'theme-color', content: '#0A6B6B' },
 
       { property: 'og:type', content: 'website' },
@@ -70,10 +75,18 @@ export const Route = createRootRoute({
 })
 
 /** Wears the site chrome so an unknown address still looks like the site.
- *  Prerendered to /404.html by the pages entry in vite.config.ts. */
+ *  Rendered by the Worker on every unmatched path, with a 404 status — there
+ *  is no prerendered 404.html. */
 function NotFoundPage() {
   return (
     <>
+      {/* React 19 hoists these into <head>. A route head cannot reach here —
+       *  nothing matched, so there is no route. The 404 status is what keeps
+       *  the page out of the index; these are for the browser tab, and for a
+       *  crawler that reads the markup before the status. */}
+      <title>{notFoundTitle}</title>
+      <meta name="robots" content="noindex, follow" />
+
       <SiteHeader />
       <Box as="main" id="top" tabIndex={-1}>
         <NotFound />
