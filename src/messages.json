@@ -6,7 +6,7 @@
   },
   "meta": {
     "title": "Execil | Medical Billing & RCM for Independent Practices",
-    "description": "Specialty-assigned medical billing and RCM for independent practices with 1-20 providers. We work inside your existing EHR, and you know the price upfront.",
+    "description": "Specialty-assigned medical billing and RCM for independent practices with 35-40 providers. We work inside your existing EHR, and you know the price upfront.",
     "ogTitle": "Collect Every Dollar You've Earned",
     "ogImageAlt": "Execil: medical billing and revenue cycle management for independent practices",
     "legalName": "EXECIL PVT LTD",
@@ -82,7 +82,7 @@
       },
       "."
     ],
-    "lead": "Specialty-assigned billing for independent practices with 1-20 providers. We work inside the EHR you already use. You see what we collect, and you know the price before you sign anything.",
+    "lead": "Specialty-assigned billing for independent practices with 35-40 providers. We work inside the EHR you already use. You see what we collect, and you know the price before you sign anything.",
     "imageAlt": "A billing specialist at two monitors, reviewing a claims dashboard",
     "ctaPrimary": "Get a Free Billing Assessment",
     "ctaSecondary": "See Our Services",
@@ -92,7 +92,8 @@
       "BAA on Day One",
       "No Setup Fees",
       "No Long-Term Contract",
-      "US-facing team · 24-hour processing"
+      "US-facing team",
+      "24-hour processing"
     ]
   },
   "problem": {
@@ -118,7 +119,7 @@
         "source": "CAQH Index 2024"
       },
       {
-        "stat": "13 wks",
+        "stat": "13 weeks",
         "title": "Providers not enrolled",
         "blurb": "New hires see patients before payers will pay for them. Effective dates are not backdated.",
         "source": "BCBS of Texas · Ohio Rev. Code 3963.06 · La. R.S. 22:1009"
@@ -303,7 +304,7 @@
     "goodTitle": "A strong fit if",
     "badTitle": "Less of a fit if",
     "good": [
-      "You're an independent practice with 1-20 providers",
+      "You're an independent practice with 35-40 providers",
       "Denials are rising or AR is aging",
       "You want real visibility into collections",
       "You're adding providers who need credentialing"
