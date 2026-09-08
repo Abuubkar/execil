@@ -23,7 +23,8 @@ INK_50 = (247, 249, 250)
 TEAL_25 = (238, 246, 246)
 WHITE = (255, 255, 255)
 
-W, H = 1200, 630
+SS = 3  # supersample; PIL draws shapes without antialiasing
+W, H = 1200 * SS, 630 * SS
 img = Image.new("RGB", (W, H), INK_50)
 d = ImageDraw.Draw(img)
 
@@ -48,8 +49,8 @@ def load(path, size, weight=None):
     return f
 
 ttf = ROOT / "scripts" / ".og-font" / "Satoshi-Variable.ttf"
-bold = load(ttf, 76, 800)
-body = load(ttf, 30, 400)
+bold = load(ttf, 76 * SS, 800)
+body = load(ttf, 30 * SS, 400)
 
 # The wordmark, in font units at upem 1000, taken from the same geometry that
 # produced public/brand/cross-dot/. Pen positions are listed rather than laid
@@ -101,11 +102,11 @@ def draw_wordmark(image, draw, x0, baseline, size):
         [cx - thick, cy - half, cx + thick, cy + half], radius=radius, fill=WHITE
     )
 
-PAD = 88
+PAD = 88 * SS
 
 # Brand lockup. Sized so the badge-to-baseline height matches the 56px mark it
 # replaces, which is what the rest of the card was spaced against.
-LOCKUP = 64
+LOCKUP = 64 * SS
 draw_wordmark(img, d, PAD, PAD + WORDMARK_TOP * LOCKUP / 1000, LOCKUP)
 
 # Headline, with the same two emphases as the hero. Broken into three lines so
@@ -117,19 +118,19 @@ LINES = [
     [("Cut Denials ", INK_900), ("Before They Happen", GREEN_600), (".", INK_900)],
 ]
 
-size = 76
-while size > 30:
+size = 76 * SS
+while size > 30 * SS:
     bold = load(ttf, size, 800)
     widest = max(
         sum(d.textlength(part, font=bold) for part, _ in line) for line in LINES
     )
     if widest <= W - 2 * PAD:
         break
-    size -= 2
+    size -= 2 * SS
 else:
     raise SystemExit("headline will not fit at any reasonable size")
 
-y = 214
+y = 214 * SS
 for line in LINES:
     x = PAD
     for part, colour in line:
@@ -137,11 +138,12 @@ for line in LINES:
         x += d.textlength(part, font=bold)
     y += round(size * 1.18)
 
-d.text((PAD, 476), "Medical billing & RCM for independent practices", font=body, fill=INK_600)
-d.text((PAD, 518), "35-40 providers · Inside your existing EHR · Priced upfront", font=body, fill=INK_600)
+d.text((PAD, 476 * SS), "Medical billing & RCM for independent practices", font=body, fill=INK_600)
+d.text((PAD, 518 * SS), "35-40 providers · Inside your existing EHR · Priced upfront", font=body, fill=INK_600)
 
 def save(image, name):
     path = ROOT / "public" / name
+    image = image.resize((image.width // SS, image.height // SS), Image.LANCZOS)
     image.save(path, "PNG", optimize=True)
     print(f"wrote {path} ({path.stat().st_size / 1024:.1f} kB)")
 
@@ -152,7 +154,7 @@ save(img, "og.png")
 # The wordmark alone on white, sized so it fills a 1024px-wide card. Google
 # crops and scales this itself, so the only jobs here are enough resolution and
 # a white ground, which is the ground it composites onto anyway.
-LOGO_W, LOGO_PAD = 1024, 72
+LOGO_W, LOGO_PAD = 1024 * SS, 72 * SS
 logo_size = round((LOGO_W - 2 * LOGO_PAD) / WORDMARK_ADVANCE * 1000)
 logo_baseline = LOGO_PAD + WORDMARK_TOP * logo_size / 1000
 logo_h = round(logo_baseline + LOGO_PAD)

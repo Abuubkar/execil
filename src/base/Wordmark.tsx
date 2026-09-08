@@ -7,7 +7,7 @@ import { color } from '../styles/tokens.stylex'
 export type WordmarkSize = 'sm' | 'md'
 
 const sizes = stylex.create({
-  sm: { height: '28px' },
+  sm: { height: '32px' },
   md: { height: '40px' },
 })
 

@@ -26,7 +26,8 @@ that renders in the header and footer; these files are for anything outside the
 app — email signatures, decks, the client's own use. **They are two copies of
 one drawing: change one and change the other.**
 
-`public/favicon.svg` is `execil-mark.svg` fitted to a 32×32 box.
+`public/favicon.svg` is `execil-mark.svg` fitted to a 32×32 box, with a heavier
+cross so it survives 16px.
 
 ### Clearance
 
