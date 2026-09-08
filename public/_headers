@@ -10,3 +10,23 @@
 
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Keep every non-canonical hostname out of the index. The Worker's own
+# `workers.dev` subdomain stays enabled by choice (issue #34) and preview
+# aliases from non-production branch builds live on the same domain, so both
+# serve the whole site. The prerendered canonical already points at execil.net;
+# this is the stronger signal that costs nothing.
+#
+# Absolute-URL rules are matched host-first, and `:name` is a placeholder for
+# one label — so this covers `execil.<subdomain>.workers.dev` and every
+# `<alias>-execil.<subdomain>.workers.dev` preview alike. Ports and protocols
+# are ignored during matching.
+https://:worker.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex, nofollow
+
+# Applies to asset responses only, which is every prerendered page. Deliberately
+# not HSTS: that one is a lasting commitment for the apex and every subdomain,
+# so it belongs to a decision rather than a commit.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
