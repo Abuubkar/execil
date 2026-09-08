@@ -2,7 +2,7 @@ import * as stylex from '@stylexjs/stylex'
 
 import { Dot } from './Dot'
 import type { DotTone } from './Dot'
-import { color, radius, space, text } from '../styles/tokens.stylex'
+import { color, radius, shadow, space, text } from '../styles/tokens.stylex'
 
 export type BadgeTone = 'accent' | 'danger' | 'notice'
 
@@ -30,6 +30,7 @@ const base = stylex.create({
     borderRadius: radius.full,
     borderStyle: 'solid',
     borderWidth: '1px',
+    boxShadow: shadow.sm,
     display: 'inline-flex',
     fontSize: text.base,
     fontWeight: text.weightSemibold,
@@ -51,7 +52,7 @@ export function Badge({
 }) {
   return (
     <span {...stylex.props(base.badge, tones[tone])}>
-      {dot ? <Dot tone={dot} size="sm" /> : null}
+      {dot ? <Dot tone={dot} size="xs" glow /> : null}
       {children}
     </span>
   )

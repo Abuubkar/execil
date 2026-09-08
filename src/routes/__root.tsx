@@ -13,14 +13,17 @@ import { m } from '../messages'
 
 import appCss from '../styles/app.css?url'
 
+const notFoundTitle = `${m.notFound.title} | ${m.site.name}`
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: m.meta.title },
+      // No title here: a root title wins over the one the not-found page
+      // renders, leaving two in the document. No robots either — that is the
+      // crawler default.
       { name: 'description', content: m.meta.description },
-      { name: 'robots', content: 'index, follow' },
       { name: 'theme-color', content: '#0A6B6B' },
 
       { property: 'og:type', content: 'website' },
@@ -70,10 +73,15 @@ export const Route = createRootRoute({
 })
 
 /** Wears the site chrome so an unknown address still looks like the site.
- *  Prerendered to /404.html by the pages entry in vite.config.ts. */
+ *  Rendered by the Worker on every unmatched path, with a 404 status — there
+ *  is no prerendered 404.html. */
 function NotFoundPage() {
   return (
     <>
+      {/* React 19 hoists these; no route matched, so no route head applies. */}
+      <title>{notFoundTitle}</title>
+      <meta name="robots" content="noindex, follow" />
+
       <SiteHeader />
       <Box as="main" id="top" tabIndex={-1}>
         <NotFound />

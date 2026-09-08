@@ -9,6 +9,10 @@ export const absolute = (path: string) => new URL(path, SITE_URL).toString()
 
 export const OG_IMAGE = absolute('/og.png')
 
+/** Organization.logo, not the OG banner: Google wants the logo itself on
+ *  white, 112px minimum in both axes. */
+export const LOGO_IMAGE = absolute('/logo.png')
+
 /**
  * Organization, NOT LocalBusiness.
  *
@@ -27,7 +31,7 @@ export const organizationLd = {
   name: m.site.name,
   legalName: m.meta.legalName,
   url: SITE_URL,
-  logo: OG_IMAGE,
+  logo: LOGO_IMAGE,
   telephone: m.site.phoneHref.replace('tel:', ''),
   description: m.meta.description,
   address: {
@@ -36,4 +40,17 @@ export const organizationLd = {
     addressCountry: m.meta.addressCountry,
   },
   areaServed: { '@type': 'Country', name: m.meta.areaServed },
+}
+
+/** Home page only. Google has shown FAQ rich results for government and
+ *  health authority sites only since 2023, so expect none — this is for other
+ *  consumers of structured data. */
+export const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: m.faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 }

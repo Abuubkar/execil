@@ -7,7 +7,7 @@
     "contactEnd": "."
   },
   "privacy": {
-    "updated": "September 7, 2026",
+    "updated": "September 8, 2026",
     "intro": [
       "This policy explains what Execil collects when you use execil.net, why, and what happens to it. Execil is the trading name of EXECIL PVT LTD, a company registered in New York.",
       "The short version: the site sets no cookies, we do not sell your information or share it with advertisers, and the only information we collect directly is what you type into the assessment form."
@@ -25,14 +25,14 @@
         "heading": "How we use it",
         "blocks": [
           "We use what you send through the form to respond to you, prepare the assessment you asked for, and follow up about our services. We keep a record of the enquiry as an ordinary business record.",
-          "We do not sell your information, share it with advertisers, or use it to build a profile of you."
+          "We do not sell your information, share it with advertisers, or use it to build a profile of you. This site carries no advertising, and we do not use any tracking that profiles visitors by health condition or medical interest."
         ]
       },
       {
         "heading": "Where the form goes",
         "blocks": [
           "When you submit the form, a small program running on Cloudflare's network sends the contents to our mailbox by email. The site does not keep a copy in a database of its own.",
-          "Server logs record whether the delivery succeeded and which fields were filled in, never what they contained. If delivery fails, the page offers to open your own email client with the message instead."
+          "The connection between your browser and this site is encrypted with TLS 1.2 or higher; older versions are refused. Server logs record whether the delivery succeeded and which fields were filled in, never what they contained. If delivery fails, the page offers to open your own email client with the message instead."
         ]
       },
       {
@@ -46,7 +46,7 @@
                 "href": "https://www.cloudflare.com/privacypolicy/",
                 "external": true
               },
-              ". Turnstile may store a small amount of data in your browser to complete its check."
+              ". Turnstile may store a small amount of data in your browser to complete its check. Cloudflare states that these signals are used only to tell people from bots, not to identify, profile or target anyone, and that a cookie set this way is partitioned to the site you are on rather than shared across the sites you visit."
             ]
           }
         ]
@@ -119,7 +119,7 @@
       {
         "heading": "Children",
         "blocks": [
-          "The site is aimed at medical practices and is not directed at anyone under 18. We do not knowingly collect information from children."
+          "The site is aimed at medical practices and is not directed at anyone under 18. We do not knowingly collect information from anyone under 18, and if we learn that we have, we delete it promptly."
         ]
       },
       {
@@ -213,7 +213,7 @@
     ]
   },
   "hipaa": {
-    "updated": "September 7, 2026",
+    "updated": "September 8, 2026",
     "intro": [
       "Execil provides medical billing and revenue cycle management to medical practices. In HIPAA terms, we are a business associate of each practice we work for. This page explains what that means in practice and what we commit to.",
       "It is not a Notice of Privacy Practices. That is the document your practice gives its patients."
@@ -263,13 +263,13 @@
       {
         "heading": "If something goes wrong",
         "blocks": [
-          "If we discover a breach of unsecured protected health information, we notify the practice without unreasonable delay and within the time set in the business associate agreement, and we help with the practice's own notification obligations."
+          "If we discover a breach of unsecured protected health information, we notify the practice without unreasonable delay, and in no case later than 60 calendar days after discovery, or sooner if the business associate agreement requires it. We help with the practice's own notification obligations."
         ]
       },
       {
         "heading": "This website",
         "blocks": [
-          "This website does not collect protected health information and is not a way to send it to us. Do not include patient names, dates of birth, diagnoses, claim details or similar information in the assessment form or in email.",
+          "This website does not collect protected health information and is not a way to send it to us. Do not include patient names, dates of birth, diagnoses, claim details or similar information in the assessment form or in email. Ordinary email is not a secure channel for patient information, and we do not treat it as one.",
           "If you have a question about a specific claim, tell us and we will arrange a secure channel once an agreement is in place."
         ]
       }

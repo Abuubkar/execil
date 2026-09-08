@@ -26,8 +26,12 @@ const styles = stylex.create({
     borderCollapse: 'collapse',
     display: { default: 'none', [screen.tableUp]: 'table' },
     fontSize: text.md,
+    // Auto layout sized the two compared columns unequally.
+    tableLayout: 'fixed',
     width: '100%',
   },
+  colLabel: { width: '30%' },
+  colValue: { width: '35%' },
   th: {
     borderBlockEndColor: color.borderStrong,
     borderBlockEndStyle: 'solid',
@@ -118,7 +122,11 @@ export function Table({
         <thead>
           <tr>
             {columns.map((heading, i) => (
-              <th key={heading || `col-${i}`} scope="col" {...stylex.props(styles.th)}>
+              <th
+                key={heading || `col-${i}`}
+                scope="col"
+                {...stylex.props(styles.th, i === 0 ? styles.colLabel : styles.colValue)}
+              >
                 {heading}
               </th>
             ))}

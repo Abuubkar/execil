@@ -6,7 +6,14 @@ import { color, motion, radius, shadow, space, text } from '../styles/tokens.sty
 /** A link that looks like a button is `variant="button"` — NOT `Button as="a"`.
  *  The canvas has 6 brand-background anchors against 2 real buttons, so this is
  *  the common case, and it keeps the semantics honest. */
-export type LinkVariant = 'plain' | 'inline' | 'nav' | 'navHeader' | 'button' | 'buttonSecondary'
+export type LinkVariant =
+  | 'plain'
+  | 'inline'
+  | 'nav'
+  | 'navHeader'
+  | 'utility'
+  | 'button'
+  | 'buttonSecondary'
 
 const variants = stylex.create({
   /** No visual treatment — for links that wrap their own composed content,
@@ -22,8 +29,19 @@ const variants = stylex.create({
     fontWeight: text.weightMedium,
     textDecoration: 'none',
   },
+  /** The header's contact strip. Small, and on the Inverse surface, so its
+   *  roles resolve against the Dark theme. */
+  utility: {
+    color: { default: color.textSecondary, ':hover': color.textHeading },
+    fontSize: text.sm,
+    fontWeight: text.weightMedium,
+    textDecoration: 'none',
+    transitionDuration: motion.fast,
+    transitionProperty: 'color',
+    transitionTimingFunction: motion.ease,
+  },
   navHeader: {
-    color: { default: color.textSecondary, ':hover': color.textLink },
+    color: { default: color.textBody, ':hover': color.textLink },
     fontSize: text.md,
     fontWeight: text.weightSemibold,
     textDecorationColor: color.textLink,

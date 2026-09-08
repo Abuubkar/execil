@@ -78,6 +78,8 @@ export const color = stylex.defineVars({
    *  headline emphasis at clamp(34px, 5.4vw, 64px). Never use it below 24px. */
   textAccentDisplay: palette.teal600,
   textStat: palette.clay700,
+  /** surfaceRaised goes translucent in the Dark theme; this does not. */
+  textOnBrand: palette.white,
 
   // --- Roles: surface
   surfacePage: palette.ink50,
@@ -153,12 +155,15 @@ export const space = stylex.defineVars({
   s32: '32px',
   s40: '40px',
   s48: '48px',
+  s64: '64px',
 
   // Section padding: 8 canvas clamp patterns collapsed to 4, plus the gutter.
   sectionLg: 'clamp(56px, 7vw, 96px)',
   sectionMd: 'clamp(48px, 6vw, 80px)',
   sectionSm: 'clamp(40px, 5vw, 64px)',
-  heroTop: 'clamp(56px, 8vw, 104px)',
+  /** Hero negates this to bleed the picture to the top edge. 32px lighter
+   *  than sectionMd, which is what the header's contact strip takes. */
+  heroTop: 'clamp(32px, 4vw, 48px)',
   gutter: '24px',
 })
 
@@ -180,6 +185,8 @@ export const shadow = stylex.defineVars({
   xl: '0 20px 50px rgba(15, 27, 45, 0.25)',
   brand: '0 14px 30px rgba(10, 107, 107, 0.14)',
   brandSm: '0 6px 18px rgba(14, 138, 138, 0.25)',
+  glowSuccess: '0 0 0 4px rgba(46, 158, 91, 0.16), 0 0 10px rgba(46, 158, 91, 0.5)',
+  glowBrand: '0 0 0 4px rgba(10, 107, 107, 0.16), 0 0 10px rgba(10, 107, 107, 0.5)',
 })
 
 /**
@@ -190,6 +197,8 @@ export const shadow = stylex.defineVars({
 export const motion = stylex.defineConsts({
   fast: '150ms',
   base: '250ms',
+  pulse: '1800ms',
+  easeOut: 'cubic-bezier(0.2, 0.7, 0.3, 1)',
   ease: 'ease',
 })
 
@@ -203,10 +212,12 @@ export const motion = stylex.defineConsts({
  * The raw widths are exported too, for anything that needs the number.
  */
 export const screen = stylex.defineConsts({
-  /** Header only — desktop nav swaps to the hamburger. */
-  nav: '940px',
-  navUp: '@media (min-width: 940px)',
-  navDown: '@media (max-width: 939.98px)',
+  /** Nav and Hero layout. HERO_SIZES repeats this number; change both. */
+  nav: '1040px',
+  /** Where the header has room to open its gaps up. */
+  navWide: '@media (min-width: 1300px)',
+  navUp: '@media (min-width: 1040px)',
+  navDown: '@media (max-width: 1039.98px)',
   /** Comparison table only — stacks below this. Issue #17. */
   table: '600px',
   tableUp: '@media (min-width: 600px)',
@@ -215,10 +226,11 @@ export const screen = stylex.defineConsts({
 
 export const layout = stylex.defineConsts({
   headerHeight: '68px',
-  containerWide: '1160px',
+  containerWide: '1280px',
   containerHero: '880px',
   containerText: '640px',
   containerNarrow: '440px',
+  heroBandMax: '480px',
   gridFloorSm: '200px',
   gridFloorMd: '250px',
   gridFloorLg: '300px',

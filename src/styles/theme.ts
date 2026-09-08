@@ -21,6 +21,8 @@ export const darkSurface = stylex.createTheme(color, {
 
   surfacePage: palette.ink900,
   surfaceRaised: 'rgba(255, 255, 255, 0.08)',
+  /** teal700 vanishes on ink900. Logotype fill, so WCAG 1.4.3 exempts it. */
+  surfaceBrand: palette.teal600,
   surfaceAccent: 'rgba(159, 212, 163, 0.14)',
 
   borderDefault: 'rgba(255, 255, 255, 0.08)',

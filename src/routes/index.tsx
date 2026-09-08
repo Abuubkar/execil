@@ -1,6 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { SITE_URL } from '../seo'
+import { HERO_SIZES, HERO_SRC, HERO_SRCSET } from '../hero-image'
+import { m } from '../messages'
+import { SITE_URL, faqLd } from '../seo'
 
 import { Box } from '../base/Box'
 import { Assessment } from '../sections/Assessment'
@@ -18,7 +20,25 @@ import { Systems } from '../sections/Systems'
 import { WhyUs } from '../sections/WhyUs'
 
 export const Route = createFileRoute('/')({
-  head: () => ({ links: [{ rel: 'canonical', href: SITE_URL }] }),
+  head: () => ({
+    // Title lives here, not in the root head. See __root.tsx.
+    meta: [{ title: m.meta.title }],
+    links: [
+      { rel: 'canonical', href: SITE_URL },
+      // LCP element on narrow screens. imageSrcSet/imageSizes must match the
+      // <img> or the picture is fetched twice.
+      {
+        rel: 'preload',
+        as: 'image',
+        href: HERO_SRC,
+        imageSrcSet: HERO_SRCSET,
+        imageSizes: HERO_SIZES,
+        fetchPriority: 'high',
+      },
+    ],
+    // FAQPage belongs to this route; the questions render here only.
+    scripts: [{ type: 'application/ld+json', children: JSON.stringify(faqLd) }],
+  }),
   component: Home,
 })
 
