@@ -218,7 +218,7 @@ export function Assessment() {
               </ListItem>
             ))}
           </List>
-          <Text size="sm" tone="muted">
+          <Text size="md" tone="muted">
             {m.assessment.findings}
           </Text>
         </Stack>

@@ -56,7 +56,7 @@ export function Results() {
                   <Prose>{measure.blurb}</Prose>
                 </Stack>
                 {'source' in measure ? (
-                  <Text size="xs" tone="muted" style={styles.source}>
+                  <Text size="sm" tone="muted" style={styles.source}>
                     {measure.source}
                   </Text>
                 ) : null}

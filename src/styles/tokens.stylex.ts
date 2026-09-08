@@ -78,9 +78,7 @@ export const color = stylex.defineVars({
    *  headline emphasis at clamp(34px, 5.4vw, 64px). Never use it below 24px. */
   textAccentDisplay: palette.teal600,
   textStat: palette.clay700,
-  /** Foreground on surfaceBrand. Distinct from surfaceRaised, which the Dark
-   *  theme turns translucent — anything sitting ON the brand fill needs a
-   *  colour that survives that override. */
+  /** surfaceRaised goes translucent in the Dark theme; this does not. */
   textOnBrand: palette.white,
 
   // --- Roles: surface
@@ -162,10 +160,7 @@ export const space = stylex.defineVars({
   sectionLg: 'clamp(56px, 7vw, 96px)',
   sectionMd: 'clamp(48px, 6vw, 80px)',
   sectionSm: 'clamp(40px, 5vw, 64px)',
-  /** The hero's top padding. The canvas drew it taller than the bottom; level
-   *  with sectionMd reads better now that the picture fills the right half and
-   *  supplies its own height. Hero also negates this to bleed the picture to
-   *  the top edge below the nav breakpoint, so the two stay in step. */
+  /** Hero negates this to bleed the picture to the top edge. */
   heroTop: 'clamp(48px, 6vw, 80px)',
   gutter: '24px',
 })
@@ -188,9 +183,6 @@ export const shadow = stylex.defineVars({
   xl: '0 20px 50px rgba(15, 27, 45, 0.25)',
   brand: '0 14px 30px rgba(10, 107, 107, 0.14)',
   brandSm: '0 6px 18px rgba(14, 138, 138, 0.25)',
-  /** Dot glows: a tight ring plus a soft bloom, so an 8px dot reads as lit
-   *  rather than merely blurred. Alpha does the work — a solid ring at this
-   *  size just looks like a bigger dot. */
   glowSuccess: '0 0 0 4px rgba(46, 158, 91, 0.16), 0 0 10px rgba(46, 158, 91, 0.5)',
   glowBrand: '0 0 0 4px rgba(10, 107, 107, 0.16), 0 0 10px rgba(10, 107, 107, 0.5)',
 })
@@ -203,9 +195,7 @@ export const shadow = stylex.defineVars({
 export const motion = stylex.defineConsts({
   fast: '150ms',
   base: '250ms',
-  /** One breath of the status dot's pulse. Long enough to read as alive
-   *  rather than as a blink. */
-  pulse: '2400ms',
+  pulse: '1300ms',
   ease: 'ease',
 })
 
@@ -219,16 +209,7 @@ export const motion = stylex.defineConsts({
  * The raw widths are exported too, for anything that needs the number.
  */
 export const screen = stylex.defineConsts({
-  /** Where the desktop nav swaps to the hamburger, and where the Hero puts its
-   *  picture beside the copy rather than above it.
-   *
-   *  1040, not the canvas's 940: the header row needs 1000px before the nav
-   *  links, the phone number and the CTA all stop wrapping onto second lines,
-   *  so between 940 and 1000 the desktop header rendered three lines deep.
-   *  1040 leaves a gutter of slack past the point where it fits.
-   *
-   *  HERO_SIZES in src/hero-image.ts repeats this number — a `sizes` attribute
-   *  cannot read a token. Change both together. */
+  /** Nav and Hero layout. HERO_SIZES repeats this number; change both. */
   nav: '1040px',
   navUp: '@media (min-width: 1040px)',
   navDown: '@media (max-width: 1039.98px)',
@@ -240,15 +221,10 @@ export const screen = stylex.defineConsts({
 
 export const layout = stylex.defineConsts({
   headerHeight: '68px',
-  // Widened from the canvas's 1160: at 1440 and above the header's three
-  // groups sat closer to each other than to the edges of the screen, which
-  // read as a narrow strip floating in the middle of a wide page.
   containerWide: '1280px',
   containerHero: '880px',
   containerText: '640px',
   containerNarrow: '440px',
-  // The hero picture below the nav breakpoint: a 4:3 band, capped so a
-  // tablet does not spend most of its first screen on it.
   heroBandMax: '480px',
   gridFloorSm: '200px',
   gridFloorMd: '250px',

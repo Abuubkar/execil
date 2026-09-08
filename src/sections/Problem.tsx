@@ -48,7 +48,7 @@ export function Problem() {
                 </Heading>
                 <Prose>{card.blurb}</Prose>
               </Stack>
-              <Text size="base" tone="muted" style={styles.source}>
+              <Text size="sm" tone="muted" style={styles.source}>
                 {card.source}
               </Text>
             </Card>
