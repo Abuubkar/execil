@@ -9,6 +9,12 @@ export const absolute = (path: string) => new URL(path, SITE_URL).toString()
 
 export const OG_IMAGE = absolute('/og.png')
 
+/** Organization.logo, NOT the OG banner. Google reads this one for the
+ *  knowledge panel and wants the logo itself on a white ground, at 112px
+ *  minimum in both axes. og.png is a 1200x630 social card with a headline on
+ *  it, which is a different picture for a different job. */
+export const LOGO_IMAGE = absolute('/logo.png')
+
 /**
  * Organization, NOT LocalBusiness.
  *
@@ -27,7 +33,7 @@ export const organizationLd = {
   name: m.site.name,
   legalName: m.meta.legalName,
   url: SITE_URL,
-  logo: OG_IMAGE,
+  logo: LOGO_IMAGE,
   telephone: m.site.phoneHref.replace('tel:', ''),
   description: m.meta.description,
   address: {
@@ -36,4 +42,26 @@ export const organizationLd = {
     addressCountry: m.meta.addressCountry,
   },
   areaServed: { '@type': 'Country', name: m.meta.areaServed },
+}
+
+/**
+ * FAQPage, for the home page only — the questions live in the Faq section and
+ * nowhere else, so this must not go in the root head beside organizationLd.
+ *
+ * Worth setting expectations: since 2023 Google shows FAQ rich results only for
+ * government and health *authority* sites, and Execil is neither. This is
+ * cheap, valid, and read by other consumers of structured data; the accordion
+ * in Google's results is not the reason to have it.
+ *
+ * `a` is the whole answer. One item also carries a `link`, but that is a
+ * "read more" the section renders after the text, not part of the answer.
+ */
+export const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: m.faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
 }
