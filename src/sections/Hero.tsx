@@ -1,9 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
 import { useTrack } from '../analytics/useTrack'
-import hero1254 from '../assets/hero/hero-1254.webp'
-import hero900 from '../assets/hero/hero-900.webp'
-import hero600 from '../assets/hero/hero-600.webp'
 import { Badge } from '../base/Badge'
 import { Box } from '../base/Box'
 import { Dot } from '../base/Dot'
@@ -16,14 +13,9 @@ import { RichText } from '../base/RichText'
 import { Section } from '../base/Section'
 import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
+import { HERO_HEIGHT, HERO_SIZES, HERO_SRC, HERO_SRCSET, HERO_WIDTH } from '../hero-image'
 import { heroTitle, m } from '../messages'
 import { layout, screen, space, text } from '../styles/tokens.stylex'
-
-// 1254 is the source's native size — the square render is capped there.
-const HERO_SRCSET = `${hero600} 600w, ${hero900} 900w, ${hero1254} 1254w`
-// Matches the desktop split below: the picture takes the right half of the
-// viewport once the nav breakpoint is crossed, the full width before it.
-const HERO_SIZES = `(min-width: 940px) 50vw, 100vw`
 
 const styles = stylex.create({
   // The picture is positioned against the section, not the container, so it
@@ -150,11 +142,11 @@ export function Hero() {
 
         <Box style={styles.picture}>
           <Image
-            src={hero1254}
+            src={HERO_SRC}
             srcSet={HERO_SRCSET}
             sizes={HERO_SIZES}
-            width={1254}
-            height={1254}
+            width={HERO_WIDTH}
+            height={HERO_HEIGHT}
             alt={m.hero.imageAlt}
             fit="cover"
             // Desktop's box is taller than the square, so "right" keeps the
