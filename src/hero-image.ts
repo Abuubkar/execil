@@ -17,8 +17,11 @@ export const HERO_SRC = hero1254
 export const HERO_SRCSET = `${hero600} 600w, ${hero900} 900w, ${hero1254} 1254w`
 
 /** Mirrors the Hero's own breakpoint: half the viewport beside the copy on
- *  desktop, the full width above it below the nav breakpoint. */
-export const HERO_SIZES = '(min-width: 940px) 50vw, 100vw'
+ *  desktop, the full width above it below the nav breakpoint. A `sizes`
+ *  attribute cannot read a token, so this number is a copy of `screen.nav` —
+ *  change it there and here together, or the browser picks a candidate sized
+ *  for the wrong layout. */
+export const HERO_SIZES = '(min-width: 1040px) 50vw, 100vw'
 
 /** Intrinsic size of the source render, so the box is reserved before the
  *  bytes land. 1254 is the square's native size and its ceiling. */

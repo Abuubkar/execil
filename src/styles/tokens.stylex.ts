@@ -162,7 +162,11 @@ export const space = stylex.defineVars({
   sectionLg: 'clamp(56px, 7vw, 96px)',
   sectionMd: 'clamp(48px, 6vw, 80px)',
   sectionSm: 'clamp(40px, 5vw, 64px)',
-  heroTop: 'clamp(56px, 8vw, 104px)',
+  /** The hero's top padding. The canvas drew it taller than the bottom; level
+   *  with sectionMd reads better now that the picture fills the right half and
+   *  supplies its own height. Hero also negates this to bleed the picture to
+   *  the top edge below the nav breakpoint, so the two stay in step. */
+  heroTop: 'clamp(48px, 6vw, 80px)',
   gutter: '24px',
 })
 
@@ -199,6 +203,9 @@ export const shadow = stylex.defineVars({
 export const motion = stylex.defineConsts({
   fast: '150ms',
   base: '250ms',
+  /** One breath of the status dot's pulse. Long enough to read as alive
+   *  rather than as a blink. */
+  pulse: '2400ms',
   ease: 'ease',
 })
 
@@ -212,10 +219,19 @@ export const motion = stylex.defineConsts({
  * The raw widths are exported too, for anything that needs the number.
  */
 export const screen = stylex.defineConsts({
-  /** Header only — desktop nav swaps to the hamburger. */
-  nav: '940px',
-  navUp: '@media (min-width: 940px)',
-  navDown: '@media (max-width: 939.98px)',
+  /** Where the desktop nav swaps to the hamburger, and where the Hero puts its
+   *  picture beside the copy rather than above it.
+   *
+   *  1040, not the canvas's 940: the header row needs 1000px before the nav
+   *  links, the phone number and the CTA all stop wrapping onto second lines,
+   *  so between 940 and 1000 the desktop header rendered three lines deep.
+   *  1040 leaves a gutter of slack past the point where it fits.
+   *
+   *  HERO_SIZES in src/hero-image.ts repeats this number — a `sizes` attribute
+   *  cannot read a token. Change both together. */
+  nav: '1040px',
+  navUp: '@media (min-width: 1040px)',
+  navDown: '@media (max-width: 1039.98px)',
   /** Comparison table only — stacks below this. Issue #17. */
   table: '600px',
   tableUp: '@media (min-width: 600px)',

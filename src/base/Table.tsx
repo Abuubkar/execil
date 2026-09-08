@@ -26,8 +26,18 @@ const styles = stylex.create({
     borderCollapse: 'collapse',
     display: { default: 'none', [screen.tableUp]: 'table' },
     fontSize: text.md,
+    // Fixed, not auto. Auto sizes each column to its longest cell and hands the
+    // surplus to whichever column asked for most — here the Execil column,
+    // which ended up half again as wide as the one it is compared against while
+    // its own text stopped short of filling it. A comparison reads as rigged
+    // when the two columns being compared are not the same width.
+    tableLayout: 'fixed',
     width: '100%',
   },
+  // Proportions, not sizes: the row labels are short, and the two value columns
+  // share what is left equally however many of them there are.
+  colLabel: { width: '22%' },
+  colValue: { width: '39%' },
   th: {
     borderBlockEndColor: color.borderStrong,
     borderBlockEndStyle: 'solid',
@@ -118,7 +128,11 @@ export function Table({
         <thead>
           <tr>
             {columns.map((heading, i) => (
-              <th key={heading || `col-${i}`} scope="col" {...stylex.props(styles.th)}>
+              <th
+                key={heading || `col-${i}`}
+                scope="col"
+                {...stylex.props(styles.th, i === 0 ? styles.colLabel : styles.colValue)}
+              >
                 {heading}
               </th>
             ))}
