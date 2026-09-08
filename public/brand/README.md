@@ -42,6 +42,22 @@ content through an intermediate surface and the header wordmark came out
 soft. Narrower than about 15% stops registering at
 28px; wider than about 25% starts eating the stem of the "i".
 
+## social/ — LinkedIn Page
+
+`scripts/social-images.py` writes these. Sizes are LinkedIn's own
+recommendations, not the 300x300 and 1128x191 figures that are all over the web
+and out of date.
+
+| file                 | size     | use                                    |
+| -------------------- | -------- | -------------------------------------- |
+| `linkedin-logo.png`  | 400x400  | Page logo. 268x268 is LinkedIn's floor |
+| `linkedin-cover.jpg` | 1512x256 | Page cover                             |
+
+The logo is the badge, not the wordmark: LinkedIn shows it at roughly 60px in
+the feed, where "Execil" set across 400px would be about 50px wide. It is
+opaque white behind the mark rather than transparent, because LinkedIn renders
+the logo over both light and dark surfaces.
+
 ## plus-split — not in use
 
 "+ execil" lowercase at wght 900, cut by a diagonal two-tone split through the

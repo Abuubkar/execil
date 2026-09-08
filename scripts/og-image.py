@@ -58,57 +58,7 @@ ttf = ROOT / "scripts" / ".og-font" / "Satoshi-Variable.ttf"
 bold = load(ttf, 76 * SS, 800)
 body = load(ttf, 30 * SS, 400)
 
-BRAND = ROOT / "public" / "brand" / "cross-dot"
-
-CHROME = next(
-    (
-        c
-        for c in (
-            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-            shutil.which("google-chrome"),
-            shutil.which("chromium"),
-        )
-        if c and pathlib.Path(c).exists()
-    ),
-    None,
-)
-
-
-def render_svg(name, height):
-    """The wordmark as a transparent RGBA image, cropped to its ink."""
-    if CHROME is None:
-        raise SystemExit("headless Chrome is required to rasterise " + name)
-    src = BRAND / name
-    with tempfile.TemporaryDirectory() as tmp:
-        page = pathlib.Path(tmp) / "page.html"
-        shot = pathlib.Path(tmp) / "shot.png"
-        page.write_text(
-            f'<body style="margin:0">'
-            f'<img src="file://{src}" style="height:{height}px;display:block">'
-            f"</body>"
-        )
-        subprocess.run(
-            [
-                CHROME,
-                "--headless=new",
-                "--disable-gpu",
-                "--hide-scrollbars",
-                "--allow-file-access-from-files",
-                "--force-device-scale-factor=1",
-                "--default-background-color=00000000",
-                f"--window-size={height * 8},{height * 3}",
-                "--virtual-time-budget=8000",
-                f"--screenshot={shot}",
-                f"file://{page}",
-            ],
-            check=True,
-            capture_output=True,
-        )
-        im = Image.open(shot).convert("RGBA")
-        box = im.getbbox()
-        if box is None:
-            raise SystemExit("rasterising " + name + " produced an empty image")
-        return im.crop(box)
+from _brand import render_svg
 
 
 PAD = 88 * SS
