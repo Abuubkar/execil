@@ -25,10 +25,6 @@ const styles = stylex.create({
     borderBlockEndStyle: 'solid',
     borderBlockEndWidth: '1px',
     insetBlockStart: 0,
-    // The gutter belongs out here, outside the container, the way Section and
-    // SiteFooter do it. Inside the max-width it inset the brand by a gutter
-    // relative to every section below, so the wordmark never lined up with the
-    // hero copy it sits above.
     paddingInline: space.gutter,
     position: 'sticky',
     zIndex: 50,
@@ -97,7 +93,8 @@ function useCurrentSection(hrefs: readonly string[]): [string | null, (href: str
         }
         if (pinned.current !== null) return
         const topmost = ids.find((id) => inBand.has(id))
-        if (topmost !== undefined) setCurrent(hrefs[ids.indexOf(topmost)] ?? null)
+        // Clears when nothing is in the band — over the hero, no link is current.
+        setCurrent(topmost === undefined ? null : (hrefs[ids.indexOf(topmost)] ?? null))
       },
       { rootMargin: '-35% 0px -55% 0px' },
     )
