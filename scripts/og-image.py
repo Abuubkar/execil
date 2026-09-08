@@ -5,13 +5,19 @@ headline, on the hero's wash. logo.png is what Organization.logo points at, and
 Google reads that one for the knowledge panel -- it wants the logo itself, on a
 white ground, 112px minimum in both axes.
 
+The wordmark is rasterised from public/brand/cross-dot/ rather than redrawn
+here. Reimplementing it in Pillow drifted from the real artwork three times:
+Pillow has no Raqm so its layout dropped the kerning, the knockout ring
+sampled its colour after the letters were drawn, and the ring ended up
+biting the "l". One drawing, one source.
+
 Static assets, not a build step: run once and commit the results. A build-time
 generator would be two dependencies and a headless font pipeline to produce two
 files that rarely change. See issue #30.
 """
 
 from PIL import Image, ImageDraw, ImageFont
-import io, pathlib
+import io, pathlib, shutil, subprocess, tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 INK_900 = (15, 27, 45)
@@ -52,62 +58,65 @@ ttf = ROOT / "scripts" / ".og-font" / "Satoshi-Variable.ttf"
 bold = load(ttf, 76 * SS, 800)
 body = load(ttf, 30 * SS, 400)
 
-# The wordmark, in font units at upem 1000, taken from the same geometry that
-# produced public/brand/cross-dot/. Pen positions are listed rather than laid
-# out: this Pillow has no Raqm, so its own text layout drops the kerning and
-# would set "Execil" 25 units wide and land the badge 78 units late.
-WORDMARK = [("E", 0), ("x", 550), ("e", 1073), ("c", 1648), ("i", 2217), ("l", 2487)]
-WORDMARK_ADVANCE = 2810
-CAP_TOP = 740
-BADGE_CX, BADGE_CY, BADGE_R = 2403.5, 665.5, 141.75
-NOTCH = 1.20        # knockout ring, as a multiple of the badge radius
-CROSS_LEN = 0.36    # half-length of a cross bar, as a multiple of the radius
-CROSS_BAR = 0.1225  # half-thickness, likewise
-CROSS_R = 0.045
+BRAND = ROOT / "public" / "brand" / "cross-dot"
 
-# Tallest point above the baseline: the badge clears the cap height.
-WORDMARK_TOP = max(CAP_TOP, BADGE_CY + BADGE_R * NOTCH)
+CHROME = next(
+    (
+        c
+        for c in (
+            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            shutil.which("google-chrome"),
+            shutil.which("chromium"),
+        )
+        if c and pathlib.Path(c).exists()
+    ),
+    None,
+)
 
 
-def draw_wordmark(image, draw, x0, baseline, size):
-    """Draws the wordmark with its baseline at `baseline` and pen start at `x0`.
+def render_svg(name, height):
+    """The wordmark as a transparent RGBA image, cropped to its ink."""
+    if CHROME is None:
+        raise SystemExit("headless Chrome is required to rasterise " + name)
+    src = BRAND / name
+    with tempfile.TemporaryDirectory() as tmp:
+        page = pathlib.Path(tmp) / "page.html"
+        shot = pathlib.Path(tmp) / "shot.png"
+        page.write_text(
+            f'<body style="margin:0">'
+            f'<img src="file://{src}" style="height:{height}px;display:block">'
+            f"</body>"
+        )
+        subprocess.run(
+            [
+                CHROME,
+                "--headless=new",
+                "--disable-gpu",
+                "--hide-scrollbars",
+                "--allow-file-access-from-files",
+                "--force-device-scale-factor=1",
+                "--default-background-color=00000000",
+                f"--window-size={height * 8},{height * 3}",
+                "--virtual-time-budget=8000",
+                f"--screenshot={shot}",
+                f"file://{page}",
+            ],
+            check=True,
+            capture_output=True,
+        )
+        im = Image.open(shot).convert("RGBA")
+        box = im.getbbox()
+        if box is None:
+            raise SystemExit("rasterising " + name + " produced an empty image")
+        return im.crop(box)
 
-    The badge is painted over the "i" rather than the tittle being removed: it
-    is larger than the tittle, and the knockout ring larger still, so the dot
-    disappears underneath. The ring is filled with whatever the canvas already
-    holds at that point, which is how it works on the gradient and on white
-    without being told which it is on.
-    """
-    k = size / 1000
-    cx = x0 + BADGE_CX * k
-    cy = baseline - BADGE_CY * k
-    r = BADGE_R * k
-    ring = r * NOTCH
-    # Sampled before a single letter is drawn: the badge sits on the tittle, so
-    # after the text this point is ink and the ring would come out black.
-    ground = image.getpixel((round(cx), round(cy)))
-
-    face = load(ttf, size, 900)
-    for char, pen in WORDMARK:
-        draw.text((x0 + pen * k, baseline), char, font=face, fill=INK_900, anchor="ls")
-
-    draw.ellipse([cx - ring, cy - ring, cx + ring, cy + ring], fill=ground)
-    draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=TEAL_700)
-
-    half, thick, radius = r * CROSS_LEN, r * CROSS_BAR, r * CROSS_R
-    draw.rounded_rectangle(
-        [cx - half, cy - thick, cx + half, cy + thick], radius=radius, fill=WHITE
-    )
-    draw.rounded_rectangle(
-        [cx - thick, cy - half, cx + thick, cy + half], radius=radius, fill=WHITE
-    )
 
 PAD = 88 * SS
 
-# Brand lockup. Sized so the badge-to-baseline height matches the 56px mark it
-# replaces, which is what the rest of the card was spaced against.
-LOCKUP = 64 * SS
-draw_wordmark(img, d, PAD, PAD + WORDMARK_TOP * LOCKUP / 1000, LOCKUP)
+# Brand lockup, at the height the rest of the card was spaced against.
+LOCKUP_H = 54 * SS
+lockup = render_svg("execil-wordmark-notag.svg", LOCKUP_H)
+img.paste(lockup, (PAD, PAD), lockup)
 
 # Headline, with the same two emphases as the hero. Broken into three lines so
 # it fits the 1200px canvas; the size is reduced until the widest line clears
@@ -155,10 +164,10 @@ save(img, "og.png")
 # crops and scales this itself, so the only jobs here are enough resolution and
 # a white ground, which is the ground it composites onto anyway.
 LOGO_W, LOGO_PAD = 1024 * SS, 72 * SS
-logo_size = round((LOGO_W - 2 * LOGO_PAD) / WORDMARK_ADVANCE * 1000)
-logo_baseline = LOGO_PAD + WORDMARK_TOP * logo_size / 1000
-logo_h = round(logo_baseline + LOGO_PAD)
+mark = render_svg("execil-wordmark-notag.svg", 900)  # generous, then scaled to width
+scale = (LOGO_W - 2 * LOGO_PAD) / mark.width
+mark = mark.resize((round(mark.width * scale), round(mark.height * scale)), Image.LANCZOS)
 
-logo = Image.new("RGB", (LOGO_W, logo_h), WHITE)
-draw_wordmark(logo, ImageDraw.Draw(logo), LOGO_PAD, logo_baseline, logo_size)
+logo = Image.new("RGB", (LOGO_W, mark.height + 2 * LOGO_PAD), WHITE)
+logo.paste(mark, (LOGO_PAD, LOGO_PAD), mark)
 save(logo, "logo.png")
