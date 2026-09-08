@@ -184,6 +184,11 @@ export const shadow = stylex.defineVars({
   xl: '0 20px 50px rgba(15, 27, 45, 0.25)',
   brand: '0 14px 30px rgba(10, 107, 107, 0.14)',
   brandSm: '0 6px 18px rgba(14, 138, 138, 0.25)',
+  /** Dot glows: a tight ring plus a soft bloom, so an 8px dot reads as lit
+   *  rather than merely blurred. Alpha does the work — a solid ring at this
+   *  size just looks like a bigger dot. */
+  glowSuccess: '0 0 0 4px rgba(46, 158, 91, 0.16), 0 0 10px rgba(46, 158, 91, 0.5)',
+  glowBrand: '0 0 0 4px rgba(10, 107, 107, 0.16), 0 0 10px rgba(10, 107, 107, 0.5)',
 })
 
 /**
@@ -219,7 +224,10 @@ export const screen = stylex.defineConsts({
 
 export const layout = stylex.defineConsts({
   headerHeight: '68px',
-  containerWide: '1160px',
+  // Widened from the canvas's 1160: at 1440 and above the header's three
+  // groups sat closer to each other than to the edges of the screen, which
+  // read as a narrow strip floating in the middle of a wide page.
+  containerWide: '1280px',
   containerHero: '880px',
   containerText: '640px',
   containerNarrow: '440px',

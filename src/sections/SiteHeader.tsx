@@ -25,6 +25,11 @@ const styles = stylex.create({
     borderBlockEndStyle: 'solid',
     borderBlockEndWidth: '1px',
     insetBlockStart: 0,
+    // The gutter belongs out here, outside the container, the way Section and
+    // SiteFooter do it. Inside the max-width it inset the brand by a gutter
+    // relative to every section below, so the wordmark never lined up with the
+    // hero copy it sits above.
+    paddingInline: space.gutter,
     position: 'sticky',
     zIndex: 50,
   },
@@ -36,7 +41,7 @@ const styles = stylex.create({
     justifyContent: 'space-between',
     marginInline: 'auto',
     maxWidth: layout.containerWide,
-    paddingInline: space.gutter,
+    width: '100%',
   },
   brand: { alignItems: 'center', display: 'flex' },
   desktopOnly: { display: { default: 'none', [screen.navUp]: 'flex' } },
