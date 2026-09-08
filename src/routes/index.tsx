@@ -21,15 +21,12 @@ import { WhyUs } from '../sections/WhyUs'
 
 export const Route = createFileRoute('/')({
   head: () => ({
-    // The home page's title lives here rather than in the root head, so that
-    // the not-found page is free to render its own. See __root.tsx.
+    // Title lives here, not in the root head. See __root.tsx.
     meta: [{ title: m.meta.title }],
     links: [
       { rel: 'canonical', href: SITE_URL },
-      // The hero picture is the LCP element on narrow screens. Preloading it
-      // here starts the fetch alongside the stylesheet instead of after it;
-      // imageSrcSet and imageSizes must match the <img> exactly or the browser
-      // resolves a different candidate and downloads the picture twice.
+      // LCP element on narrow screens. imageSrcSet/imageSizes must match the
+      // <img> or the picture is fetched twice.
       {
         rel: 'preload',
         as: 'image',
@@ -39,8 +36,7 @@ export const Route = createFileRoute('/')({
         fetchPriority: 'high',
       },
     ],
-    // FAQPage belongs to this route, not the root: the questions render here
-    // and nowhere else.
+    // FAQPage belongs to this route; the questions render here only.
     scripts: [{ type: 'application/ld+json', children: JSON.stringify(faqLd) }],
   }),
   component: Home,

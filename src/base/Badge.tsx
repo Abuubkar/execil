@@ -30,8 +30,6 @@ const base = stylex.create({
     borderRadius: radius.full,
     borderStyle: 'solid',
     borderWidth: '1px',
-    // Lifts the pill off the hero's wash, which is close enough to the pill's
-    // own fill that the border alone barely separates them.
     boxShadow: shadow.sm,
     display: 'inline-flex',
     fontSize: text.base,

@@ -12,22 +12,14 @@ const tones = stylex.create({
   subtle: { backgroundColor: color.textSubtle },
 })
 
-/** The pulse. Opacity and transform only, so no colour is named here and the
- *  ring is composited rather than repainted. The global prefers-reduced-motion
- *  rule in app.css covers ::after, so this stops on its own for anyone who has
- *  asked it to. */
 const pulse = stylex.keyframes({
   '0%': { opacity: 0.9, transform: 'scale(1)' },
   '70%': { opacity: 0, transform: 'scale(2.2)' },
   '100%': { opacity: 0, transform: 'scale(2.2)' },
 })
 
-/** Keyed by tone: a glow is the dot's own colour bloomed outwards, so a brand
- *  dot wearing the success glow would just look wrong. `subtle` has none —
- *  a decorative grey dot has nothing to announce.
- *
- *  The steady bloom sits on the dot and the travelling ring on ::after, so the
- *  dot still reads as lit when the animation is suppressed. */
+/** ::after carries the travelling ring; app.css stops it under
+ *  prefers-reduced-motion, leaving the steady bloom on the dot. */
 const glows = stylex.create({
   brand: {
     boxShadow: shadow.glowBrand,
@@ -67,7 +59,6 @@ const sizes = stylex.create({
 })
 
 const base = stylex.create({
-  // position: the glow's travelling ring is an inset ::after.
   dot: { borderRadius: radius.circle, display: 'block', flex: 'none', position: 'relative' },
 })
 
@@ -80,8 +71,6 @@ export function Dot({
 }: {
   tone?: DotTone
   size?: DotSize
-  /** Lights the dot from its own colour. For a status dot that should read as
-   *  live, not for every bullet in a list. */
   glow?: boolean
   style?: StyleProp
 }) {

@@ -13,9 +13,6 @@ const fits = stylex.create({
 const anchors = stylex.create({
   center: { objectPosition: 'center' },
   right: { objectPosition: 'right center' },
-  // Each axis only bites when that axis is the one being cropped, so this
-  // serves a box that is taller than the image and one that is wider. Upper,
-  // not top: a portrait subject usually has dead headroom above it.
   upperRight: { objectPosition: 'right 18%' },
 })
 
@@ -42,9 +39,7 @@ type ImageProps = {
   style?: StyleProp
 }
 
-/** Closes the raw-`<img>` hole. Always fills its parent's box — sizing and
- *  cropping decisions belong to the parent, so it never sets its own width,
- *  radius or border. */
+/** Fills its parent's box; the parent owns sizing and cropping. */
 export function Image({
   src,
   srcSet,

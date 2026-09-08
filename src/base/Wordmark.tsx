@@ -18,21 +18,11 @@ const styles = stylex.create({
 })
 
 /**
- * The Execil wordmark. Satoshi Black outlines with the tittle of the "i"
- * replaced by the cross badge — the letterforms are paths, not live text, so
- * the badge can sit exactly where the dot was at any size.
+ * Satoshi Black outlines, the "i" tittle replaced by the cross badge, which is
+ * masked out of the letterforms so the ring shows whatever ground it sits on.
  *
- * The badge is knocked out of the letterforms by a ring 20% of its radius
- * wide, so it separates from the ink it touches by space rather than by
- * colour. The ring shows whatever ground the mark sits on, which is why this
- * is a mask and not a filled circle: it works on the light page and on the
- * inverse footer without a second token.
- *
- * Generated from the same geometry as `public/brand/cross-dot/`. Regenerate
- * both together rather than editing the path data by hand.
- *
- * Decorative by default — aria-hidden unless given a title, in which case it
- * becomes an img with an accessible name. Matches Icon.
+ * Generated from the same geometry as `public/brand/cross-dot/` — regenerate
+ * both together. Decorative unless given a title, like Icon.
  */
 export function Wordmark({
   size = 'sm',
