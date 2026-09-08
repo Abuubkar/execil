@@ -35,11 +35,11 @@ The badge replaces the tittle of the "i", so it sits against the letterforms
 rather than against the page — and at `teal700` it separates from `ink900` by
 only 2.74:1, which at header size reads as one dark mass rather than as a mark.
 
-It is separated by space instead. A ring 20% of the badge radius wide is masked
-out of the letterforms, so the ground shows through around the badge. It is a
-mask rather than a filled circle on purpose: the ring shows whatever the mark is
-placed on, so the same drawing works on the light page and on the inverse
-footer without a second colour. Narrower than about 15% stops registering at
+It is separated by space instead. A ring 20% of the badge radius wide is cut
+out of the letter paths themselves, so the ground shows through around the
+badge on any surface. It used to be an SVG mask; Chrome rasterises masked
+content through an intermediate surface and the header wordmark came out
+soft. Narrower than about 15% stops registering at
 28px; wider than about 25% starts eating the stem of the "i".
 
 ## plus-split — not in use
