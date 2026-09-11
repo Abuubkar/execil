@@ -8,8 +8,10 @@ import { color, radius, screen, space, text } from '../styles/tokens.stylex'
  * narrow-screen behaviour is the decision this interface exists to hold in one
  * place — call sites never write row or cell elements (issue #9).
  *
- * Below screen.table it renders STACKED rows rather than scrolling
- * horizontally. Column order runs [label, them, us], so overflow-x would show a
+ * Below screen.table it renders STACKED rows under one header rather than
+ * scrolling horizontally. The column names appear once; the teal on the last
+ * column is what ties a value back to its heading once that heading has
+ * scrolled away. Column order runs [label, them, us], so overflow-x would show a
  * phone the competitor's column in full and hide ours — the section would argue
  * against itself until the visitor scrolled sideways. Verified in the prototype
  * on branch prototype/table-options (issue #17).
@@ -84,12 +86,14 @@ const styles = stylex.create({
     paddingBlockEnd: space.s10,
   },
   stackPair: { display: 'grid', gap: space.s10, gridTemplateColumns: '1fr 1fr' },
-  stackKey: {
-    display: 'block',
-    letterSpacing: text.trackingWide,
-    marginBlockEnd: '2px',
-    textTransform: 'uppercase',
+  // The column names, once, on the same grid as every pair below them.
+  stackHead: {
+    borderBlockEndColor: color.borderStrong,
+    borderBlockEndStyle: 'solid',
+    borderBlockEndWidth: '1px',
+    paddingBlockEnd: space.s8,
   },
+  stackKey: { letterSpacing: text.trackingWide, textTransform: 'uppercase' },
   caption: {
     borderRadius: radius.md,
     captionSide: 'top',
@@ -152,6 +156,19 @@ export function Table({
       </table>
 
       <div {...stylex.props(styles.stack)}>
+        <div {...stylex.props(styles.stackPair, styles.stackHead)}>
+          {valueColumns.map((heading, i) => (
+            <Text
+              key={heading}
+              size="xs"
+              tone={i === valueColumns.length - 1 ? 'link' : 'muted'}
+              weight="semibold"
+              style={styles.stackKey}
+            >
+              {heading}
+            </Text>
+          ))}
+        </div>
         {rows.map((row) => (
           <div key={row.label} {...stylex.props(styles.stackRow)}>
             <Text size="md" tone="heading" weight="semibold">
@@ -165,9 +182,6 @@ export function Table({
                   tone={i === row.cells.length - 1 ? 'link' : 'prose'}
                   weight={i === row.cells.length - 1 ? 'semibold' : 'regular'}
                 >
-                  <Text size="xs" tone="muted" style={styles.stackKey}>
-                    {valueColumns[i]}
-                  </Text>
                   {cell}
                 </Text>
               ))}
