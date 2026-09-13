@@ -38,6 +38,7 @@ export function Faq() {
             return (
               <Disclosure
                 key={item.id}
+                id={`faq-${item.id}`}
                 name={FAQ_GROUP}
                 summary={item.q}
                 // Stable slug, NEVER an index: copy edits reorder questions and
