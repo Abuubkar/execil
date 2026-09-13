@@ -1,0 +1,141 @@
+# Execil
+
+> Medical billing and RCM for independent practices with 20+ providers, handled by coders who know your specialty. You know the price upfront.
+
+Specialty-driven medical billing and revenue cycle management for independent US practices. Each practice is matched with coders who work your specialty's codes and payer rules every day. We work inside the system you already use, so nothing has to be migrated.
+
+- Audience: Independent medical practices with 20+ providers
+- Service area: United States
+- Pricing: A percentage of collections, quoted upfront before any work begins.
+- Contract: No. The engagement is month-to-month, and there are no setup fees.
+- Onboarding: Fourteen days from a signed BAA to steady-state claim submission, in most cases.
+- Contact: contact@execil.net, +1 (914) 513-4535
+
+## Services
+The full revenue cycle, handled by people who know your specialty.
+
+### Front-end: Get paid-ready before the visit
+Confirm coverage and enrollment so clean claims start at the front desk.
+
+- Insurance Eligibility & Benefits Verification
+- Provider Credentialing & Payer Enrollment (CAQH, PECOS, commercial payers)
+
+### Mid-cycle: Code and submit it right the first time
+Certified coders and pre-submission scrubbing to protect first-pass rate.
+
+- Medical Coding (ICD-10, CPT, HCPCS) by certified coders
+- Charge Entry & Claim Scrubbing
+- Electronic Claims Submission via clearinghouse
+
+### Back-end: Collect every dollar owed
+Every payment posted and every denial worked, down to the last patient balance.
+
+- Payment Posting (ERA / EOB)
+- Accounts Receivable Follow-up (30/60/90-day protocol)
+- Denial Management & Appeals
+- Patient Statements & Balance Follow-up
+
+### Visibility: Know where your revenue stands
+The numbers that matter, reported the same way every month.
+
+- Monthly KPI Reporting: net collections, denial rate, days in AR, first-pass rate
+- Read-only KPI Dashboard Access
+
+Available as a full end-to-end package or à la carte (credentialing and AR cleanup can be engaged separately).
+
+## How it works
+From first look to steady collections in four steps.
+
+1. **Free billing assessment** — We review a sample of your claims and AR and show you what we find.
+2. **Custom plan and BAA** — A scoped plan, a quoted rate, and a signed BAA before any data moves.
+3. **14-day onboarding** — You keep your existing EHR/PM. There is no software switch and nobody has to be retrained. Claims already in flight keep moving while we take over.
+4. **Ongoing billing** — Daily claims work with a monthly performance review you can act on.
+
+## Specialties
+Each practice is matched with coders who work your specialty's codes and payer rules every day.
+
+- Orthopedics
+- OB/GYN
+- Dermatology
+- Podiatry
+- Primary Care
+- Behavioral Health
+- Physical Therapy
+- Urgent Care
+- Internal Medicine
+- Pediatrics
+
+## Works with your systems
+- [eClinicalWorks](https://www.eclinicalworks.com/)
+- [athenahealth](https://www.athenahealth.com/)
+- [Tebra (formerly Kareo)](https://www.tebra.com/)
+- [AdvancedMD](https://www.advancedmd.com/)
+- [NextGen](https://www.nextgen.com/)
+- [Office Ally](https://www.officeally.com/)
+- [DrChrono](https://www.drchrono.com/)
+- [Practice Fusion](https://www.practicefusion.com/)
+
+## Execil compared with a typical billing vendor
+| | Typical billing vendor | Execil |
+| --- | --- | --- |
+| Setup fees | Common | None |
+| Contract | Multi-year | Month-to-month |
+| Pricing | Opaque | % of collections, quoted upfront |
+| Reporting | Monthly PDF | Live / monthly KPI dashboard |
+| Your data | Lives in the vendor's system | Stays in your EHR, on your accounts |
+| Switching | Weeks of parallel running | 14 days, no gap in submissions |
+| Team | Pooled generalists | A team that knows your specialty |
+| Account manager | Ticket queue | Named US-hours contact |
+
+## What we report, every month
+- **Net collections** — What actually arrived, against what was billable. This is the number your fee is calculated on.
+- **Denial rate** — The share of claims denied, with the reason codes behind them, so you can see the cause and not just the total.
+- **Days in AR** — How long money sits before it reaches you, and how much of it has aged past 120 days. Benchmark: the AAFP puts days in AR below 50 at minimum, and 30 to 40 as preferable.
+- **First-pass acceptance** — The share of claims accepted on first submission, before anyone has to rework them.
+
+Execil is new, so there are no client outcomes to publish here yet. We will publish them once they are measured and the client has approved sharing them, not before.
+
+## Who we're built for
+
+### A strong fit if
+- You're an independent practice with 20+ providers
+- Denials are rising or AR is aging
+- You want real visibility into collections
+- You're adding providers who need credentialing
+
+### Less of a fit if
+- You need the facility's own billing (UB-04) for a hospital or surgery center
+- Your practice is mostly cash-pay
+- You want to keep a full in-house billing team
+
+## Common questions
+
+### Do you work inside our existing EHR?
+Yes. We work inside your existing EHR/PM, so there is no software switch and no retraining.
+
+### How long does onboarding take?
+Fourteen days from a signed BAA to steady-state claim submission, in most cases.
+
+### Is there a long-term contract?
+No. The engagement is month-to-month, and there are no setup fees.
+
+### How is pricing structured?
+A percentage of collections, quoted upfront before any work begins.
+
+### Will we lose control of our billing?
+No. We work inside your EHR under accounts you create and can revoke. Every claim, note and payment stays in your system, and the read-only KPI dashboard shows the same numbers we work from. If you leave, there is nothing to hand back.
+
+### What happens to claims already out when we switch?
+They keep moving. We pick up your open AR and the existing work queue on day one, so submissions never stop while onboarding runs.
+
+### How is patient data protected?
+A BAA is signed before any data moves, and patient records stay in your systems rather than moving into ours.
+
+### Can you take on aged AR cleanup only?
+Yes. Credentialing and AR cleanup can be engaged separately from full billing.
+
+## Pages
+- [Execil | Medical Billing & RCM for Independent Practices](https://execil.net/)
+- [Privacy Policy](https://execil.net/privacy): What execil.net collects, why, and what happens to it. The site sets no cookies and collects only what you type into the assessment form. Last updated September 8, 2026.
+- [Terms of Service](https://execil.net/terms): The terms for using execil.net. Billing services themselves are governed by a written agreement signed before any work begins. Last updated September 7, 2026.
+- [HIPAA Statement](https://execil.net/hipaa): How Execil handles protected health information as a business associate, and why the website is not a channel for it. Last updated September 8, 2026.

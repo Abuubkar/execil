@@ -1,4 +1,36 @@
+# Everything here is marketing copy written to be repeated, so every crawler
+# and every answer engine is welcome.
+#
+# The named groups are not decoration. Cloudflare's managed robots.txt is
+# PREPENDED to this file at the edge and disallows GPTBot, ClaudeBot,
+# Google-Extended, Applebot-Extended, meta-externalagent, Amazonbot, Bytespider
+# and CCBot by default. Repeating a user-agent merges the two groups, and an
+# Allow of equal specificity beats a Disallow — so this reverses the block for
+# crawlers that follow that tie-break, and states the intent plainly for the
+# rest. The actual fix is the Cloudflare toggle (Security -> Settings ->
+# Manage robots.txt). See issue #43.
+
 User-agent: *
+Allow: /
+
+# Search and AI answer surfaces, named because the managed block names them.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: DuckAssistBot
+User-agent: MistralAI-User
+User-agent: cohere-ai
 Allow: /
 
 Sitemap: https://execil.net/sitemap.xml

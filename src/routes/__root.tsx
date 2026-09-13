@@ -6,7 +6,7 @@ import { Box } from '../base/Box'
 import { NotFound } from '../sections/NotFound'
 import { SiteFooter } from '../sections/SiteFooter'
 import { SiteHeader } from '../sections/SiteHeader'
-import { OG_IMAGE, SITE_URL, organizationLd } from '../seo'
+import { OG_IMAGE, SITE_URL, siteLd } from '../seo'
 import { color, text } from '../styles/tokens.stylex'
 
 import { m } from '../messages'
@@ -64,7 +64,7 @@ export const Route = createRootRoute({
     scripts: [
       {
         type: 'application/ld+json',
-        children: JSON.stringify(organizationLd),
+        children: JSON.stringify(siteLd),
       },
     ],
   }),

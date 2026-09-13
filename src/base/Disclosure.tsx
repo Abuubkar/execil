@@ -87,12 +87,15 @@ const styles = stylex.create({
  * the APG disclosure pattern does not ask for one.
  */
 export function Disclosure({
+  id,
   name,
   summary,
   marker = '+',
   children,
   onOpen,
 }: {
+  /** Anchor for the panel, so one answer can be linked to on its own. */
+  id?: string
   name?: string
   summary: string
   marker?: string
@@ -102,6 +105,7 @@ export function Disclosure({
 }) {
   return (
     <details
+      id={id}
       name={name}
       onToggle={(event) => {
         if ((event.currentTarget as HTMLDetailsElement).open) onOpen?.()

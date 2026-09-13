@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Box } from '../base/Box'
 import { m } from '../messages'
-import { absolute } from '../seo'
+import { absolute, legalLd } from '../seo'
 import { LegalDocument } from '../sections/LegalDocument'
 import { SiteFooter } from '../sections/SiteFooter'
 import { SiteHeader } from '../sections/SiteHeader'
@@ -23,6 +23,7 @@ export const Route = createFileRoute('/privacy')({
       { name: 'twitter:description', content: doc.description },
     ],
     links: [{ rel: 'canonical', href: url }],
+    scripts: [{ type: 'application/ld+json', children: JSON.stringify(legalLd('privacy')) }],
   }),
   component: Page,
 })
