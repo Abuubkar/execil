@@ -1,15 +1,25 @@
-"""Generates the LinkedIn Page logo and cover into public/brand/social/.
+"""Generates the social profile assets into public/brand/social/.
 
-Sizes are LinkedIn's own recommendations, not the 300x300 / 1128x191 numbers
-that are all over the web and out of date:
+LinkedIn publishes its sizes; these are LinkedIn's own numbers, not the
+300x300 / 1128x191 ones that are all over the web and out of date:
 
   logo   400 x 400   (268 x 268 minimum)
   cover  1512 x 256
   PNG or JPEG, 3MB ceiling
 
-LinkedIn crops the cover on narrow viewports and shows the logo over both light
-and dark surfaces, so the cover keeps its copy inside a generous safe box and
-the logo is opaque rather than transparent.
+Google does NOT publish logo or cover dimensions for a Business Profile. Its
+help pages give one spec for every photo — 720x720 recommended, 250x250
+minimum, JPG or PNG, between 10 KB and 5 MB. So the logo is square at the
+recommended size and the cover uses the 16:9 the profile header crops to,
+both well clear of the minimum:
+
+  logo   720 x 720
+  cover  1024 x 576
+  square 720 x 720   (a photo for the gallery)
+
+Every profile crops its cover differently and Google re-crops on each surface,
+so the covers keep their copy inside a generous safe box. Logos are opaque
+rather than transparent, because both products show them over light and dark.
 
 Run once and commit the results, like scripts/og-image.py.
 """
@@ -98,3 +108,84 @@ d.text(
 )
 
 save(cover, "linkedin-cover.jpg", quality=92)
+
+
+# ------------------------------------------------------- Google Business
+# Same badge as the favicon and the LinkedIn logo. It fills the frame rather
+# than sitting inset: Google circle-crops the logo on several surfaces, and an
+# inset mark would end up floating inside a white ring at thumbnail size. Filled
+# edge to edge, the crop lands on the badge itself.
+GLOGO = 720 * SS
+glogo = Image.new("RGB", (GLOGO, GLOGO), WHITE)
+gmark = render_svg("execil-mark.svg", GLOGO)
+glogo.paste(gmark, ((GLOGO - gmark.width) // 2, (GLOGO - gmark.height) // 2), gmark)
+save(glogo, "gbp-logo.png")
+
+
+def wash(width, height):
+    """The hero's wash, corner to corner."""
+    img = Image.new("RGB", (width, height), INK_50)
+    draw = ImageDraw.Draw(img)
+    for x in range(width):
+        t = x / width
+        draw.line(
+            [(x, 0), (x, height)],
+            fill=tuple(round(a + (b - a) * t) for a, b in zip(INK_50, TEAL_25)),
+        )
+    return img
+
+
+def hero_crop(width, height, focus=0.18):
+    """The hero photograph, filled to a box and cropped from the right."""
+    img = Image.open(ROOT / "src" / "assets" / "hero" / "hero-1254.webp").convert("RGBA")
+    scale = max(width / img.width, height / img.height)
+    img = img.resize((round(img.width * scale), round(img.height * scale)), Image.LANCZOS)
+    top = round((img.height - height) * focus)
+    return img.crop((img.width - width, top, img.width, top + height))
+
+
+# 1024 x 576. Google crops the header hard on mobile, so the wordmark and one
+# line sit left of centre with the photograph fading in on the right.
+BW, BH = 1024 * SS, 576 * SS
+BPAD = 64 * SS
+
+bcover = wash(BW, BH)
+bd = ImageDraw.Draw(bcover)
+
+bphoto_w = round(BW * 0.46)
+bphoto = hero_crop(bphoto_w, BH)
+bfade = Image.new("L", (bphoto_w, BH), 255)
+bfd = ImageDraw.Draw(bfade)
+brun = round(bphoto_w * 0.6)
+for x in range(brun):
+    bfd.line([(x, 0), (x, BH)], fill=round(255 * (x / brun)))
+bphoto.putalpha(bfade)
+bcover.paste(bphoto, (BW - bphoto_w, 0), bphoto)
+
+bword = render_svg("execil-wordmark-notag.svg", 86 * SS)
+bcover.paste(bword, (BPAD, round(BH * 0.34)), bword)
+
+bbody = load_font(34 * SS, 500)
+bsmall = load_font(28 * SS, 400)
+by = round(BH * 0.34) + bword.height + 28 * SS
+bd.text((BPAD, by), "Medical billing & RCM", font=bbody, fill=INK_900)
+bd.text((BPAD, by + 46 * SS), "for independent practices", font=bbody, fill=INK_900)
+bd.text(
+    (BPAD, by + 104 * SS),
+    "20+ providers \u00b7 Inside your existing EHR",
+    font=bsmall,
+    fill=INK_600,
+)
+
+save(bcover, "gbp-cover.jpg", quality=92)
+
+
+# A square for the photo gallery. Google shows these in a grid and crops to
+# square, so the photograph carries it and the wordmark sits along the bottom.
+SQ = 720 * SS
+square = hero_crop(SQ, SQ, focus=0.10).convert("RGB")
+sd = ImageDraw.Draw(square, "RGBA")
+sd.rectangle([(0, round(SQ * 0.72)), (SQ, SQ)], fill=(15, 27, 45, 190))
+sword = render_svg("execil-wordmark-reversed.svg", 54 * SS)
+square.paste(sword, ((SQ - sword.width) // 2, round(SQ * 0.80)), sword)
+save(square, "gbp-square.jpg", quality=92)
