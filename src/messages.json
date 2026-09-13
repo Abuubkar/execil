@@ -9,6 +9,8 @@
     "description": "Medical billing and RCM for independent practices with 20+ providers, handled by coders who know your specialty. You know the price upfront.",
     "ogTitle": "Collect Every Dollar You've Earned",
     "ogImageAlt": "Execil: medical billing and revenue cycle management for independent practices",
+    "serviceType": "Medical billing and revenue cycle management",
+    "audience": "Independent medical practices with 20+ providers",
     "legalName": "EXECIL PVT LTD",
     "legal": {
       "privacy": {

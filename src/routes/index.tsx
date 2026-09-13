@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { HERO_SIZES, HERO_SRC, HERO_SRCSET } from '../hero-image'
 import { m } from '../messages'
-import { SITE_URL, faqLd } from '../seo'
+import { SITE_URL, homeLd } from '../seo'
 
 import { Box } from '../base/Box'
 import { Assessment } from '../sections/Assessment'
@@ -36,8 +36,9 @@ export const Route = createFileRoute('/')({
         fetchPriority: 'high',
       },
     ],
-    // FAQPage belongs to this route; the questions render here only.
-    scripts: [{ type: 'application/ld+json', children: JSON.stringify(faqLd) }],
+    // The page, the service catalogue and the FAQ. The publisher nodes they
+    // reference by @id come from the root.
+    scripts: [{ type: 'application/ld+json', children: JSON.stringify(homeLd) }],
   }),
   component: Home,
 })
