@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { HERO_SIZES, HERO_SRC, HERO_SRCSET } from '../hero-image'
 import { m } from '../messages'
 import { SITE_URL, homeLd } from '../seo'
 
@@ -23,19 +22,7 @@ export const Route = createFileRoute('/')({
   head: () => ({
     // Title lives here, not in the root head. See __root.tsx.
     meta: [{ title: m.meta.title }],
-    links: [
-      { rel: 'canonical', href: SITE_URL },
-      // LCP element on narrow screens. imageSrcSet/imageSizes must match the
-      // <img> or the picture is fetched twice.
-      {
-        rel: 'preload',
-        as: 'image',
-        href: HERO_SRC,
-        imageSrcSet: HERO_SRCSET,
-        imageSizes: HERO_SIZES,
-        fetchPriority: 'high',
-      },
-    ],
+    links: [{ rel: 'canonical', href: SITE_URL }],
     // The page, the service catalogue and the FAQ. The publisher nodes they
     // reference by @id come from the root.
     scripts: [{ type: 'application/ld+json', children: JSON.stringify(homeLd) }],
