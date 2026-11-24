@@ -1,7 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
 import { useTrack } from '../analytics/useTrack'
-import { Badge } from '../base/Badge'
 import { Box } from '../base/Box'
 import { Dot } from '../base/Dot'
 import { Heading } from '../base/Heading'
@@ -15,26 +14,25 @@ import { Stack } from '../base/Stack'
 import { Text } from '../base/Text'
 import { HERO_HEIGHT, HERO_SIZES, HERO_SRC, HERO_SRCSET, HERO_WIDTH } from '../hero-image'
 import { heroTitle, m } from '../messages'
-import { color, layout, radius, screen, shadow, space, text } from '../styles/tokens.stylex'
+import { layout, screen, space, text } from '../styles/tokens.stylex'
 
 const styles = stylex.create({
-  section: { overflow: 'hidden' },
-  layout: {
-    alignItems: 'center',
-    display: 'grid',
-    gap: space.s40,
-    gridTemplateColumns: { default: '1fr', [screen.navUp]: '1.05fr 0.95fr' },
-  },
+  // Positioning context for the picture; nothing between may be positioned.
+  section: { overflow: 'hidden', position: 'relative' },
+  layout: { display: 'flex', flexDirection: 'column' },
   copy: {
     alignItems: { default: 'center', [screen.navUp]: 'flex-start' },
     display: 'flex',
     flexDirection: 'column',
     gap: space.s24,
+    marginBlockStart: { default: '-15vw', [screen.navUp]: 0 },
     maxWidth: {
       default: layout.containerHero,
-      [screen.navUp]: layout.containerText,
+      [screen.navUp]: `min(${layout.containerText}, 55%)`,
     },
     textAlign: { default: 'center', [screen.navUp]: 'left' },
+    position: 'relative',
+    zIndex: 1,
   },
   lead: { maxWidth: layout.containerText },
   ctas: { justifyContent: { default: 'center', [screen.navUp]: 'flex-start' } },
@@ -49,33 +47,26 @@ const styles = stylex.create({
     marginBlockStart: space.s16,
     rowGap: space.s10,
   },
-  // The arch and its outline are two boxes, not one with a pseudo-element:
-  // the frame has to sit OUTSIDE the clip, and `overflow: hidden` on the
-  // picture would cut off a ring drawn inside it.
-  frame: {
-    justifySelf: 'center',
-    maxWidth: layout.heroArchMax,
-    padding: space.s8,
-    position: 'relative',
-    width: '100%',
-  },
-  outline: {
-    borderColor: color.borderBrand,
-    // `full` on the top corners clamps to half the width, so the arch stays a
-    // true semicircle at any size without naming one.
-    borderRadius: `${radius.full} ${radius.full} ${radius['3xl']} ${radius['3xl']}`,
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    inset: 0,
-    opacity: 0.35,
-    pointerEvents: 'none',
-    position: 'absolute',
-  },
+  // Masked rather than overlaid, so it fades into whatever ground the
+  // section paints. The source is a 4:5 portrait, so on desktop it scales to
+  // the panel's width and only the vertical crop bites — which is why the
+  // anchor sets a vertical position and the horizontal half of it is moot.
   picture: {
-    aspectRatio: '4 / 5',
-    borderRadius: `${radius.full} ${radius.full} ${radius['3xl']} ${radius['3xl']}`,
-    boxShadow: shadow.lg,
+    aspectRatio: { default: '4 / 3', [screen.navUp]: 'auto' },
+    insetBlock: { default: 'auto', [screen.navUp]: 0 },
+    insetInlineEnd: { default: 'auto', [screen.navUp]: 0 },
+    marginBlockStart: { default: `calc(-1 * ${space.heroTop})`, [screen.navUp]: 0 },
+    marginInline: { default: `calc(-1 * ${space.gutter})`, [screen.navUp]: 0 },
+    maxHeight: { default: layout.heroBandMax, [screen.navUp]: 'none' },
+    maskImage: {
+      default: 'linear-gradient(180deg, black 40%, transparent 100%)',
+      [screen.navUp]: 'linear-gradient(90deg, transparent 0%, black 30%)',
+    },
+    // Visually first, after the copy in the DOM.
+    order: { default: -1, [screen.navUp]: 0 },
     overflow: 'hidden',
+    position: { default: 'relative', [screen.navUp]: 'absolute' },
+    width: { default: `calc(100% + 2 * ${space.gutter})`, [screen.navUp]: '50%' },
   },
 })
 
@@ -94,10 +85,6 @@ export function Hero() {
     >
       <Box style={styles.layout}>
         <Box style={styles.copy}>
-          <Badge tone="accent" dot="success">
-            {m.hero.badge}
-          </Badge>
-
           <Heading level={1} size="displayLg" id={HERO_HEADING_ID}>
             <RichText segments={heroTitle} />
           </Heading>
@@ -139,21 +126,18 @@ export function Hero() {
           </List>
         </Box>
 
-        <Box style={styles.frame}>
-          <Box style={styles.outline} />
-          <Box style={styles.picture}>
-            <Image
-              src={HERO_SRC}
-              srcSet={HERO_SRCSET}
-              sizes={HERO_SIZES}
-              width={HERO_WIDTH}
-              height={HERO_HEIGHT}
-              alt={m.hero.imageAlt}
-              fit="cover"
-              anchor="center"
-              priority
-            />
-          </Box>
+        <Box style={styles.picture}>
+          <Image
+            src={HERO_SRC}
+            srcSet={HERO_SRCSET}
+            sizes={HERO_SIZES}
+            width={HERO_WIDTH}
+            height={HERO_HEIGHT}
+            alt={m.hero.imageAlt}
+            fit="cover"
+            anchor="upperRight"
+            priority
+          />
         </Box>
       </Box>
     </Section>

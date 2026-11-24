@@ -96,9 +96,6 @@ export const color = stylex.defineVars({
   borderDefault: palette.ink100,
   borderStrong: palette.ink200,
   borderAccent: palette.teal100,
-  /** teal600. borderAccent is teal100, which disappears on surfaceAccentSoft —
-   *  fine for a card edge on white, invisible for a line drawn on the wash. */
-  borderBrand: palette.teal600,
   borderDashed: palette.ink300,
 
   // --- Roles: focus. WCAG 1.4.11 wants 3:1 for the indicator; teal700 is 6.31:1.
@@ -234,9 +231,6 @@ export const layout = stylex.defineConsts({
   containerText: '640px',
   containerNarrow: '440px',
   heroBandMax: '480px',
-  /** The hero's arched portrait. Capped so it never outgrows the copy beside
-   *  it, and centred under its own cap on narrow screens. */
-  heroArchMax: '420px',
   gridFloorSm: '200px',
   gridFloorMd: '250px',
   gridFloorLg: '300px',
