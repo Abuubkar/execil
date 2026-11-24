@@ -12,4 +12,4 @@ export const HERO_SIZES = '(min-width: 1040px) 50vw, 100vw'
 
 /** Intrinsic size, so the box is reserved before the bytes land. */
 export const HERO_WIDTH = 1254
-export const HERO_HEIGHT = 1254
+export const HERO_HEIGHT = 1568

@@ -25,8 +25,8 @@ export const Route = createFileRoute('/')({
     meta: [{ title: m.meta.title }],
     links: [
       { rel: 'canonical', href: SITE_URL },
-      // LCP element on narrow screens. imageSrcSet/imageSizes must match the
-      // <img> or the picture is fetched twice.
+      // LCP element on narrow screens, where the picture is visually first.
+      // imageSrcSet/imageSizes must match the <img> or it is fetched twice.
       {
         rel: 'preload',
         as: 'image',

@@ -66,7 +66,6 @@
     ]
   },
   "hero": {
-    "badge": "Medical billing & RCM for independent practices",
     "title": [
       "Collect Every Dollar You've ",
       {
@@ -85,7 +84,7 @@
       "."
     ],
     "lead": "We work with independent practices that have 20+ providers. Coders who know your specialty do the billing, inside the EHR you already use. You see what we collect, and you know the price before you sign.",
-    "imageAlt": "A billing specialist at two monitors, reviewing a claims dashboard",
+    "imageAlt": "Two people at a desk going through billing reports together",
     "ctaPrimary": "Get a Free Billing Assessment",
     "ctaSecondary": "See Our Services",
     "trustPointsLabel": "Trust points",
@@ -101,6 +100,7 @@
   "problem": {
     "eyebrow": "The problem",
     "title": "Revenue leaks quietly, one claim at a time.",
+    "imageAlt": "A financial statement on a desk with figures ringed in marker",
     "cards": [
       {
         "stat": "60%",
@@ -321,6 +321,7 @@
     "eyebrow": "Results",
     "title": "What changes when the cycle is worked.",
     "comingSoon": "Execil is new, so there are no client outcomes to publish here yet. We will publish them once they are measured and the client has approved sharing them, not before.",
+    "imageAlt": "An open folder of printed charts, held open on a lap",
     "measuresTitle": "What we report, every month",
     "measures": [
       {

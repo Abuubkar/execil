@@ -1,7 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
 import { useTrack } from '../analytics/useTrack'
-import { Badge } from '../base/Badge'
 import { Box } from '../base/Box'
 import { Dot } from '../base/Dot'
 import { Heading } from '../base/Heading'
@@ -49,7 +48,9 @@ const styles = stylex.create({
     rowGap: space.s10,
   },
   // Masked rather than overlaid, so it fades into whatever ground the
-  // section paints.
+  // section paints. The source is a 4:5 portrait, so on desktop it scales to
+  // the panel's width and only the vertical crop bites — which is why the
+  // anchor sets a vertical position and the horizontal half of it is moot.
   picture: {
     aspectRatio: { default: '4 / 3', [screen.navUp]: 'auto' },
     insetBlock: { default: 'auto', [screen.navUp]: 0 },
@@ -84,10 +85,6 @@ export function Hero() {
     >
       <Box style={styles.layout}>
         <Box style={styles.copy}>
-          <Badge tone="accent" dot="success">
-            {m.hero.badge}
-          </Badge>
-
           <Heading level={1} size="displayLg" id={HERO_HEADING_ID}>
             <RichText segments={heroTitle} />
           </Heading>
